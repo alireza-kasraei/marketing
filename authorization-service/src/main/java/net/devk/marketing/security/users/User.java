@@ -1,4 +1,4 @@
-package net.devk.marketing.security.accounts;
+package net.devk.marketing.security.users;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Account {
+public class User {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	private String username, password; // <1>
+	private String username, password, email, mobileNumber;
 
-	private boolean active; // <2>
+	private boolean active;
 
-	public Account(String username, String password, boolean active) {
+	public User(String username, String password, boolean active) {
 		this.username = username;
 		this.password = password;
 		this.active = active;

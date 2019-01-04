@@ -1,4 +1,4 @@
-package net.devk.marketing.security.accounts;
+package net.devk.marketing.security.users;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Configuration
-public class AccountConfiguration {
+public class UserConfiguration {
 
 	@Bean
-	UserDetailsService userDetailsService(AccountRepository accountRepository) {
+	UserDetailsService userDetailsService(UserRepository accountRepository) {
 		// <1>
 		return username -> accountRepository.findByUsername(username).map(account -> {
 			boolean active = account.isActive();
