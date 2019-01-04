@@ -1,1 +1,36 @@
-Spring Boot Service.
+# Marketing Service
+
+this project consists of multiple modules such as authorization-service,config-service,service-discovery and edge-api as main modules and modules such as greetings-service and service-autoconfiguration are helper modules which might be deleted in the futur.
+
+# How to Start
+
+as you can see its a maven based project. for simplicity execute  :
+```sh
+mvn clean install
+```
+and first run config-service with
+```sh
+mvn spring-boot:run
+```
+and then execute same command for service-discovery modules and authorization-service.
+please consider ports for each module.
+
+after all you can test authorization-service with the following command :
+```sh
+curl -X POST \
+-H"authorization: Basic aHRtbDU6cGFzc3dvcmQ=" \                  
+-F"password=spring" \        
+-F"client_secret=password" \
+-F"client_id=html5" \
+-F"username=jlong" \
+-F"grant_type=password" \
+-F"scope=openid" \
+http://localhost:9191/uaa/oauth/token
+```
+
+and if everythis goes right with the given access-token , you can call the sample secured api with the given command :
+```sh
+curl \        
+-H"Authorization: Bearer afa30a93-e1b7-4fff-a850-e2778dd13162" \ 
+http://localhost:8080/greet/hello
+```
