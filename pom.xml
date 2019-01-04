@@ -67,5 +67,9 @@
 	<modules>
 		<module>service-discovery</module>
 		<module>config-service</module>
+		<module>greetings-service</module>
+		<module>edge-api</module>
+		<module>authorization-service</module>
+		<module>security-autoconfiguration</module>
 	</modules>
 </project>
