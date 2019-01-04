@@ -71,5 +71,6 @@
 		<module>edge-api</module>
 		<module>authorization-service</module>
 		<module>security-autoconfiguration</module>
+		<module>marketing-ui</module>
 	</modules>
 </project>
