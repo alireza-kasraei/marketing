@@ -3,6 +3,8 @@ package net.devk.marketing.security.clients;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import org.springframework.util.StringUtils;
 
@@ -14,10 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "CLIENTS")
 public class Client {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "client_generator")
+	@SequenceGenerator(name = "client_generator", sequenceName = "client_sequence", initialValue = 1)
 	private Long id;
 
 	private String clientId;

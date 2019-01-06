@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 //@formatter:off
@@ -20,9 +21,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-//@formatter:on
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
@@ -32,11 +31,15 @@ class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdap
 
 	private final ClientDetailsService clientDetailsService;
 
+	private final RedisConnectionFactory redisConnectionFactory;
+
 	@Autowired
 	public AuthorizationServerConfiguration(AuthenticationConfiguration authenticationConfiguration,
-			@Qualifier("clientDetails") ClientDetailsService clientDetailsService) throws Exception {
+			@Qualifier("clientDetails") ClientDetailsService clientDetailsService,
+			RedisConnectionFactory redisConnectionFactory) throws Exception {
 		this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
 		this.clientDetailsService = clientDetailsService;
+		this.redisConnectionFactory = redisConnectionFactory;
 	}
 
 //	@Autowired
@@ -75,26 +78,31 @@ class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+		// this is for jwt
+//		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer()));
 		endpoints.tokenStore(tokenStore()).tokenEnhancer(tokenEnhancerChain)
 				.authenticationManager(authenticationManager);
 	}
 
 	@Bean
 	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
+		return new RedisTokenStore(redisConnectionFactory);
 	}
 
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
-		final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey("123");
-		// final KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new
-		// ClassPathResource("mytest.jks"), "mypass".toCharArray());
-		// converter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
-		return converter;
-	}
-
+	/*
+	 * @Bean public TokenStore tokenStore() { return new
+	 * JwtTokenStore(accessTokenConverter()); }
+	 * 
+	 * @Bean public JwtAccessTokenConverter accessTokenConverter() { final
+	 * JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+	 * converter.setSigningKey("123"); // final KeyStoreKeyFactory
+	 * keyStoreKeyFactory = new KeyStoreKeyFactory(new //
+	 * ClassPathResource("mytest.jks"), "mypass".toCharArray()); //
+	 * converter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest")); return
+	 * converter; }
+	 */
 	@Bean
 	public TokenEnhancer tokenEnhancer() {
 		return new CustomTokenEnhancer();

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -11,15 +12,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 @Configuration
 @EnableResourceServer
 public class OAuth2ResourceServerConfigJwt extends ResourceServerConfigurerAdapter {
 
+//	@Autowired
+//	private CustomAccessTokenConverter customAccessTokenConverter;
+
 	@Autowired
-	private CustomAccessTokenConverter customAccessTokenConverter;
+	private RedisConnectionFactory redisConnectionFactory;
 
 	@Override
 	public void configure(final HttpSecurity http) throws Exception {
@@ -32,26 +35,24 @@ public class OAuth2ResourceServerConfigJwt extends ResourceServerConfigurerAdapt
 		config.tokenServices(tokenServices());
 	}
 
+	/*
+	 * @Bean public TokenStore tokenStore() { return new
+	 * JwtTokenStore(accessTokenConverter()); }
+	 * 
+	 * @Bean public JwtAccessTokenConverter accessTokenConverter() { final
+	 * JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+	 * converter.setAccessTokenConverter(customAccessTokenConverter);
+	 * 
+	 * converter.setSigningKey("123"); // final Resource resource = new
+	 * ClassPathResource("public.txt"); // String publicKey = null; // try { //
+	 * publicKey = IOUtils.toString(resource.getInputStream()); // } catch (final
+	 * IOException e) { // throw new RuntimeException(e); // } //
+	 * converter.setVerifierKey(publicKey); return converter; }
+	 */
+
 	@Bean
 	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
-	}
-
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
-		final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setAccessTokenConverter(customAccessTokenConverter);
-
-		converter.setSigningKey("123");
-		// final Resource resource = new ClassPathResource("public.txt");
-		// String publicKey = null;
-		// try {
-		// publicKey = IOUtils.toString(resource.getInputStream());
-		// } catch (final IOException e) {
-		// throw new RuntimeException(e);
-		// }
-		// converter.setVerifierKey(publicKey);
-		return converter;
+		return new RedisTokenStore(redisConnectionFactory);
 	}
 
 	@Bean

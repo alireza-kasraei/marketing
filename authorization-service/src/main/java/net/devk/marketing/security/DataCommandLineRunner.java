@@ -4,14 +4,13 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import net.devk.marketing.security.clients.Client;
 import net.devk.marketing.security.clients.ClientRepository;
 import net.devk.marketing.security.users.User;
 import net.devk.marketing.security.users.UserRepository;
 
-@Component
+//@Component
 class DataCommandLineRunner implements CommandLineRunner {
 
 	private final UserRepository userRepository;
