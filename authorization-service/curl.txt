@@ -1,6 +1,6 @@
-curl -X POST \ 
--H"authorization: Basic aHRtbDU6cGFzc3dvcmQ=" \                 
--F"password=spring" \        
+curl -X POST \
+-H"authorization: Basic aHRtbDU6cGFzc3dvcmQ=" \
+-F"password=spring" \
 -F"client_secret=password" \
 -F"client_id=html5" \
 -F"username=jlong" \
