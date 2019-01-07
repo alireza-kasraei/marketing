@@ -72,5 +72,6 @@
 		<module>authorization-service</module>
 		<module>security-autoconfiguration</module>
 		<module>marketing-ui</module>
+		<module>marketing-gateway</module>
 	</modules>
 </project>
