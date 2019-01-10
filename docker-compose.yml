@@ -1,0 +1,57 @@
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    ports:
+    - 6037:6037
+    networks:
+    - marketing-cloud
+  postgres:
+    image: postgres:latest
+    ports:
+    - 5432:5432
+    networks:
+    - marketing-cloud
+    environment:
+      POSTGRES_DB: authorization
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+  config-service:
+    image: marketing/config-service:latest
+    ports:
+    - 8888:8888
+    networks:
+    - marketing-cloud
+  service-discovery:
+    image: marketing/service-discovery:latest
+    ports:
+    - 8761:8761
+    networks:
+    - marketing-cloud
+    depends_on:
+    - config-service
+    environment:
+      CONFIG_SERVICE_URI: config-service
+      CONFIG_SERVICE_PORT: 8888
+  authorization-service:
+    image: marketing/authorization-service:latest
+    ports:
+    - 9191:9191
+    networks:
+    - marketing-cloud
+    depends_on:
+    - config-service
+    - service-discovery
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6037
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USERNAME: docker
+      POSTGRES_PASSWORD: docker
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+networks:
+  marketing-cloud:
