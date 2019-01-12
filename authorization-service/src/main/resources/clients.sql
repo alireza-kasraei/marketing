@@ -1,0 +1,2 @@
+INSERT INTO clients(id, authorities, grant_types, autho_approve_scopes, client_id, scopes, secret) VALUES (1,'ROLE_USER,ROLE_ADMIN' , 'authorization_code,refresh_token,password', '.*', 'html5', 'openid', 'password');
+INSERT INTO clients(id, authorities, grant_types, autho_approve_scopes, client_id, scopes, secret) VALUES (2,'ROLE_USER,ROLE_ADMIN' , 'authorization_code,refresh_token,password', '.*', 'android', 'openid', 'secret');

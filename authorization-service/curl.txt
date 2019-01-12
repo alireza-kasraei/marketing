@@ -8,6 +8,17 @@ curl -X POST \
 -F"scope=openid" \
 http://localhost:9191/uaa/oauth/token
 
+curl -X POST \
+-H"authorization: Basic aHRtbDU6cGFzc3dvcmQ=" \
+-F"password=spring" \
+-F"client_secret=password" \
+-F"client_id=html5" \
+-F"username=jlong" \
+-F"grant_type=password" \
+-F"scope=openid" \
+http://localhost:9191/uaa/oauth/token
+
+
 
 curl \
 -H"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqbG9uZyIsInNjb3BlIjpbIm9wZW5pZCJdLCJvcmdhbml6YXRpb24iOiJqbG9uZ1VNckoiLCJleHAiOjE1NDY2NDI3MDIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwianRpIjoiZWNkNTg3NWMtYmQ2MS00Yjc1LTllZWEtYjRlNzI4OTQ5ZGRjIiwiY2xpZW50X2lkIjoiaHRtbDUifQ._eQakQ1uwRw0nEa6zIHkyrqP2KN_2Yh1ykHaMnBhQMk","token_type":"bearer","refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqbG9uZyIsInNjb3BlIjpbIm9wZW5pZCJdLCJvcmdhbml6YXRpb24iOiJqbG9uZ1VNckoiLCJhdGkiOiJlY2Q1ODc1Yy1iZDYxLTRiNzUtOWVlYS1iNGU3Mjg5NDlkZGMiLCJleHAiOjE1NDkxOTE1MDIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwianRpIjoiM2I5M2IxN2ItOWM1Mi00N2NjLWFlMDEtMjE4NGU5ODBiMmRlIiwiY2xpZW50X2lkIjoiaHRtbDUifQ.Ugy0NVzTvh0IhwKpHkLZbT2snAHtNn_X4PkXxEBOsZg" \

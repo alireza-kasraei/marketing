@@ -37,6 +37,8 @@ class PrincipalRestController {
 		userMap.put("username", user.getUsername());
 		userMap.put("mobileNumber", user.getMobileNumber());
 		userMap.put("email", user.getEmail());
+		userMap.put("firstname", user.getFirstName());
+		userMap.put("lastname", user.getLastName());
 		return ResponseEntity.ok(userMap);
 	}
 
