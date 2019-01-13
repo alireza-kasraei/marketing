@@ -16,4 +16,6 @@ security:
       userInfoUri: http://localhost:9191/uaa/user
 spring:
   thymeleaf:
-    cache: false   
+    cache: false
+       
+    

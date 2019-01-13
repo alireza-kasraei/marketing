@@ -1,0 +1,39 @@
+server:
+    port: 8082
+    servlet:
+      session:
+        cookie:
+          name: UISESSION
+      context-path: /ui
+security:
+  oauth2:
+    client:
+      clientId: html5
+      clientSecret: password
+      accessTokenUri: http://${AUTH_SERVICE_HOST}:${AUTH_SERVICE_PORT}/uaa/oauth/token
+      userAuthorizationUri: http://${AUTH_SERVICE_HOST}:${AUTH_SERVICE_PORT}/uaa/oauth/authorize
+    resource:
+      userInfoUri: http://${AUTH_SERVICE_HOST}:${AUTH_SERVICE_PORT}/uaa/user
+spring:
+  thymeleaf:
+    cache: false
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVICE_HOST}:${CONFIG_SERVICE_PORT}
+  application:
+    name: marketing-ui
+      
+eureka:
+  client:
+    region: default
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${DISCOVERY_SERVICE_HOST}:${DISCOVERY_SERVICE_PORT}/eureka
+      
+management:
+  security:
+    enabled: false
+  info:
+    git:
+      mode: full
