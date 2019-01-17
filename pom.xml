@@ -109,5 +109,6 @@
 		<!-- <module>security-autoconfiguration</module> -->
 		<module>marketing-ui</module>
 		<module>marketing-gateway</module>
+		<module>marketing-service</module>
 	</modules>
 </project>
