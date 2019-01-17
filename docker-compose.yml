@@ -106,7 +106,7 @@ services:
     environment:
     
       SPRING_PROFILES_ACTIVE: stage
-      AUTH_SERVICE_HOST: authorization-service
+      AUTH_SERVICE_HOST: localhost
       AUTH_SERVICE_PORT: 9191 
       DISCOVERY_SERVICE_HOST: service-discovery
       DISCOVERY_SERVICE_PORT: 8761
