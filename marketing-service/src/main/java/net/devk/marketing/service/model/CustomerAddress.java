@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,6 +23,7 @@ public class CustomerAddress {
 
 	@GeneratedValue(generator = CUSTOMER_ADDRESS_GENERATOR)
 	@SequenceGenerator(name = CUSTOMER_ADDRESS_GENERATOR, sequenceName = "customers_addresses_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "CUSTOMER_ADDRESS", length = 1000)
@@ -31,6 +34,6 @@ public class CustomerAddress {
 	private String longitude;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 }

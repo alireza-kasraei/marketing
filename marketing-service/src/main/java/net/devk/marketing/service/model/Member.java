@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,6 +24,7 @@ public class Member {
 
 	@GeneratedValue(generator = TEAMS_MEMBERS_GENERATOR)
 	@SequenceGenerator(name = TEAMS_MEMBERS_GENERATOR, sequenceName = "members_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "MEMBER_NAME")
@@ -34,7 +37,7 @@ public class Member {
 	private Integer membershipStatus;
 	// TODO FIXME how can we find out this member is head?
 
-	@Column(name = "TEAM_ID")
+	@JoinColumn(name = "TEAM_ID")
 	@ManyToOne
 	private Team team;
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,13 +22,14 @@ public class ContactType {
 
 	@GeneratedValue(generator = CONTACT_TYPES_GENERATOR)
 	@SequenceGenerator(name = CONTACT_TYPES_GENERATOR, sequenceName = "contact_types_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
-	@Column(name = "CONTACT_TYPE_NAME")
-	private String type;
+	@Column(name = "TYPE_NAME")
+	private String name;
 
 	// TODO FIXME int or string?
-	@Column(name = "CONTACT_TYPE_CATEGORY")
+	@Column(name = "TYPE_CATEGORY")
 	@Enumerated(EnumType.ORDINAL)
 	private ContactCategory category;
 }

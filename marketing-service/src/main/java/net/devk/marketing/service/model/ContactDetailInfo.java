@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,10 +23,11 @@ public class ContactDetailInfo {
 
 	@GeneratedValue(generator = CONTACTS_INFO_DETAILS_GENERATOR)
 	@SequenceGenerator(name = CONTACTS_INFO_DETAILS_GENERATOR, sequenceName = "contacts_info_details_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@Column(name = "CONTACT_INFO_ID")
+	@JoinColumn(name = "CONTACT_INFO_ID")
 	private ContactInfo contactInfo;
 	@Column(name = "CONTACT_DATA")
 	private String contactData;

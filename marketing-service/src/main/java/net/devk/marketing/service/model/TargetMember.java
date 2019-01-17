@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +25,7 @@ public class TargetMember {
 
 	@GeneratedValue(generator = TARGETS_MEMBERS_GENERATOR)
 	@SequenceGenerator(name = TARGETS_MEMBERS_GENERATOR, sequenceName = "targets_members_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "TARGET_MEMBER_NAME")
@@ -38,15 +41,15 @@ public class TargetMember {
 	private Date dueDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "VALUE_TYPE_ID")
+	@JoinColumn(name = "VALUE_TYPE_ID")
 	private ValueType valueType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "MEMBER_ID")
+	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "TARGET_ID")
+	@JoinColumn(name = "TARGET_ID")
 	private Target target;
 
 }

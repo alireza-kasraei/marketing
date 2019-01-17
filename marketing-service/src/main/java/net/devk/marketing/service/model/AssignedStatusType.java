@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,9 +18,10 @@ public class AssignedStatusType {
 
 	@GeneratedValue(generator = "assigned_status_types_generator")
 	@SequenceGenerator(name = "assigned_status_types_generator", sequenceName = "assigned_status_types_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
-	@Column(name = "ASSIGNED_STATUS_TYPE")
-	private String type;
+	@Column(name = "TYPE_NAME")
+	private String name;
 
 }

@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,6 +20,7 @@ public class ContactRole {
 
 	@GeneratedValue(generator = CONTACT_ROLES_GENERATOR)
 	@SequenceGenerator(name = CONTACT_ROLES_GENERATOR, sequenceName = "contact_roles_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "CONTACT_ROLE_NAME")

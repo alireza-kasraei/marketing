@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +25,7 @@ public class Team {
 
 	@GeneratedValue(generator = TEAMS_GENERATOR)
 	@SequenceGenerator(name = TEAMS_GENERATOR, sequenceName = "teams_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "TEAM_NAME")
@@ -30,7 +33,7 @@ public class Team {
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
 
-	@Column(name = "ORGAN_ID")
+	@JoinColumn(name = "ORGAN_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Organ organ;
 

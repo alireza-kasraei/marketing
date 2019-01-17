@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,9 +20,10 @@ public class ValueType {
 
 	@GeneratedValue(generator = VALUE_TYPE_GENERATOR)
 	@SequenceGenerator(name = VALUE_TYPE_GENERATOR, sequenceName = "value_types_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
-	@Column(name = "VALUE_TYPE_NAME")
+	@Column(name = "TYPE_NAME")
 	private String name;
 
 }

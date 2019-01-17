@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +25,7 @@ public class Requirment {
 
 	@GeneratedValue(generator = CUSTOMERS_REQUIREMENTS_GENERATOR)
 	@SequenceGenerator(name = CUSTOMERS_REQUIREMENTS_GENERATOR, sequenceName = "customers_requirements_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "ESTIMATED_VALUE")
@@ -45,11 +48,11 @@ public class Requirment {
 	private Date realValueRegisterDate;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@Column(name = "SERVICE_ID")
+	@JoinColumn(name = "SERVICE_ID")
 	private Service service;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@Column(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
 }

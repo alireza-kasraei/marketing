@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,16 +22,17 @@ public class Organ {
 
 	@GeneratedValue(generator = GENERATOR_NAME)
 	@SequenceGenerator(name = GENERATOR_NAME, sequenceName = "organs_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "ORGAN_NAME")
 	private String name;
-	@Column(name = "LEVEL")
+	@Column(name = "ORGAN_LEVEL")
 	private Integer level;
-	@Column(name = "ORDER")
+	@Column(name = "ORGAN_ORDER")
 	private Integer order;
 
-	@Column(name = "PARENT_ID")
+	@JoinColumn(name = "PARENT_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Organ parent;
 

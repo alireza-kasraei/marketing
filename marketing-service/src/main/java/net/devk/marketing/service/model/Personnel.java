@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,6 +22,7 @@ public class Personnel {
 
 	@GeneratedValue(generator = "personnel_generator")
 	@SequenceGenerator(name = "personnel_generator", sequenceName = "personnel_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "PERSONNEL_NAME")
@@ -28,7 +31,7 @@ public class Personnel {
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
 
-	@Column(name = "ORGAN_ID")
+	@JoinColumn(name = "ORGAN_ID")
 	@ManyToOne
 	private Organ organ;
 

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,17 +26,18 @@ public class ContactInfo {
 
 	@GeneratedValue(generator = CONTACT_INFO_GENERATOR)
 	@SequenceGenerator(name = CONTACT_INFO_GENERATOR, sequenceName = "contacts_info_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "CONTACT_NAME")
 	private String name;
 
-	@Column(name = "CONTACT_ROLE_ID")
+	@JoinColumn(name = "CONTACT_ROLE_ID")
 	@ManyToOne(fetch=FetchType.LAZY)
 	private ContactRole role;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@Column(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
 	@ManyToMany(mappedBy = "contactInfos",fetch=FetchType.LAZY)

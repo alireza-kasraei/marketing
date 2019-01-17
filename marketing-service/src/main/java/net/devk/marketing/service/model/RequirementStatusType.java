@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,9 +20,10 @@ public class RequirementStatusType {
 
 	@GeneratedValue(generator = REQUIREMENT_STATUS_TYPES_GENERATOR)
 	@SequenceGenerator(name = REQUIREMENT_STATUS_TYPES_GENERATOR, sequenceName = "requirement_status_types_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
-	@Column(name = "STATUS_TYPE")
+	@Column(name = "TYPE_NAME")
 	private String type;
 
 }

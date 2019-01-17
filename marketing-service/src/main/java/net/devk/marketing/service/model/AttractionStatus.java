@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,17 +25,18 @@ public class AttractionStatus {
 
 	@GeneratedValue(generator = ATTRACTIONS_STATUSES_GENERATOR)
 	@SequenceGenerator(name = ATTRACTIONS_STATUSES_GENERATOR, sequenceName = "attractions_statuses_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "ATTRACTION_TYPE_ID")
+	@JoinColumn(name = "ATTRACTION_TYPE_ID")
 	private AttractionType attractionType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
 }

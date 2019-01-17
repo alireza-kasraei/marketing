@@ -3,6 +3,8 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,13 +22,14 @@ public class MeetingResult {
 
 	@GeneratedValue(generator = MEETINGS_RESULTS_GENERATOR)
 	@SequenceGenerator(name = MEETINGS_RESULTS_GENERATOR, sequenceName = "meetings_results_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
 	@Column(name = "description")
 	private String description;
 
 	@ManyToOne
-	@Column(name = "MEETING_ID")
+	@JoinColumn(name = "MEETING_ID")
 	private Meeting meeting;
 
 }

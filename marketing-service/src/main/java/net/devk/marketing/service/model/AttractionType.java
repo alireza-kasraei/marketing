@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,8 +20,9 @@ public class AttractionType {
 
 	@GeneratedValue(generator = ATTRACTION_TYPE_GENERATOR)
 	@SequenceGenerator(name = ATTRACTION_TYPE_GENERATOR, sequenceName = "attraction_types_sequence", initialValue = 1)
+	@Id
 	private Long id;
 
-	@Column(name = "ATTRACTION_TYPE")
-	private String type;
+	@Column(name = "TYPE_NAME")
+	private String name;
 }
