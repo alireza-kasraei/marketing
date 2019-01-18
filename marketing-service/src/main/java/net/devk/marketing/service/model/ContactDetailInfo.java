@@ -26,9 +26,12 @@ public class ContactDetailInfo {
 	@Id
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CONTACT_INFO_ID")
 	private ContactInfo contactInfo;
 	@Column(name = "CONTACT_DATA")
 	private String contactData;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CONTACT_TYPE_ID")
+	private ContactType contactType;
 }

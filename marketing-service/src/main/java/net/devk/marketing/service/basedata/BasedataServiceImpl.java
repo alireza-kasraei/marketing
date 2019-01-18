@@ -10,6 +10,12 @@ import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
 import net.devk.marketing.service.basedata.dto.BasedataDTO;
 import net.devk.marketing.service.basedata.dto.ContactTypeDTO;
 import net.devk.marketing.service.basedata.dto.ServiceDTO;
+import net.devk.marketing.service.model.AttractionType;
+import net.devk.marketing.service.model.BusinessScale;
+import net.devk.marketing.service.model.ContactRole;
+import net.devk.marketing.service.model.ContactType;
+import net.devk.marketing.service.model.CustomerType;
+import net.devk.marketing.service.model.OwnershipType;
 
 @Service
 class BasedataServiceImpl implements BasedataService {
@@ -85,6 +91,36 @@ class BasedataServiceImpl implements BasedataService {
 
 		aggregatedBasedataDTO.setServices(services);
 		return aggregatedBasedataDTO;
+	}
+
+	@Override
+	public BusinessScale getOneBusinessScale(Long id) {
+		return businessScaleRepository.getOne(id);
+	}
+
+	@Override
+	public CustomerType getOneCustomerType(Long id) {
+		return customerTypeRepository.getOne(id);
+	}
+
+	@Override
+	public OwnershipType getOneOwnershipType(Long id) {
+		return ownershipTypeRepository.getOne(id);
+	}
+
+	@Override
+	public AttractionType getOneAttractionType(Long id) {
+		return attractionTypeRepository.getOne(id);
+	}
+
+	@Override
+	public ContactType getOneContactType(Long id) {
+		return contactTypeRepository.getOne(id);
+	}
+
+	@Override
+	public ContactRole getOneContactRole(Long id) {
+		return contactRoleRepository.getOne(id);
 	}
 
 }
