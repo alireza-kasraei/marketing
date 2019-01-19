@@ -1,5 +1,6 @@
 package net.devk.marketing.service.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,13 +34,13 @@ public class ContactInfo {
 	private String name;
 
 	@JoinColumn(name = "CONTACT_ROLE_ID")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private ContactRole role;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
-	@ManyToMany(mappedBy = "contactInfos",fetch=FetchType.LAZY)
-	private Set<Meeting> meetings;
+	@ManyToMany(mappedBy = "contactInfos", fetch = FetchType.LAZY)
+	private Set<Meeting> meetings = new HashSet<>();
 }

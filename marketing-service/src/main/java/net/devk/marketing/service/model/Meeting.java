@@ -1,6 +1,7 @@
 package net.devk.marketing.service.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -37,5 +38,5 @@ public class Meeting {
 
 	@ManyToMany
 	@JoinTable(name = "MEETINGS_CONTACTS_INFO", joinColumns = @JoinColumn(name = "MEETING_ID"), inverseJoinColumns = @JoinColumn(name = "CONTACT_INFO_ID"))
-	private Set<ContactInfo> contactInfos;
+	private Set<ContactInfo> contactInfos = new HashSet<>();
 }

@@ -75,4 +75,9 @@ class ContactsServiceImpl implements ContactService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public ContactInfo getOneContactInfo(Long contactInfo) {
+		return contactInfoRepository.getOne(contactInfo);
+	}
+
 }

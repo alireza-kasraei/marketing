@@ -16,4 +16,6 @@ public interface ContactService {
 
 	public List<GetContactInfoResponseDTO> findAllContactsInfo(Long customerId);
 
+	public ContactInfo getOneContactInfo(Long contactInfo);
+
 }
