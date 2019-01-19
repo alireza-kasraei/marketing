@@ -1,4 +1,4 @@
-package net.devk.marketing.service.customers;
+package net.devk.marketing.service.documents;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

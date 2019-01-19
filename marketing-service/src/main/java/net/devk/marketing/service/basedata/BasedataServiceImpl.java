@@ -15,6 +15,7 @@ import net.devk.marketing.service.model.BusinessScale;
 import net.devk.marketing.service.model.ContactRole;
 import net.devk.marketing.service.model.ContactType;
 import net.devk.marketing.service.model.CustomerType;
+import net.devk.marketing.service.model.DocumentType;
 import net.devk.marketing.service.model.OwnershipType;
 
 @Service
@@ -121,6 +122,11 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public ContactRole getOneContactRole(Long id) {
 		return contactRoleRepository.getOne(id);
+	}
+
+	@Override
+	public DocumentType getOneDocumentType(Long id) {
+		return documentTypeRepository.getOne(id);
 	}
 
 }
