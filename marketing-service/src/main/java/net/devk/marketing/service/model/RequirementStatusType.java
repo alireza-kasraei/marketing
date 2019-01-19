@@ -19,7 +19,7 @@ public class RequirementStatusType {
 	private static final String REQUIREMENT_STATUS_TYPES_GENERATOR = "requirement_status_types_generator";
 
 	@GeneratedValue(generator = REQUIREMENT_STATUS_TYPES_GENERATOR)
-	@SequenceGenerator(name = REQUIREMENT_STATUS_TYPES_GENERATOR, sequenceName = "requirement_status_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = REQUIREMENT_STATUS_TYPES_GENERATOR, sequenceName = "rst_sequence", initialValue = 1)
 	@Id
 	private Long id;
 

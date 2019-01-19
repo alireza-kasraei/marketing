@@ -23,7 +23,7 @@ public class AssignedRequirementStatus {
 	private static final String ASSIGNED_REQUIREMENTS_STATUSES_GENERATOR = "assigned_requirements_statuses_generator";
 
 	@GeneratedValue(generator = ASSIGNED_REQUIREMENTS_STATUSES_GENERATOR)
-	@SequenceGenerator(name = ASSIGNED_REQUIREMENTS_STATUSES_GENERATOR, sequenceName = "assigned_requirements_statuses_sequence", initialValue = 1)
+	@SequenceGenerator(name = ASSIGNED_REQUIREMENTS_STATUSES_GENERATOR, sequenceName = "ars_sequence", initialValue = 1)
 	@Id
 	private Long id;
 

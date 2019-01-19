@@ -24,7 +24,7 @@ public class Requirment {
 	private static final String CUSTOMERS_REQUIREMENTS_GENERATOR = "customers_requirements_generator";
 
 	@GeneratedValue(generator = CUSTOMERS_REQUIREMENTS_GENERATOR)
-	@SequenceGenerator(name = CUSTOMERS_REQUIREMENTS_GENERATOR, sequenceName = "customers_requirements_sequence", initialValue = 1)
+	@SequenceGenerator(name = CUSTOMERS_REQUIREMENTS_GENERATOR, sequenceName = "cr_sequence", initialValue = 1)
 	@Id
 	private Long id;
 

@@ -46,11 +46,21 @@
 
 	<profiles>
 		<profile>
-			<id>development</id>
+			<id>development-h2</id>
 			<dependencies>
 				<dependency>
 					<groupId>com.h2database</groupId>
 					<artifactId>h2</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>development-oracle</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.oracle</groupId>
+					<artifactId>ojdbc6</artifactId>
+					<version>11.2.0.3.0</version>
 				</dependency>
 			</dependencies>
 		</profile>
