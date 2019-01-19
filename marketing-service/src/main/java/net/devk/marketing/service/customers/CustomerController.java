@@ -51,9 +51,8 @@ public class CustomerController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findAll(@RequestParam(name = "name") String name) {
-
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<?> findAll(@RequestParam(name = "name", required = false) String name) {
+		return ResponseEntity.ok(customerService.findAllCustomersLikeByName(name));
 	}
 
 }

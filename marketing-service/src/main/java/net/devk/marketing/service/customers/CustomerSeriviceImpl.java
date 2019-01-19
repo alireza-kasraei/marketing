@@ -1,6 +1,7 @@
 package net.devk.marketing.service.customers;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
+import net.devk.marketing.service.customers.dto.GetCustomerResponseDTO;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.CustomerAddress;
 import net.devk.marketing.service.model.RegistrationStatus;
@@ -102,6 +104,11 @@ class CustomerSeriviceImpl implements CustomerService {
 	@Override
 	public Customer getOneCustomer(Long customerId) {
 		return customerRepository.getOne(customerId);
+	}
+
+	@Override
+	public List<GetCustomerResponseDTO> findAllCustomersLikeByName(String name) {
+		return customerRepository.findAllCustomersLikeByName(name);
 	}
 
 }
