@@ -1,12 +1,18 @@
 package net.devk.marketing.service.contacts;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
+import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
+import net.devk.marketing.service.contacts.dto.GetContactInfoResponseDTO;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.model.ContactDetailInfo;
 import net.devk.marketing.service.model.ContactInfo;
@@ -22,9 +28,13 @@ class ContactsServiceImpl implements ContactService {
 	private ContactInfoRepository contactInfoRepository;
 
 	@Autowired
+	private ContactDetailInfoRepository contactDetailInfoRepository;
+
+	@Autowired
 	private BasedataService basedataService;
 
 	@Override
+	@Transactional
 	public ContactInfo createContactInfo(Long customerId, Long contactRoleId, String name,
 			Collection<ContactTypeRequestDTO> contactTypes) {
 
@@ -41,9 +51,28 @@ class ContactsServiceImpl implements ContactService {
 			contactDetailInfo.setContactData(c.getContactData());
 			contactDetailInfo.setContactInfo(savedContactInfo);
 			contactDetailInfo.setContactType(basedataService.getOneContactType(c.getContactTypeId()));
+			contactDetailInfoRepository.save(contactDetailInfo);
 		});
 
 		return savedContactInfo;
+	}
+
+	@Override
+	@Transactional
+	public GetContactInfoResponseDTO findContactInfo(Long contactInfoId) {
+		Optional<ContactInfo> contactInfoOptional = contactInfoRepository.findById(contactInfoId);
+		// TODO FIXME
+		ContactInfo contactInfo = contactInfoOptional.orElseThrow(() -> new RuntimeException(""));
+		List<ContactDetailInfoQueryResultDTO> details = contactDetailInfoRepository
+				.findContactDetailInfoByContactInfoId(contactInfoId);
+		return new GetContactInfoResponseDTO(contactInfoId, contactInfo.getName(), contactInfo.getRole().getName(),
+				details);
+	}
+
+	@Override
+	public List<GetContactInfoResponseDTO> findAllContactsInfo(Long customerId) {
+		return contactInfoRepository.findByCustomerId(customerId).stream().map(c -> findContactInfo(c.getId()))
+				.collect(Collectors.toList());
 	}
 
 }

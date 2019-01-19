@@ -1,5 +1,6 @@
 package net.devk.marketing.service.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class ContactDetailInfo {
 	@Id
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name = "CONTACT_INFO_ID")
 	private ContactInfo contactInfo;
 	@Column(name = "CONTACT_DATA")
