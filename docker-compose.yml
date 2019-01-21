@@ -15,11 +15,17 @@ services:
       marketing-cloud:
       
   oracle-marketing:
+    build:
+      context: ./oracle
+      dockerfile: Dockerfile
     image: koorosh01/oracle-xe:marketing
     networks:
       marketing-cloud:
       
   config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
     image: marketing/config-service:latest
     ports:
     - 8888:8888
@@ -29,6 +35,9 @@ services:
       SPRING_PROFILES_ACTIVE: stage    
      
   service-discovery:
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile
     image: marketing/service-discovery:latest
     ports:
     - 8761:8761
@@ -42,6 +51,9 @@ services:
       CONFIG_SERVICE_PORT: 8888
 
   authorization-service:
+    build:
+      context: ./authorization-service
+      dockerfile: Dockerfile
     image: marketing/authorization-service:latest
     ports:
     - 9191:9191
@@ -66,6 +78,9 @@ services:
       CONFIG_SERVICE_PORT: 8888
       
   greetings-service:
+    build:
+      context: ./greetings-service
+      dockerfile: Dockerfile
     image: marketing/greetings-service:latest
     networks:
       marketing-cloud:
@@ -84,6 +99,9 @@ services:
       CONFIG_SERVICE_PORT: 8888
       
   marketing-gateway:
+    build:
+      context: ./marketing-gateway
+      dockerfile: Dockerfile
     image: marketing/marketing-gateway:latest
     ports:
     - 8081:8081
@@ -101,6 +119,9 @@ services:
       CONFIG_SERVICE_PORT: 8888
       
   marketing-ui:
+    build:
+      context: ./marketing-ui
+      dockerfile: Dockerfile
     image: marketing/marketing-ui:latest
     ports:
     - 8082:8082
@@ -120,6 +141,9 @@ services:
       CONFIG_SERVICE_PORT: 8888
       
   marketing-service:
+    build:
+      context: ./marketing-service
+      dockerfile: Dockerfile
     image: marketing/marketing-service:latest
     networks:
       marketing-cloud:
@@ -136,6 +160,14 @@ services:
       DISCOVERY_SERVICE_PORT: 8761
       CONFIG_SERVICE_HOST: config-service
       CONFIG_SERVICE_PORT: 8888
+      ORACLE_HOST: oracle-marketing
+      ORACLE_PORT: 1521
+      ORACLE_SID: XE
+      ORACLE_USER: marketing
+      ORACLE_PASSWORD: marketing
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      
       
   
 networks:
