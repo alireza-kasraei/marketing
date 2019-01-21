@@ -18,7 +18,8 @@ public class MarketingGatewayApplication {
 	@Bean
 	public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route(r -> r.path("/gs/**").filters(f -> f.stripPrefix(1)).uri("lb://greetings-service")).build();
+				.route(r -> r.path("/gs/**").filters(f -> f.stripPrefix(1)).uri("lb://greetings-service"))
+				.route(r -> r.path("/ms/**").filters(f -> f.stripPrefix(1)).uri("lb://marketing-service")).build();
 	}
 
 }

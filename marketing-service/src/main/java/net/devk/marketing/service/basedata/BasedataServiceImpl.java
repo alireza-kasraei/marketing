@@ -56,7 +56,9 @@ class BasedataServiceImpl implements BasedataService {
 		List<BasedataDTO> contactRoles = contactRoleRepository.findAll().stream()
 				.map(c -> new BasedataDTO(c.getId(), c.getName())).collect(Collectors.toList());
 
-		List<ContactTypeDTO> contactTypes = contactTypeRepository.findAllContactTypes();
+		List<ContactTypeDTO> contactTypes = contactTypeRepository.findAll().stream().map(
+				ct -> new ContactTypeDTO(ct.getId(), ct.getName(), ct.getCategory().name(), ct.getCategory().ordinal()))
+				.collect(Collectors.toList());
 
 		List<BasedataDTO> attractionTypes = attractionTypeRepository.findAll().stream()
 				.map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList());

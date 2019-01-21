@@ -13,6 +13,12 @@ services:
       - ./init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
     networks:
       marketing-cloud:
+      
+  oracle-marketing:
+    image: koorosh01/oracle-xe:marketing
+    networks:
+      marketing-cloud:
+      
   config-service:
     image: marketing/config-service:latest
     ports:
@@ -103,6 +109,24 @@ services:
     depends_on:
     - service-discovery
     - config-service
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      AUTH_SERVICE_HOST: localhost
+      AUTH_SERVICE_PORT: 9191 
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      
+  marketing-service:
+    image: marketing/marketing-service:latest
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - config-service
+    - oracle-marketing
     environment:
     
       SPRING_PROFILES_ACTIVE: stage

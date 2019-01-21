@@ -3,6 +3,7 @@ package net.devk.marketing.service.documents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
@@ -20,13 +21,12 @@ class DocumentServiceImpl implements DocumentService {
 
 	@Override
 	@Transactional
-	public CustomerDocument createCustomerDocument(Long customerId, String documentName, Long documentId,
-			byte[] contect) {
-
+	public CustomerDocument createCustomerDocument(Long customerId, String documentName, Long documentTypeId,
+			MultipartFile file) {
 		CustomerDocument customerDocument = new CustomerDocument();
 		customerDocument.setCustomer(customerService.getOneCustomer(customerId));
 		customerDocument.setDocumentName(documentName);
-		customerDocument.setDocumentType(basedataService.getOneDocumentType(documentId));
+		customerDocument.setDocumentType(basedataService.getOneDocumentType(documentTypeId));
 		// customerDocument.setFilePath(File.createTempFile(null, ""));
 		return customerDocumentRepository.save(customerDocument);
 	}

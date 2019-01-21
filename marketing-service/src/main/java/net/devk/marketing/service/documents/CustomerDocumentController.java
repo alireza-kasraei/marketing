@@ -24,6 +24,8 @@ public class CustomerDocumentController {
 
 	@PostMapping("{id}/documents")
 	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("id") Long customerId) {
+		
+		
 
 //        String fileName = fileStorageService.storeFile(file);
 //
