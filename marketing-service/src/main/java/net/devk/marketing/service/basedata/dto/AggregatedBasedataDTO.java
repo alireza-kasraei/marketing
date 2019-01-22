@@ -17,6 +17,7 @@ public class AggregatedBasedataDTO {
 	private List<BasedataDTO> assignStatusTypes;
 	private List<BasedataDTO> customerTypes;
 	private List<BasedataDTO> ownershipTypes;
+	private List<BasedataDTO> organizationTypes;
 
 	private List<ServiceDTO> services;
 

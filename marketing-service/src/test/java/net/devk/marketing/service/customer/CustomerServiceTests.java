@@ -23,7 +23,7 @@ public class CustomerServiceTests {
 	public void testSaveCustomer() {
 
 		Customer customer = customerService.createCustomer("koorosh01", true, "123", "456", 1, 123, true,
-				RegistrationStatus.EARLY, "koorosh01", 1L, 2L, 1L, 1L);
+				RegistrationStatus.EARLY, "koorosh01", 1L, 2L, 1L, 1L,1L);
 		Assert.assertNotNull(customer);
 	}
 
@@ -31,7 +31,7 @@ public class CustomerServiceTests {
 	public void testSaveCustomerAddress() {
 
 		Customer customer = customerService.createCustomer("koorosh01", true, "123", "456", 1, 123, true,
-				RegistrationStatus.EARLY, "koorosh01", 1L, 2L, 1L, 1L);
+				RegistrationStatus.EARLY, "koorosh01", 1L, 2L, 1L, 1L,1L);
 		CustomerAddress addAddress = customerService.addAddress(customer.getId(), "9263492374928", "asdaldhalk",
 				"aksdjgajkhda");
 		Assert.assertNotNull(addAddress);

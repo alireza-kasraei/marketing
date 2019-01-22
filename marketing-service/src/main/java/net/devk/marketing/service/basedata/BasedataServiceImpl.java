@@ -16,6 +16,7 @@ import net.devk.marketing.service.model.ContactRole;
 import net.devk.marketing.service.model.ContactType;
 import net.devk.marketing.service.model.CustomerType;
 import net.devk.marketing.service.model.DocumentType;
+import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
 
 @Service
@@ -43,6 +44,8 @@ class BasedataServiceImpl implements BasedataService {
 	private OwnershipTypeRepository ownershipTypeRepository;
 	@Autowired
 	private ServiceRepository serviceRepository;
+	@Autowired
+	private OrganizationTypeRepository organizationTypeRepository;
 
 	@Override
 	public AggregatedBasedataDTO getAggregatedBasedata() {
@@ -77,6 +80,9 @@ class BasedataServiceImpl implements BasedataService {
 
 		List<BasedataDTO> ownershipTypes = ownershipTypeRepository.findAll().stream()
 				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
+		
+		List<BasedataDTO> organizationTypes = organizationTypeRepository.findAll().stream()
+				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
 
 		List<ServiceDTO> services = serviceRepository.findAllServices();
 
@@ -89,6 +95,7 @@ class BasedataServiceImpl implements BasedataService {
 		aggregatedBasedataDTO.setCustomerTypes(customerTypes);
 		aggregatedBasedataDTO.setDocumentTypes(documentTypes);
 		aggregatedBasedataDTO.setOwnershipTypes(ownershipTypes);
+		aggregatedBasedataDTO.setOrganizationTypes(organizationTypes);
 		aggregatedBasedataDTO.setRequirementStatusTypes(requirementStatusTypes);
 		aggregatedBasedataDTO.setValueTypes(valueTypes);
 
@@ -129,6 +136,11 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public DocumentType getOneDocumentType(Long id) {
 		return documentTypeRepository.getOne(id);
+	}
+
+	@Override
+	public OrganizationType getOrganizationType(Long id) {
+		return organizationTypeRepository.getOne(id);
 	}
 
 }

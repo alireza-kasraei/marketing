@@ -30,7 +30,7 @@ public class ContactServiceTests {
 	public void testSaveContactInfo() {
 
 		Customer customer = customerService.createCustomer("koorosh01", true, "123", "nine", 12, 2232, false,
-				RegistrationStatus.FINISHED, "koorosh01", 1L, 1L, 1L, 1L);
+				RegistrationStatus.FINISHED, "koorosh01", 1L, 1L, 1L, 1L,1L);
 
 		List<ContactTypeRequestDTO> contactTypes = new ArrayList<>();
 		contactTypes.add(new ContactTypeRequestDTO(1L, "09123853840"));

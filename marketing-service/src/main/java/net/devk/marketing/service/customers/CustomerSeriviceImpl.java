@@ -30,7 +30,7 @@ class CustomerSeriviceImpl implements CustomerService {
 	@Transactional
 	public Customer createCustomer(String name, boolean legal, String economicCode, String economicSection,
 			int headCount, long annualIncome, boolean hasDocuments, RegistrationStatus registrationStatus,
-			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId) {
+			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId,Long organizationTypeId) {
 		Customer customer = new Customer();
 		customer.setName(name);
 		customer.setRegisterDate(new Date());
@@ -47,6 +47,7 @@ class CustomerSeriviceImpl implements CustomerService {
 		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
 		customer.setOwnershipType(basedataService.getOneOwnershipType(ownershipTypeId));
 		customer.setAttractionType(basedataService.getOneAttractionType(attractionTypeId));
+		customer.setOrganizationType(basedataService.getOrganizationType(organizationTypeId));
 		return customerRepository.save(customer);
 	}
 
@@ -87,7 +88,7 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer updateCustomer(Long customerId, Long customerTypeId, int headCount, Long ownershipTypeId,
+	public Customer updateCustomer(Long customerId, Long customerTypeId, int headCount, Long ownershipTypeId,Long organizationTypeId,
 			long annualIncome) {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
@@ -96,6 +97,7 @@ class CustomerSeriviceImpl implements CustomerService {
 		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
 		customer.setHeadCount(headCount);
 		customer.setOwnershipType(basedataService.getOneOwnershipType(ownershipTypeId));
+		customer.setOrganizationType(basedataService.getOrganizationType(organizationTypeId));
 		customer.setAnnualIncome(annualIncome);
 		customer.setRegistrationStatus(RegistrationStatus.FINISHED);
 		return customerRepository.save(customer);

@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "CUSTOMER_TYPES")
+@Table(name = "ORGANIZATION_TYPES")
 @NoArgsConstructor
-public class CustomerType {
+public class OrganizationType {
 
-	private static final String CUSTOMER_TYPE_GENERATOR = "customer_types_generator";
-	@GeneratedValue(generator = CUSTOMER_TYPE_GENERATOR)
-	@SequenceGenerator(name = CUSTOMER_TYPE_GENERATOR, sequenceName = "customer_types_sequence", initialValue = 1)
+	private static final String ORGANIZATION_TYPE_GENERATOR = "organization_types_generator";
+	@GeneratedValue(generator = ORGANIZATION_TYPE_GENERATOR)
+	@SequenceGenerator(name = ORGANIZATION_TYPE_GENERATOR, sequenceName = "organization_types_sequence", initialValue = 1)
 	@Id
 	private Long id;
 

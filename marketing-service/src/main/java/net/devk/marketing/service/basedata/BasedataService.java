@@ -7,6 +7,7 @@ import net.devk.marketing.service.model.ContactRole;
 import net.devk.marketing.service.model.ContactType;
 import net.devk.marketing.service.model.CustomerType;
 import net.devk.marketing.service.model.DocumentType;
+import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
 
 public interface BasedataService {
@@ -26,5 +27,7 @@ public interface BasedataService {
 	public AttractionType getOneAttractionType(Long id);
 
 	public DocumentType getOneDocumentType(Long id);
+	
+	public OrganizationType getOrganizationType(Long id);
 
 }

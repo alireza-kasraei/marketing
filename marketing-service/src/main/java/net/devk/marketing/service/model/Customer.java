@@ -1,3 +1,4 @@
+
 package net.devk.marketing.service.model;
 
 import java.util.Date;
@@ -74,5 +75,8 @@ public class Customer {
 	@JoinColumn(name = "ATTRACTION_TYPE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private AttractionType attractionType;
+	@JoinColumn(name = "ORGANIZATION_TYPE_ID")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private OrganizationType organizationType;
 
 }

@@ -26,7 +26,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CreateNewCustomerResponseDTO> createNewCustomer(
 			@RequestBody CreateNewCustomerRequestDTO createNewCustomerRequestDTO, Principal principal) {
 
@@ -41,12 +41,12 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewCustomerResponseDTO(customer.getId()));
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+	@RequestMapping(path = "new/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateNewCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
 		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getCompanyTypeId(),
 				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
-				updateCustomerRequestDTO.getAnnualIncome());
+				updateCustomerRequestDTO.getOrganizationTypeId(), updateCustomerRequestDTO.getAnnualIncome());
 		return ResponseEntity.noContent().build();
 	}
 
