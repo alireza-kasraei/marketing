@@ -25,4 +25,7 @@ public class AttractionType {
 
 	@Column(name = "TYPE_NAME")
 	private String name;
+
+	@Column(name = "TYPE_CODE")
+	private String code;
 }

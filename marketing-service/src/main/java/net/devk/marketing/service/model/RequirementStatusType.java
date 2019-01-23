@@ -26,4 +26,7 @@ public class RequirementStatusType {
 	@Column(name = "TYPE_NAME")
 	private String type;
 
+	@Column(name = "TYPE_CODE")
+	private String code;
+
 }

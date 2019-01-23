@@ -35,9 +35,6 @@ public class TeamMember {
 	@Column(name = "MEMBERSHIP_STATUS")
 	private Integer membershipStatus;
 
-	@Column(name = "USER_NAME")
-	private String username;
-
 	@JoinColumn(name = "TEAM_ID")
 	@ManyToOne
 	private Team team;

@@ -45,8 +45,8 @@ public class TargetMember {
 	private ValueType valueType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID")
-	private TeamMember member;
+	@JoinColumn(name = "TEAM_MEMBER_ID")
+	private TeamMember teamMember;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TARGET_ID")

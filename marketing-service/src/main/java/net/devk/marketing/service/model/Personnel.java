@@ -20,17 +20,22 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "PERSONNEL")
+@Table(name = "PERSONNELS")
 @NoArgsConstructor
 public class Personnel {
 
-	@GeneratedValue(generator = "personnel_generator")
-	@SequenceGenerator(name = "personnel_generator", sequenceName = "personnel_sequence", initialValue = 1)
+	private static final String PERSONNELS_GENERATOR = "personnels_generator";
+
+	@GeneratedValue(generator = PERSONNELS_GENERATOR)
+	@SequenceGenerator(name = PERSONNELS_GENERATOR, sequenceName = "personnels_sequence", initialValue = 1)
 	@Id
 	private Long id;
 
 	@Column(name = "PERSONNEL_NAME")
 	private String name;
+	
+	@Column(name = "USER_NAME")
+	private String username;
 
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
