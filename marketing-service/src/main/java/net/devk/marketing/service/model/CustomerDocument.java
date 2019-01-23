@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -37,11 +38,15 @@ public class CustomerDocument {
 	@Column(name = "FILE_PATH")
 	private String filePath;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+//	@Lob
+//	@Column(name = "photo", columnDefinition = "BLOB")
+//	private byte[] file;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOCUMENT_TYPE_ID")
 	private DocumentType documentType;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 

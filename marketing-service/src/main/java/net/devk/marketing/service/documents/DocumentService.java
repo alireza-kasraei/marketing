@@ -6,7 +6,6 @@ import net.devk.marketing.service.model.CustomerDocument;
 
 public interface DocumentService {
 
-	public CustomerDocument createCustomerDocument(Long customerId, String documentName, Long documentTypeId,
-			MultipartFile file);
+	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file);
 
 }

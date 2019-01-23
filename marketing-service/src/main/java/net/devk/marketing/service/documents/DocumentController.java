@@ -3,6 +3,7 @@ package net.devk.marketing.service.documents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +16,14 @@ import net.devk.marketing.service.documents.dto.CreateNewCustomerDocumentRespons
 import net.devk.marketing.service.model.CustomerDocument;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/customers")
-public class CustomerDocumentController {
+@RequestMapping(path = ControllersConfig.API_PREFIX + "/documents")
+public class DocumentController {
 
 	@Autowired
 	private DocumentService documentService;
 
-	@PostMapping("{id}/documents")
-	public ResponseEntity<CreateNewCustomerDocumentResponseDTO> uploadFile(@RequestParam("file") MultipartFile file,
+	@GetMapping("/{id}")
+	public ResponseEntity<CreateNewCustomerDocumentResponseDTO> downloadFile(@RequestParam("file") MultipartFile file,
 			@RequestParam("documentTypeId") Long documentTypeId, @PathVariable("id") Long customerId) {
 
 		CustomerDocument customerDocument = documentService.createCustomerDocument(customerId, documentTypeId, file);
