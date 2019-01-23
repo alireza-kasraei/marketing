@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// TODO FIXME how can we find out this member is head?
 @Data
 @Entity
 @Table(name = "MEMBERS")
@@ -35,7 +36,8 @@ public class Member {
 	// TODO FIXME is it a simple integer filed or relation to another table
 	@Column(name = "MEMBERSHIP_STATUS")
 	private Integer membershipStatus;
-	// TODO FIXME how can we find out this member is head?
+	@Column(name = "USER_NAME")
+	private String username;
 
 	@JoinColumn(name = "TEAM_ID")
 	@ManyToOne

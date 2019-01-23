@@ -1,0 +1,174 @@
+version: '3'
+
+services:
+
+  redis:
+    image: redis:alpine
+    networks:
+      marketing-cloud:
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+    networks:
+      marketing-cloud:
+      
+  oracle-marketing:
+    build:
+      context: ./oracle
+      dockerfile: Dockerfile
+    image: localhost:50000/oracle-xe:marketing
+    networks:
+      marketing-cloud:
+      
+  config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
+    image: localhost:50000/config-service:latest
+    ports:
+    - 8888:8888
+    networks:
+      marketing-cloud:
+    environment:
+      SPRING_PROFILES_ACTIVE: stage    
+     
+  service-discovery:
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile
+    image: localhost:50000/service-discovery:latest
+    ports:
+    - 8761:8761
+    networks:
+      marketing-cloud:
+    depends_on:
+    - config-service
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+      CONFIG_SERVICE_URI: config-service
+      CONFIG_SERVICE_PORT: 8888
+
+  authorization-service:
+    build:
+      context: ./authorization-service
+      dockerfile: Dockerfile
+    image: localhost:50000/authorization-service:latest
+    ports:
+    - 9191:9191
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - redis
+    - postgres
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USERNAME: docker
+      POSTGRES_PASSWORD: docker
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      
+  greetings-service:
+    build:
+      context: ./greetings-service
+      dockerfile: Dockerfile
+    image: localhost:50000/greetings-service:latest
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - redis
+    - config-service
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      
+  marketing-gateway:
+    build:
+      context: ./marketing-gateway
+      dockerfile: Dockerfile
+    image: localhost:50000/marketing-gateway:latest
+    ports:
+    - 8081:8081
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - config-service
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      
+  marketing-ui:
+    build:
+      context: ./marketing-ui
+      dockerfile: Dockerfile
+    image: localhost:50000/marketing-ui:latest
+    ports:
+    - 8082:8082
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - config-service
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      AUTH_SERVICE_HOST: localhost
+      AUTH_SERVICE_PORT: 9191 
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      
+  marketing-service:
+    build:
+      context: ./marketing-service
+      dockerfile: Dockerfile
+    image: localhost:50000/marketing-service:latest
+    networks:
+      marketing-cloud:
+    depends_on:
+    - service-discovery
+    - config-service
+    - oracle-marketing
+    environment:
+    
+      SPRING_PROFILES_ACTIVE: stage
+      AUTH_SERVICE_HOST: localhost
+      AUTH_SERVICE_PORT: 9191 
+      DISCOVERY_SERVICE_HOST: service-discovery
+      DISCOVERY_SERVICE_PORT: 8761
+      CONFIG_SERVICE_HOST: config-service
+      CONFIG_SERVICE_PORT: 8888
+      ORACLE_HOST: oracle-marketing
+      ORACLE_PORT: 1521
+      ORACLE_SID: XE
+      ORACLE_USER: marketing
+      ORACLE_PASSWORD: marketing
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      
+      
+  
+networks:
+  marketing-cloud:
