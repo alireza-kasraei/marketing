@@ -17,9 +17,10 @@ import lombok.NoArgsConstructor;
 // TODO FIXME how can we find out this member is head?
 @Data
 @Entity
-@Table(name = "MEMBERS")
+//TODO FIXME is "TEAMS_PERSONNELS" a better name?
+@Table(name = "TEAMS_MEMBERS")
 @NoArgsConstructor
-public class Member {
+public class TeamMember {
 
 	private static final String TEAMS_MEMBERS_GENERATOR = "members_generator";
 
@@ -28,19 +29,21 @@ public class Member {
 	@Id
 	private Long id;
 
-	@Column(name = "MEMBER_NAME")
-	private String name;
-	// TODO FIXME should we change it to registerDate?
 	@Column(name = "MEMBERSHIP_DATE")
 	private Date membershipDate;
 	// TODO FIXME is it a simple integer filed or relation to another table
 	@Column(name = "MEMBERSHIP_STATUS")
 	private Integer membershipStatus;
+
 	@Column(name = "USER_NAME")
 	private String username;
 
 	@JoinColumn(name = "TEAM_ID")
 	@ManyToOne
 	private Team team;
+
+	@JoinColumn(name = "PERSONNEL_ID")
+	@ManyToOne
+	private Personnel personnel;
 
 }

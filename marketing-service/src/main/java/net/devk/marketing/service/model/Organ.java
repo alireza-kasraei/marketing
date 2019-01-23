@@ -27,6 +27,7 @@ public class Organ {
 
 	@Column(name = "ORGAN_NAME")
 	private String name;
+	//0 is higher level
 	@Column(name = "ORGAN_LEVEL")
 	private Integer level;
 	@Column(name = "ORGAN_ORDER")

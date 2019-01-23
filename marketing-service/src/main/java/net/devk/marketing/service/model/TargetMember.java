@@ -32,7 +32,7 @@ public class TargetMember {
 	private String name;
 	// TODO FIXME is it integer?
 	@Column(name = "TARGET_MEMBER_VALUE")
-	private Integer Value;
+	private Integer value;
 
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
@@ -46,7 +46,7 @@ public class TargetMember {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID")
-	private Member member;
+	private TeamMember member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TARGET_ID")

@@ -48,8 +48,8 @@ public class Requirment {
 	private Date realValueRegisterDate;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "SERVICE_ID")
-	private Service service;
+	@JoinColumn(name = "TARGET_MEMBER_ID")
+	private TargetMember targetMember;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")

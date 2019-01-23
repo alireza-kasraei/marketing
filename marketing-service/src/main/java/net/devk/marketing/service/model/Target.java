@@ -37,6 +37,8 @@ public class Target {
 	private Date registerDate;
 	@Column(name = "DUE_DATE")
 	private Date dueDate;
+	@Column(name = "DAYS_COUNT")
+	private Integer daysCount;
 
 	@JoinColumn(name = "ORGAN_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -44,6 +46,8 @@ public class Target {
 	@JoinColumn(name = "SERVICE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Service service;
+
+	// TODO FIXME ??
 	@JoinColumn(name = "VALUE_TYPE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ValueType valueType;
