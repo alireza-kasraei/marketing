@@ -37,6 +37,6 @@ public class RequirementStatus {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "REQUIREMENT_ID")
-	private Requirment requirment;
+	private Requirement requirment;
 
 }

@@ -41,7 +41,7 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewCustomerResponseDTO(customer.getId()));
 	}
 
-	@RequestMapping(path = "new/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/new/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateNewCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
 		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getCompanyTypeId(),

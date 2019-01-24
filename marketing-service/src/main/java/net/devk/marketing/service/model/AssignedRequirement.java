@@ -35,7 +35,7 @@ public class AssignedRequirement {
 
 	@ManyToOne
 	@JoinColumn(name = "CUSTOMER_REQUIREMENT_ID")
-	private Requirment customerRequirment;
+	private Requirement customerRequirment;
 
 	@ManyToOne
 	@JoinColumn(name = "PERSONNEL_ID")

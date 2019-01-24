@@ -9,6 +9,7 @@ import net.devk.marketing.service.model.CustomerType;
 import net.devk.marketing.service.model.DocumentType;
 import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
+import net.devk.marketing.service.model.RequirementStatusType;
 
 public interface BasedataService {
 
@@ -27,7 +28,11 @@ public interface BasedataService {
 	public AttractionType getOneAttractionType(Long id);
 
 	public DocumentType getOneDocumentType(Long id);
-	
+
 	public OrganizationType getOrganizationType(Long id);
+
+	public AttractionType findAttractionTypeByCode(String code);
+
+	public RequirementStatusType findRequirementStatusTypeByCode(String code);
 
 }

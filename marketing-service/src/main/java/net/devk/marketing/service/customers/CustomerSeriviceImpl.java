@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.dto.GetCustomerResponseDTO;
+import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.CustomerAddress;
 import net.devk.marketing.service.model.RegistrationStatus;
@@ -30,7 +31,8 @@ class CustomerSeriviceImpl implements CustomerService {
 	@Transactional
 	public Customer createCustomer(String name, boolean legal, String economicCode, String economicSection,
 			int headCount, long annualIncome, boolean hasDocuments, RegistrationStatus registrationStatus,
-			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId,Long organizationTypeId) {
+			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId,
+			Long organizationTypeId) {
 		Customer customer = new Customer();
 		customer.setName(name);
 		customer.setRegisterDate(new Date());
@@ -71,6 +73,7 @@ class CustomerSeriviceImpl implements CustomerService {
 		customer.setName(name);
 		customer.setBusinessScale(basedataService.getOneBusinessScale(businessScaleId));
 		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
+		customer.setAttractionType(basedataService.findAttractionTypeByCode(AttractionType.ATTRACTION_TYPE_TYPE1));
 		customer.setEconomicSection(economicSection);
 		customer.setRegisterDate(new Date());
 		customer.setRegistrationStatus(RegistrationStatus.EARLY);
@@ -88,8 +91,8 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer updateCustomer(Long customerId, Long customerTypeId, int headCount, Long ownershipTypeId,Long organizationTypeId,
-			long annualIncome) {
+	public Customer updateCustomer(Long customerId, Long customerTypeId, int headCount, Long ownershipTypeId,
+			Long organizationTypeId, long annualIncome) {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
 		// TODO FIXME change it with CustomerNotFoundException type

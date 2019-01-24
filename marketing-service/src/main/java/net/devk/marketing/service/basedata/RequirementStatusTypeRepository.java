@@ -6,4 +6,6 @@ import net.devk.marketing.service.model.RequirementStatusType;
 
 interface RequirementStatusTypeRepository extends JpaRepository<RequirementStatusType, Long> {
 
+	public RequirementStatusType findByCode(String code);
+
 }

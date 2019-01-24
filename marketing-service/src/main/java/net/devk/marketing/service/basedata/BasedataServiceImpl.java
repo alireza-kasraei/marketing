@@ -18,6 +18,7 @@ import net.devk.marketing.service.model.CustomerType;
 import net.devk.marketing.service.model.DocumentType;
 import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
+import net.devk.marketing.service.model.RequirementStatusType;
 
 @Service
 class BasedataServiceImpl implements BasedataService {
@@ -80,7 +81,7 @@ class BasedataServiceImpl implements BasedataService {
 
 		List<BasedataDTO> ownershipTypes = ownershipTypeRepository.findAll().stream()
 				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
-		
+
 		List<BasedataDTO> organizationTypes = organizationTypeRepository.findAll().stream()
 				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
 
@@ -141,6 +142,16 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public OrganizationType getOrganizationType(Long id) {
 		return organizationTypeRepository.getOne(id);
+	}
+
+	@Override
+	public AttractionType findAttractionTypeByCode(String code) {
+		return attractionTypeRepository.findByCode(code);
+	}
+
+	@Override
+	public RequirementStatusType findRequirementStatusTypeByCode(String code) {
+		return requirementStatusTypeRepository.findByCode(code);
 	}
 
 }

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "REQUIREMENTS")
 @NoArgsConstructor
-public class Requirment {
+public class Requirement {
 
 	private static final String CUSTOMERS_REQUIREMENTS_GENERATOR = "customers_requirements_generator";
 

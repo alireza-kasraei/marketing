@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequirementStatusType {
 
+	// TODO FIXME change these codes
+	public static final String REQUIREMENT_STATUS_STATUS1 = "RS1";
+
 	private static final String REQUIREMENT_STATUS_TYPES_GENERATOR = "requirement_status_types_generator";
 
 	@GeneratedValue(generator = REQUIREMENT_STATUS_TYPES_GENERATOR)
