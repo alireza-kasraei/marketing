@@ -2,5 +2,6 @@
 	"companyTypeId":"1",
 	"headCount":12,
 	"ownershipTypeId":1,
-	"annualIncome":123344
+	"annualIncome":123344,
+	"organizationTypeId":1
 }
