@@ -9,7 +9,7 @@ public class CreateNewCustomerRequestDTO {
 	
 	private final String name;
 	private final Long businessScaleId;
-	private final Long customerTypeId;
+	private final boolean legal;
 	private final String economicSection;
 	private final String latitude;
 	private final String longitude;

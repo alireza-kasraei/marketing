@@ -14,7 +14,6 @@ import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.BusinessScale;
 import net.devk.marketing.service.model.ContactRole;
 import net.devk.marketing.service.model.ContactType;
-import net.devk.marketing.service.model.CustomerType;
 import net.devk.marketing.service.model.DocumentType;
 import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
@@ -39,8 +38,6 @@ class BasedataServiceImpl implements BasedataService {
 	private RequirementStatusTypeRepository requirementStatusTypeRepository;
 	@Autowired
 	private AssignedStatusTypeRepository assignedStatusTypeRepository;
-	@Autowired
-	private CustomerTypeRepository customerTypeRepository;
 	@Autowired
 	private OwnershipTypeRepository ownershipTypeRepository;
 	@Autowired
@@ -76,9 +73,6 @@ class BasedataServiceImpl implements BasedataService {
 		List<BasedataDTO> assignedStatusType = assignedStatusTypeRepository.findAll().stream()
 				.map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList());
 
-		List<BasedataDTO> customerTypes = customerTypeRepository.findAll().stream()
-				.map(c -> new BasedataDTO(c.getId(), c.getType())).collect(Collectors.toList());
-
 		List<BasedataDTO> ownershipTypes = ownershipTypeRepository.findAll().stream()
 				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
 
@@ -93,7 +87,6 @@ class BasedataServiceImpl implements BasedataService {
 		aggregatedBasedataDTO.setBusinessScales(businessScales);
 		aggregatedBasedataDTO.setContactRoles(contactRoles);
 		aggregatedBasedataDTO.setContactTypes(contactTypes);
-		aggregatedBasedataDTO.setCustomerTypes(customerTypes);
 		aggregatedBasedataDTO.setDocumentTypes(documentTypes);
 		aggregatedBasedataDTO.setOwnershipTypes(ownershipTypes);
 		aggregatedBasedataDTO.setOrganizationTypes(organizationTypes);
@@ -107,11 +100,6 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public BusinessScale getOneBusinessScale(Long id) {
 		return businessScaleRepository.getOne(id);
-	}
-
-	@Override
-	public CustomerType getOneCustomerType(Long id) {
-		return customerTypeRepository.getOne(id);
 	}
 
 	@Override

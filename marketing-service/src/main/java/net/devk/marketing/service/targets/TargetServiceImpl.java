@@ -1,8 +1,11 @@
 package net.devk.marketing.service.targets;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.devk.marketing.service.charts.dto.PersonnelTargetsResponseDTO;
 import net.devk.marketing.service.model.Target;
 import net.devk.marketing.service.model.TargetMember;
 
@@ -23,6 +26,11 @@ class TargetServiceImpl implements TargetService {
 	@Override
 	public TargetMember getOneTargetMember(Long id) {
 		return targetMemberRepository.getOne(id);
+	}
+
+	@Override
+	public List<PersonnelTargetsResponseDTO> findPersonnelTargets(String username, Long serviceId) {
+		return targetMemberRepository.findPersonnelTargets(username, serviceId);
 	}
 
 }

@@ -35,7 +35,7 @@ public class CustomerController {
 			username = principal.getName();
 
 		Customer customer = customerService.createCustomer(createNewCustomerRequestDTO.getName(),
-				createNewCustomerRequestDTO.getBusinessScaleId(), createNewCustomerRequestDTO.getCustomerTypeId(),
+				createNewCustomerRequestDTO.getBusinessScaleId(), createNewCustomerRequestDTO.isLegal(),
 				createNewCustomerRequestDTO.getEconomicSection(), createNewCustomerRequestDTO.getLatitude(),
 				createNewCustomerRequestDTO.getLongitude(), createNewCustomerRequestDTO.getAddress(), username);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewCustomerResponseDTO(customer.getId()));
@@ -44,7 +44,7 @@ public class CustomerController {
 	@RequestMapping(path = "/new/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateNewCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
-		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getCompanyTypeId(),
+		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getEconomicCode(),
 				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
 				updateCustomerRequestDTO.getOrganizationTypeId(), updateCustomerRequestDTO.getAnnualIncome());
 		return ResponseEntity.noContent().build();

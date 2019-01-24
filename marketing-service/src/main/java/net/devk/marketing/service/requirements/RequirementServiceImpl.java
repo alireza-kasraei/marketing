@@ -1,6 +1,7 @@
 package net.devk.marketing.service.requirements;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,16 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
+import net.devk.marketing.service.model.AssignedRequirement;
+import net.devk.marketing.service.model.AssignedRequirementStatus;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.Requirement;
 import net.devk.marketing.service.model.RequirementStatus;
 import net.devk.marketing.service.model.RequirementStatusType;
 import net.devk.marketing.service.model.TargetMember;
+import net.devk.marketing.service.personnels.PersonnelService;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.targets.TargetService;
 
 @Service
 class RequirementServiceImpl implements RequirementService {
+
+	@Autowired
+	private AssignedRequirementRepository assignedRequirementRepository;
+	
+//	@Autowired
+//	private AssignedStatusTypeRepository assignedStatusTypeRepository;
 
 	@Autowired
 	private RequirementRepository requirementRepository;
@@ -33,6 +43,9 @@ class RequirementServiceImpl implements RequirementService {
 
 	@Autowired
 	private BasedataService basedataService;
+
+	@Autowired
+	private PersonnelService personnelService;
 
 	@Override
 	@Transactional
@@ -63,6 +76,26 @@ class RequirementServiceImpl implements RequirementService {
 				savedRequirement.getRealValue(), savedRequirement.getDescription(),
 				savedRequirement.getEstimatedValueEditDate(), savedRequirement.getEstimatedValueRegisterDate(),
 				requirement.getRealValueEditDate(), requirement.getRealValueRegisterDate());
+	}
+
+	@Transactional
+	@Override
+	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Integer realValue) {
+		Optional<Requirement> requirementOptional = requirementRepository.findById(requirementId);
+		Requirement requirement = requirementOptional.get();
+		requirement.setRealValue(realValue);
+		AssignedRequirement assignedRequirement = new AssignedRequirement();
+		assignedRequirement.setCustomerRequirment(requirement);
+		assignedRequirement.setPersonnel(personnelService.getOnePersonnel(personnelId));
+		Date now = new Date();
+		assignedRequirement.setRegisterDate(now);
+		AssignedRequirement savedAssignedRequirement = assignedRequirementRepository.save(assignedRequirement);
+		AssignedRequirementStatus assignedRequirementStatus = new AssignedRequirementStatus();
+		assignedRequirementStatus.setAssignedRequirement(savedAssignedRequirement);
+		assignedRequirementStatus.setRegisterDate(now);
+//		assignedRequirementStatus.setAssignedStatusType(assignedStatusTypeRepository.getOne(assignedStatusTypeId));
+//		assignedRequirementSt.save(assignedRequirementStatus);
+
 	}
 
 }

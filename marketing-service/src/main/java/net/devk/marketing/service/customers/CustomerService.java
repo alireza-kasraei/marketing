@@ -15,10 +15,10 @@ public interface CustomerService {
 
 	public CustomerAddress addAddress(Long customerId, String address, String latitude, String longitude);
 
-	public Customer createCustomer(String name, Long businessScaleId, Long customerTypeId, String economicSection,
+	public Customer createCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
 			String latitude, String longitude, String address, String username);
 
-	public Customer updateCustomer(Long customerId, Long companyTypeId, int headCount, Long ownershipTypeId,Long organizationTypeId,
+	public Customer updateCustomer(Long customerId,String economicCode,int headCount, Long ownershipTypeId,Long organizationTypeId,
 			long annualIncome);
 
 	public Customer getOneCustomer(Long customerId);

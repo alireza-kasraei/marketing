@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UpdateCustomerRequestDTO {
 
-	private final Long companyTypeId;
+	private final String economicCode;
 	private final Integer headCount;
 	private final Long ownershipTypeId;
 	private final Long organizationTypeId;

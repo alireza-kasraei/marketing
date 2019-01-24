@@ -26,9 +26,9 @@ public class CustomerRequirementController {
 			@RequestBody CreateNewRequirementRequestDTO createNewRequirementRequestDTO,
 			@PathVariable(name = "id", required = true) Long customerId) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(
-				customerId, createNewRequirementRequestDTO.getTargetMemberId(),
-				createNewRequirementRequestDTO.getEstimatedValue(), createNewRequirementRequestDTO.getDescription()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(customerId,
+				createNewRequirementRequestDTO.getTargetMemberId(), createNewRequirementRequestDTO.getEstimatedValue(),
+				createNewRequirementRequestDTO.getDescription()));
 	}
 
 }

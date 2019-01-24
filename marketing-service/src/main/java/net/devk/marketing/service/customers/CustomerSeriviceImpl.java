@@ -46,7 +46,7 @@ class CustomerSeriviceImpl implements CustomerService {
 		customer.setUsername(username);
 		customer.setUsername(username);
 		customer.setBusinessScale(basedataService.getOneBusinessScale(businessScaleId));
-		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
+//		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
 		customer.setOwnershipType(basedataService.getOneOwnershipType(ownershipTypeId));
 		customer.setAttractionType(basedataService.getOneAttractionType(attractionTypeId));
 		customer.setOrganizationType(basedataService.getOrganizationType(organizationTypeId));
@@ -66,13 +66,13 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer createCustomer(String name, Long businessScaleId, Long customerTypeId, String economicSection,
+	public Customer createCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
 			String latitude, String longitude, String address, String username) {
 
 		Customer customer = new Customer();
 		customer.setName(name);
 		customer.setBusinessScale(basedataService.getOneBusinessScale(businessScaleId));
-		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
+		customer.setLegal(legal);
 		customer.setAttractionType(basedataService.findAttractionTypeByCode(AttractionType.ATTRACTION_TYPE_TYPE1));
 		customer.setEconomicSection(economicSection);
 		customer.setRegisterDate(new Date());
@@ -91,14 +91,14 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer updateCustomer(Long customerId, Long customerTypeId, int headCount, Long ownershipTypeId,
+	public Customer updateCustomer(Long customerId, String economicCode, int headCount, Long ownershipTypeId,
 			Long organizationTypeId, long annualIncome) {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
 		// TODO FIXME change it with CustomerNotFoundException type
 		Customer customer = optional.orElseThrow(() -> new RuntimeException("customer not found!"));
-		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
 		customer.setHeadCount(headCount);
+		customer.setEconomicCode(economicCode);
 		customer.setOwnershipType(basedataService.getOneOwnershipType(ownershipTypeId));
 		customer.setOrganizationType(basedataService.getOrganizationType(organizationTypeId));
 		customer.setAnnualIncome(annualIncome);
