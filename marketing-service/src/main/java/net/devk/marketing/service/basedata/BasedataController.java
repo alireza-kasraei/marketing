@@ -11,8 +11,10 @@ import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/basedata")
+@RequestMapping(path = ControllersConfig.API_PREFIX + BasedataController.BASEDATA)
 public class BasedataController {
+
+	public static final String BASEDATA = "/basedata";
 
 	@Autowired
 	private BasedataService basedataService;

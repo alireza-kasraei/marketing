@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "ATTRACTION_TYPES")
 @NoArgsConstructor
 public class AttractionType {
-	//TODO FIXME change these names
-	//belghovve!
-	public static final String ATTRACTION_TYPE_TYPE1="AT1";
-	//ragheb
-	public static final String ATTRACTION_TYPE_TYPE2="AT2";
-	//dar hale jazb
-	public static final String ATTRACTION_TYPE_TYPE3="AT3";
+	// TODO FIXME change these names
+	// belghovve!
+	public static final String ATTRACTION_TYPE_TYPE1 = "AT1";
+	// ragheb
+	public static final String ATTRACTION_TYPE_TYPE2 = "AT2";
+	// dar hale jazb
+	public static final String ATTRACTION_TYPE_TYPE3 = "AT3";
 
 	private static final String ATTRACTION_TYPE_GENERATOR = "attraction_types_generator";
 
@@ -33,6 +33,6 @@ public class AttractionType {
 	@Column(name = "TYPE_NAME")
 	private String name;
 
-	@Column(name = "TYPE_CODE")
+	@Column(name = "TYPE_CODE", unique = true)
 	private String code;
 }

@@ -1,5 +1,6 @@
 package net.devk.marketing.service.basedata;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,53 +50,41 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public AggregatedBasedataDTO getAggregatedBasedata() {
 
-		List<BasedataDTO> valueTypes = valueTypeRepository.findAll().stream()
-				.map(v -> new BasedataDTO(v.getId(), v.getName())).collect(Collectors.toList());
+		List<BasedataDTO> valueTypes = Collections.unmodifiableList(valueTypeRepository.findAll().stream()
+				.map(v -> new BasedataDTO(v.getId(), v.getName())).collect(Collectors.toList()));
 
-		List<BasedataDTO> businessScales = businessScaleRepository.findAll().stream()
-				.map(b -> new BasedataDTO(b.getId(), b.getName())).collect(Collectors.toList());
+		List<BasedataDTO> businessScales = Collections.unmodifiableList(businessScaleRepository.findAll().stream()
+				.map(b -> new BasedataDTO(b.getId(), b.getName())).collect(Collectors.toList()));
 
-		List<BasedataDTO> contactRoles = contactRoleRepository.findAll().stream()
-				.map(c -> new BasedataDTO(c.getId(), c.getName())).collect(Collectors.toList());
+		List<BasedataDTO> contactRoles = Collections.unmodifiableList(contactRoleRepository.findAll().stream()
+				.map(c -> new BasedataDTO(c.getId(), c.getName())).collect(Collectors.toList()));
 
-		List<ContactTypeDTO> contactTypes = contactTypeRepository.findAll().stream().map(
+		List<ContactTypeDTO> contactTypes = Collections.unmodifiableList(contactTypeRepository.findAll().stream().map(
 				ct -> new ContactTypeDTO(ct.getId(), ct.getName(), ct.getCategory().name(), ct.getCategory().ordinal()))
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 
-		List<BasedataDTO> attractionTypes = attractionTypeRepository.findAll().stream()
-				.map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList());
+		List<BasedataDTO> attractionTypes = Collections.unmodifiableList(attractionTypeRepository.findAll().stream()
+				.map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList()));
 
-		List<BasedataDTO> documentTypes = documentTypeRepository.findAll().stream()
-				.map(d -> new BasedataDTO(d.getId(), d.getType())).collect(Collectors.toList());
+		List<BasedataDTO> documentTypes = Collections.unmodifiableList(documentTypeRepository.findAll().stream()
+				.map(d -> new BasedataDTO(d.getId(), d.getType())).collect(Collectors.toList()));
 
-		List<BasedataDTO> requirementStatusTypes = requirementStatusTypeRepository.findAll().stream()
-				.map(r -> new BasedataDTO(r.getId(), r.getType())).collect(Collectors.toList());
+		List<BasedataDTO> requirementStatusTypes = Collections.unmodifiableList(requirementStatusTypeRepository
+				.findAll().stream().map(r -> new BasedataDTO(r.getId(), r.getType())).collect(Collectors.toList()));
 
-		List<BasedataDTO> assignedStatusType = assignedStatusTypeRepository.findAll().stream()
-				.map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList());
+		List<BasedataDTO> assignedStatusType = Collections.unmodifiableList(assignedStatusTypeRepository.findAll()
+				.stream().map(a -> new BasedataDTO(a.getId(), a.getName())).collect(Collectors.toList()));
 
-		List<BasedataDTO> ownershipTypes = ownershipTypeRepository.findAll().stream()
-				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
+		List<BasedataDTO> ownershipTypes = Collections.unmodifiableList(ownershipTypeRepository.findAll().stream()
+				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList()));
 
-		List<BasedataDTO> organizationTypes = organizationTypeRepository.findAll().stream()
-				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList());
+		List<BasedataDTO> organizationTypes = Collections.unmodifiableList(organizationTypeRepository.findAll().stream()
+				.map(o -> new BasedataDTO(o.getId(), o.getType())).collect(Collectors.toList()));
 
-		List<ServiceDTO> services = serviceRepository.findAllServices();
+		List<ServiceDTO> services = Collections.unmodifiableList(serviceRepository.findAllServices());
 
-		AggregatedBasedataDTO aggregatedBasedataDTO = new AggregatedBasedataDTO();
-		aggregatedBasedataDTO.setAssignStatusTypes(assignedStatusType);
-		aggregatedBasedataDTO.setAttractionTypes(attractionTypes);
-		aggregatedBasedataDTO.setBusinessScales(businessScales);
-		aggregatedBasedataDTO.setContactRoles(contactRoles);
-		aggregatedBasedataDTO.setContactTypes(contactTypes);
-		aggregatedBasedataDTO.setDocumentTypes(documentTypes);
-		aggregatedBasedataDTO.setOwnershipTypes(ownershipTypes);
-		aggregatedBasedataDTO.setOrganizationTypes(organizationTypes);
-		aggregatedBasedataDTO.setRequirementStatusTypes(requirementStatusTypes);
-		aggregatedBasedataDTO.setValueTypes(valueTypes);
-
-		aggregatedBasedataDTO.setServices(services);
-		return aggregatedBasedataDTO;
+		return new AggregatedBasedataDTO(valueTypes, businessScales, contactRoles, attractionTypes, documentTypes,
+				requirementStatusTypes, assignedStatusType, ownershipTypes, organizationTypes, contactTypes, services);
 	}
 
 	@Override

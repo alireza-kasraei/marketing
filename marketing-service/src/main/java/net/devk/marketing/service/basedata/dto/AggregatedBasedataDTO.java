@@ -4,21 +4,22 @@ import java.util.List;
 
 import lombok.Data;
 
+/**
+ * Aggregated Type for all base data
+ */
 @Data
 public class AggregatedBasedataDTO {
 
-	private List<BasedataDTO> valueTypes;
-	private List<BasedataDTO> businessScales;
-	private List<BasedataDTO> contactRoles;
-	private List<ContactTypeDTO> contactTypes;
-	private List<BasedataDTO> attractionTypes;
-	private List<BasedataDTO> documentTypes;
-	private List<BasedataDTO> requirementStatusTypes;
-	private List<BasedataDTO> assignStatusTypes;
-	private List<BasedataDTO> customerTypes;
-	private List<BasedataDTO> ownershipTypes;
-	private List<BasedataDTO> organizationTypes;
-
-	private List<ServiceDTO> services;
+	private final List<BasedataDTO> valueTypes;
+	private final List<BasedataDTO> businessScales;
+	private final List<BasedataDTO> contactRoles;
+	private final List<BasedataDTO> attractionTypes;
+	private final List<BasedataDTO> documentTypes;
+	private final List<BasedataDTO> requirementStatusTypes;
+	private final List<BasedataDTO> assignStatusTypes;
+	private final List<BasedataDTO> ownershipTypes;
+	private final List<BasedataDTO> organizationTypes;
+	private final List<ContactTypeDTO> contactTypes;
+	private final List<ServiceDTO> services;
 
 }

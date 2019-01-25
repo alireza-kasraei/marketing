@@ -17,13 +17,13 @@ import lombok.NoArgsConstructor;
 public class RequirementStatusType {
 
 	// TODO FIXME change these codes
-	//TAARIFE NIAZ
+	// TAARIFE NIAZ
 	public static final String REQUIREMENT_STATUS_STATUS1 = "RS1";
-	
-	//DAR HALE TASVIB
+
+	// DAR HALE TASVIB
 	public static final String REQUIREMENT_STATUS_STATUS2 = "RS2";
-	
-	//EMZA
+
+	// EMZA
 	public static final String REQUIREMENT_STATUS_STATUS3 = "RS3";
 
 	private static final String REQUIREMENT_STATUS_TYPES_GENERATOR = "requirement_status_types_generator";
@@ -36,7 +36,7 @@ public class RequirementStatusType {
 	@Column(name = "TYPE_NAME")
 	private String type;
 
-	@Column(name = "TYPE_CODE")
+	@Column(name = "TYPE_CODE", unique = true)
 	private String code;
 
 }

@@ -1,10 +1,14 @@
 package net.devk.marketing.service.basedata.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+/**
+ * Base data as id,name pair
+ */
+//TODO FIXME add code property for all base data
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BasedataDTO {
 
 	private final Long id;
