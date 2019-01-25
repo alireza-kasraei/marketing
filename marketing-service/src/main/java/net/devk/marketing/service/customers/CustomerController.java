@@ -1,6 +1,7 @@
 package net.devk.marketing.service.customers;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,33 +17,36 @@ import org.springframework.web.bind.annotation.RestController;
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.customers.dto.CreateNewCustomerRequestDTO;
 import net.devk.marketing.service.customers.dto.CreateNewCustomerResponseDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.customers.dto.UpdateCustomerRequestDTO;
 import net.devk.marketing.service.model.Customer;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/customers")
+@RequestMapping(path = ControllersConfig.API_PREFIX + CustomerController.CUSTOMERS_ENDPOINT)
 public class CustomerController {
+
+	private static final String NEW_CUSTOMER_ENDPOINT = "/new";
+
+	public static final String CUSTOMERS_ENDPOINT = "/customers";
 
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping(path = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = NEW_CUSTOMER_ENDPOINT, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CreateNewCustomerResponseDTO> createNewCustomer(
 			@RequestBody CreateNewCustomerRequestDTO createNewCustomerRequestDTO, Principal principal) {
-
-		String username = null;
-		if (principal != null)
-			username = principal.getName();
 
 		Customer customer = customerService.createCustomer(createNewCustomerRequestDTO.getName(),
 				createNewCustomerRequestDTO.getBusinessScaleId(), createNewCustomerRequestDTO.isLegal(),
 				createNewCustomerRequestDTO.getEconomicSection(), createNewCustomerRequestDTO.getLatitude(),
-				createNewCustomerRequestDTO.getLongitude(), createNewCustomerRequestDTO.getAddress(), username);
+				createNewCustomerRequestDTO.getLongitude(), createNewCustomerRequestDTO.getAddress(),
+				principal.getName());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewCustomerResponseDTO(customer.getId()));
 	}
 
-	@RequestMapping(path = "/new/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateNewCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
+	@RequestMapping(path = NEW_CUSTOMER_ENDPOINT
+			+ "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
 		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getEconomicCode(),
 				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
@@ -51,7 +55,8 @@ public class CustomerController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findAll(@RequestParam(name = "name", required = false) String name) {
+	public ResponseEntity<List<CustomerFindAllQueryResultDTO>> findAll(
+			@RequestParam(name = "name", required = false) String name) {
 		return ResponseEntity.ok(customerService.findAllCustomersLikeByName(name));
 	}
 

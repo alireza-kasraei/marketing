@@ -2,13 +2,13 @@ package net.devk.marketing.service.customers.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import net.devk.marketing.service.model.RegistrationStatus;
 
 @Data
-@AllArgsConstructor
-public class GetCustomerResponseDTO {
+@RequiredArgsConstructor
+public class CustomerFindAllQueryResultDTO {
 
 	private final Long id;
 	private final String name;
@@ -24,8 +24,6 @@ public class GetCustomerResponseDTO {
 	private final Long businessScaleId;
 	private final String businessScaleName;
 
-//	private final Long customerTypeId;
-//	private final String customerTypeName;
 	private final Long ownershipTypeId;
 	private final String ownershipType;
 

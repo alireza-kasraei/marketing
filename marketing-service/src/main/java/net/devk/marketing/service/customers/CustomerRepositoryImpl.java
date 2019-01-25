@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.devk.marketing.service.customers.dto.GetCustomerResponseDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
 
 public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
@@ -23,10 +23,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 	private EntityManager entityManager;
 
 	@Override
-	public List<GetCustomerResponseDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<GetCustomerResponseDTO> query = builder.createQuery(GetCustomerResponseDTO.class);
+		CriteriaQuery<CustomerFindAllQueryResultDTO> query = builder.createQuery(CustomerFindAllQueryResultDTO.class);
 
 		Root<Customer> root = query.from(Customer.class);
 		List<Predicate> predicateList = new ArrayList<>();
@@ -39,7 +39,6 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 		}
 
 		Join<Object, Object> businessScale = root.join("businessScale", JoinType.LEFT);
-//		Join<Object, Object> customerType = root.join("customerType", JoinType.LEFT);
 		Join<Object, Object> ownershipType = root.join("ownershipType", JoinType.LEFT);
 		Join<Object, Object> attractionType = root.join("attractionType", JoinType.LEFT);
 		query.multiselect(root.get("id").alias("id"), root.get("name").alias("name"),
@@ -48,11 +47,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 				root.get("annualIncome").alias("annualIncome"), root.get("hasDocument").alias("hasDocument"),
 				root.get("registrationStatus").alias("registrationStatus"), root.get("username").alias("username"),
 				businessScale.get("id").alias("businessScaleId"), businessScale.get("name").alias("businessScaleName"),
-//				customerType.get("id").alias("customerTypeId"), customerType.get("type").alias("customerTypeName"),
 				ownershipType.get("id").alias("ownershipTypeId"), ownershipType.get("type").alias("ownershipType"),
 				attractionType.get("id").alias("attractionTypeId"),
 				attractionType.get("name").alias("attractionTypeName"));
-		TypedQuery<GetCustomerResponseDTO> typedQuery = entityManager.createQuery(query);
+		TypedQuery<CustomerFindAllQueryResultDTO> typedQuery = entityManager.createQuery(query);
 //		typedQuery.setFirstResult(first);
 //		typedQuery.setMaxResults(pageSize);
 		return typedQuery.getResultList();

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
-import net.devk.marketing.service.customers.dto.GetCustomerResponseDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.CustomerAddress;
@@ -26,43 +26,6 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Autowired
 	private BasedataService basedataService;
-
-	@Override
-	@Transactional
-	public Customer createCustomer(String name, boolean legal, String economicCode, String economicSection,
-			int headCount, long annualIncome, boolean hasDocuments, RegistrationStatus registrationStatus,
-			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId,
-			Long organizationTypeId) {
-		Customer customer = new Customer();
-		customer.setName(name);
-		customer.setRegisterDate(new Date());
-		customer.setLegal(legal);
-		customer.setEconomicCode(economicCode);
-		customer.setEconomicSection(economicSection);
-		customer.setHeadCount(headCount);
-		customer.setAnnualIncome(annualIncome);
-		customer.setHasDocument(hasDocuments);
-		customer.setRegistrationStatus(registrationStatus);
-		customer.setUsername(username);
-		customer.setUsername(username);
-		customer.setBusinessScale(basedataService.getOneBusinessScale(businessScaleId));
-//		customer.setCustomerType(basedataService.getOneCustomerType(customerTypeId));
-		customer.setOwnershipType(basedataService.getOneOwnershipType(ownershipTypeId));
-		customer.setAttractionType(basedataService.getOneAttractionType(attractionTypeId));
-		customer.setOrganizationType(basedataService.getOrganizationType(organizationTypeId));
-		return customerRepository.save(customer);
-	}
-
-	@Override
-	public CustomerAddress addAddress(Long customerId, String address, String latitude, String longitude) {
-		Customer customer = customerRepository.getOne(customerId);
-		CustomerAddress customerAddress = new CustomerAddress();
-		customerAddress.setCustomer(customer);
-		customerAddress.setAddress(address);
-		customerAddress.setLatitude(latitude);
-		customerAddress.setLongitude(longitude);
-		return customerAddressRepository.save(customerAddress);
-	}
 
 	@Transactional
 	@Override
@@ -91,8 +54,8 @@ class CustomerSeriviceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer updateCustomer(Long customerId, String economicCode, int headCount, Long ownershipTypeId,
-			Long organizationTypeId, long annualIncome) {
+	public Customer updateCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
+			Long organizationTypeId, Long annualIncome) {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
 		// TODO FIXME change it with CustomerNotFoundException type
@@ -112,7 +75,7 @@ class CustomerSeriviceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<GetCustomerResponseDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
 		return customerRepository.findAllCustomersLikeByName(name);
 	}
 

@@ -2,27 +2,48 @@ package net.devk.marketing.service.customers;
 
 import java.util.List;
 
-import net.devk.marketing.service.customers.dto.GetCustomerResponseDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
-import net.devk.marketing.service.model.CustomerAddress;
-import net.devk.marketing.service.model.RegistrationStatus;
 
 public interface CustomerService {
 
-	public Customer createCustomer(String name, boolean legal, String economicCode, String economicSection,
-			int headCount, long annualIncome, boolean hasDocuments, RegistrationStatus registrationStatus,
-			String username, Long businessScaleId, Long customerTypeId, Long ownershipTypeId, Long attractionTypeId,Long organizationTypeId);
-
-	public CustomerAddress addAddress(Long customerId, String address, String latitude, String longitude);
-
+	/**
+	 * creates a new {@link Customer} for the first step on "create customer wizard"
+	 * 
+	 * @param name
+	 * @param businessScaleId
+	 * @param legal
+	 * @param economicSection
+	 * @param latitude
+	 * @param longitude
+	 * @param address
+	 * @param username
+	 * @return
+	 */
 	public Customer createCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
 			String latitude, String longitude, String address, String username);
 
-	public Customer updateCustomer(Long customerId,String economicCode,int headCount, Long ownershipTypeId,Long organizationTypeId,
-			long annualIncome);
+	/**
+	 * updates a customer with the given customer id for the second step
+	 * 
+	 * @param customerId
+	 * @param economicCode
+	 * @param headCount
+	 * @param ownershipTypeId
+	 * @param organizationTypeId
+	 * @param annualIncome
+	 * @return
+	 */
+	public Customer updateCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
+			Long organizationTypeId, Long annualIncome);
 
+	/**
+	 * @see JpaRepository#getOne(Object)
+	 */
 	public Customer getOneCustomer(Long customerId);
 
-	public List<GetCustomerResponseDTO> findAllCustomersLikeByName(String name);
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name);
 
 }
