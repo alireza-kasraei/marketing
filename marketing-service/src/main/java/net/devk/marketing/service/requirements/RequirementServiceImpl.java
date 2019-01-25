@@ -1,6 +1,8 @@
 package net.devk.marketing.service.requirements;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import net.devk.marketing.service.model.RequirementStatus;
 import net.devk.marketing.service.model.RequirementStatusType;
 import net.devk.marketing.service.model.TargetMember;
 import net.devk.marketing.service.personnels.PersonnelService;
+import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.targets.TargetService;
 
@@ -25,7 +28,7 @@ class RequirementServiceImpl implements RequirementService {
 
 	@Autowired
 	private AssignedRequirementRepository assignedRequirementRepository;
-	
+
 //	@Autowired
 //	private AssignedStatusTypeRepository assignedStatusTypeRepository;
 
@@ -49,8 +52,8 @@ class RequirementServiceImpl implements RequirementService {
 
 	@Override
 	@Transactional
-	public CreateNewRequirementResponseDTO createRequirement(Long customerId, Long targetMemberId,
-			Long estimatedValue, String description) {
+	public CreateNewRequirementResponseDTO createRequirement(Long customerId, Long targetMemberId, Long estimatedValue,
+			String description) {
 
 		Customer customer = customerService.getOneCustomer(customerId);
 		TargetMember targetMember = targetService.getOneTargetMember(targetMemberId);
@@ -96,6 +99,20 @@ class RequirementServiceImpl implements RequirementService {
 //		assignedRequirementStatus.setAssignedStatusType(assignedStatusTypeRepository.getOne(assignedStatusTypeId));
 //		assignedRequirementSt.save(assignedRequirementStatus);
 
+	}
+
+	@Override
+	public List<CreateNewRequirementResponseDTO> createRequirement(Long customerId,
+			List<CreateNewRequirementRequestDTO> list) {
+		List<CreateNewRequirementResponseDTO> result = new ArrayList<CreateNewRequirementResponseDTO>();
+
+		list.stream().forEach(c -> {
+			CreateNewRequirementResponseDTO requirement = createRequirement(customerId, c.getTargetMemberId(),
+					c.getEstimatedValue(), c.getDescription());
+			result.add(requirement);
+		});
+
+		return result;
 	}
 
 }

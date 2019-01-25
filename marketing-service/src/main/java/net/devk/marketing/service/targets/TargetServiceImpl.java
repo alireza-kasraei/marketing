@@ -12,6 +12,7 @@ import net.devk.marketing.service.model.RequirementStatusType;
 import net.devk.marketing.service.model.Target;
 import net.devk.marketing.service.model.TargetMember;
 import net.devk.marketing.service.targets.dto.AggregateTargetResponseDTO;
+import net.devk.marketing.service.targets.dto.PersonnelTargetsListResponseDTO;
 import net.devk.marketing.service.targets.dto.PersonnelTargetsResponseDTO;
 
 @Service
@@ -64,6 +65,11 @@ class TargetServiceImpl implements TargetService {
 
 		return new AggregateTargetResponseDTO(summation.longValue(), days, totalValue.longValue(), averageProgressToNow,
 				totalDays, progressPercentageToNow, todayProgress);
+	}
+
+	@Override
+	public List<PersonnelTargetsListResponseDTO> findTargets(String username) {
+		return targetMemberRepository.findTargets(username);
 	}
 
 }

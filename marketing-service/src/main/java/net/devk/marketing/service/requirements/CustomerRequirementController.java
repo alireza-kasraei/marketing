@@ -1,5 +1,7 @@
 package net.devk.marketing.service.requirements;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,13 +24,10 @@ public class CustomerRequirementController {
 	private RequirementService requirementService;
 
 	@RequestMapping(path = "/{id}/requirements", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CreateNewRequirementResponseDTO> createRequirement(
-			@RequestBody CreateNewRequirementRequestDTO createNewRequirementRequestDTO,
+	public ResponseEntity<List<CreateNewRequirementResponseDTO>> createRequirement(
+			@RequestBody List<CreateNewRequirementRequestDTO> list,
 			@PathVariable(name = "id", required = true) Long customerId) {
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(customerId,
-				createNewRequirementRequestDTO.getTargetMemberId(), createNewRequirementRequestDTO.getEstimatedValue(),
-				createNewRequirementRequestDTO.getDescription()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(customerId, list));
 	}
 
 }
