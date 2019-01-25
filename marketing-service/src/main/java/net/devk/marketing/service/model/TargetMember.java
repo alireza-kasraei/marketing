@@ -32,7 +32,7 @@ public class TargetMember {
 	private String name;
 	// TODO FIXME is it integer?
 	@Column(name = "TARGET_MEMBER_VALUE")
-	private Integer value;
+	private Long value;
 
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;

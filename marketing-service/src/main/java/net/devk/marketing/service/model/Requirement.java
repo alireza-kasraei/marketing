@@ -29,9 +29,9 @@ public class Requirement {
 	private Long id;
 
 	@Column(name = "ESTIMATED_VALUE")
-	private Integer estimatedValue;
+	private Long estimatedValue;
 	@Column(name = "REAL_VALUE")
-	private Integer realValue;
+	private Long realValue;
 	@Column(name = "DESCRIPTION")
 	private String description;
 

@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "ASSIGNED_STATUS_TYPES")
 @NoArgsConstructor
 public class AssignedStatusType {
+	
+	public static final String ASSIGNED_STATUS_TYPE1="AST1";
 
 	@GeneratedValue(generator = "assigned_status_types_generator")
 	@SequenceGenerator(name = "assigned_status_types_generator", sequenceName = "assigned_status_types_sequence", initialValue = 1)

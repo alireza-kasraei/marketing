@@ -50,7 +50,7 @@ class RequirementServiceImpl implements RequirementService {
 	@Override
 	@Transactional
 	public CreateNewRequirementResponseDTO createRequirement(Long customerId, Long targetMemberId,
-			Integer estimatedValue, String description) {
+			Long estimatedValue, String description) {
 
 		Customer customer = customerService.getOneCustomer(customerId);
 		TargetMember targetMember = targetService.getOneTargetMember(targetMemberId);
@@ -80,7 +80,7 @@ class RequirementServiceImpl implements RequirementService {
 
 	@Transactional
 	@Override
-	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Integer realValue) {
+	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue) {
 		Optional<Requirement> requirementOptional = requirementRepository.findById(requirementId);
 		Requirement requirement = requirementOptional.get();
 		requirement.setRealValue(realValue);

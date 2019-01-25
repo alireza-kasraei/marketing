@@ -28,7 +28,7 @@ public class OAuth2ResourceServerConfigJwt extends ResourceServerConfigurerAdapt
 	@Override
 	public void configure(final HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/public/**").permitAll().antMatchers("/api/**").permitAll();
+				.antMatchers("/public/**").permitAll().antMatchers("/api/**").authenticated();
 	}
 
 	@Override

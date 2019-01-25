@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public class CreateNewRequirementRequestDTO {
 
 	private final Long targetMemberId;
-	private final Integer estimatedValue;
+	private final Long estimatedValue;
 	private final String description;
 
 }
