@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
+import net.devk.marketing.service.customers.CustomerController;
 import net.devk.marketing.service.meetings.dto.CreateNewMeetingRequestDTO;
 import net.devk.marketing.service.meetings.dto.CreateNewMeetingResponseDTO;
 import net.devk.marketing.service.model.Meeting;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/customers")
+@RequestMapping(path = ControllersConfig.API_PREFIX + CustomerController.CUSTOMERS_ENDPOINT)
 public class CustomerMeetingController {
 
 	@Autowired
