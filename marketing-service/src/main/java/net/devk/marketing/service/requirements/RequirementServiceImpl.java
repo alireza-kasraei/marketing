@@ -21,6 +21,7 @@ import net.devk.marketing.service.model.TargetMember;
 import net.devk.marketing.service.personnels.PersonnelService;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
+import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
 import net.devk.marketing.service.targets.TargetService;
 
 @Service
@@ -113,6 +114,11 @@ class RequirementServiceImpl implements RequirementService {
 		});
 
 		return result;
+	}
+
+	@Override
+	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId) {
+		return requirementRepository.findRequirements(customerId);
 	}
 
 }

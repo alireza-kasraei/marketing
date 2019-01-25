@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
+import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
 
 @RestController
 @RequestMapping(path = ControllersConfig.API_PREFIX + "/customers")
@@ -28,6 +29,12 @@ public class CustomerRequirementController {
 			@RequestBody List<CreateNewRequirementRequestDTO> list,
 			@PathVariable(name = "id", required = true) Long customerId) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(customerId, list));
+	}
+
+	@RequestMapping(path = "/{id}/requirements", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CustomerRequirementResponseDTO>> createRequirement(
+			@PathVariable(name = "id", required = true) Long customerId) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.findRequirements(customerId));
 	}
 
 }
