@@ -12,8 +12,8 @@ import net.devk.marketing.service.model.RequirementStatusType;
 import net.devk.marketing.service.model.Target;
 import net.devk.marketing.service.model.TargetMember;
 import net.devk.marketing.service.targets.dto.AggregateTargetResponseDTO;
-import net.devk.marketing.service.targets.dto.PersonnelTargetsListResponseDTO;
-import net.devk.marketing.service.targets.dto.PersonnelTargetsResponseDTO;
+import net.devk.marketing.service.targets.dto.TargetMemberListQueryResultDTO;
+import net.devk.marketing.service.targets.dto.TargetMemberQueryResultDTO;
 
 @Service
 class TargetServiceImpl implements TargetService {
@@ -35,8 +35,8 @@ class TargetServiceImpl implements TargetService {
 	}
 
 	@Override
-	public List<PersonnelTargetsResponseDTO> findPersonnelTargets(String username, Long serviceId) {
-		return targetMemberRepository.findPersonnelTargets(username, serviceId);
+	public List<TargetMemberQueryResultDTO> findPersonnelTargets(String username, Long serviceId) {
+		return targetMemberRepository.findTargetMemberByUsernameAndServiceId(username, serviceId);
 	}
 
 	private long calculateDayNumber(Date firstDate, Date secondDate) {
@@ -68,8 +68,8 @@ class TargetServiceImpl implements TargetService {
 	}
 
 	@Override
-	public List<PersonnelTargetsListResponseDTO> findTargets(String username) {
-		return targetMemberRepository.findTargets(username);
+	public List<TargetMemberListQueryResultDTO> findTargets(String username) {
+		return targetMemberRepository.findTargetsByUsername(username);
 	}
 
 }

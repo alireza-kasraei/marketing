@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
-import net.devk.marketing.service.targets.dto.PersonnelTargetsListResponseDTO;
+import net.devk.marketing.service.targets.dto.TargetMemberListQueryResultDTO;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/targets")
+@RequestMapping(path = ControllersConfig.API_PREFIX + TargetController.TARGETS_ENDPOINT)
 public class TargetController {
 
+	static final String TARGETS_ENDPOINT = "/targets";
 	@Autowired
 	private TargetService targetService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<PersonnelTargetsListResponseDTO>> findAll(Principal principal) {
+	public ResponseEntity<List<TargetMemberListQueryResultDTO>> findAll(Principal principal) {
 		return ResponseEntity.ok(targetService.findTargets(principal.getName()));
 	}
 

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class PersonnelTargetsResponseDTO {
+public class TargetMemberQueryResultDTO {
 
 	private final Long targetId;
 	private final Long targetValue;
