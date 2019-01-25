@@ -24,8 +24,8 @@ public class GetCustomerResponseDTO {
 	private final Long businessScaleId;
 	private final String businessScaleName;
 
-	private final Long customerTypeId;
-	private final String customerTypeName;
+//	private final Long customerTypeId;
+//	private final String customerTypeName;
 	private final Long ownershipTypeId;
 	private final String ownershipType;
 

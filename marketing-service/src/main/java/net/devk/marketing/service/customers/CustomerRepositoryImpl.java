@@ -39,7 +39,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 		}
 
 		Join<Object, Object> businessScale = root.join("businessScale", JoinType.LEFT);
-		Join<Object, Object> customerType = root.join("customerType", JoinType.LEFT);
+//		Join<Object, Object> customerType = root.join("customerType", JoinType.LEFT);
 		Join<Object, Object> ownershipType = root.join("ownershipType", JoinType.LEFT);
 		Join<Object, Object> attractionType = root.join("attractionType", JoinType.LEFT);
 		query.multiselect(root.get("id").alias("id"), root.get("name").alias("name"),
@@ -48,7 +48,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 				root.get("annualIncome").alias("annualIncome"), root.get("hasDocument").alias("hasDocument"),
 				root.get("registrationStatus").alias("registrationStatus"), root.get("username").alias("username"),
 				businessScale.get("id").alias("businessScaleId"), businessScale.get("name").alias("businessScaleName"),
-				customerType.get("id").alias("customerTypeId"), customerType.get("type").alias("customerTypeName"),
+//				customerType.get("id").alias("customerTypeId"), customerType.get("type").alias("customerTypeName"),
 				ownershipType.get("id").alias("ownershipTypeId"), ownershipType.get("type").alias("ownershipType"),
 				attractionType.get("id").alias("attractionTypeId"),
 				attractionType.get("name").alias("attractionTypeName"));
