@@ -1,6 +1,7 @@
 package net.devk.marketing.service.basedata;
 
 import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
+import net.devk.marketing.service.model.AssignedStatusType;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.BusinessScale;
 import net.devk.marketing.service.model.ContactRole;
@@ -27,6 +28,8 @@ public interface BasedataService {
 	public DocumentType getOneDocumentType(Long id);
 
 	public OrganizationType getOrganizationType(Long id);
+	
+	public AssignedStatusType getAssignedStatusType(Long id);
 
 	public AttractionType findAttractionTypeByCode(String code);
 

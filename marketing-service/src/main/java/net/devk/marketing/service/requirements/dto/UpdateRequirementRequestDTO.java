@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class CreateNewAssignedRequirementRequestDTO {
-
+public class UpdateRequirementRequestDTO {
+	
+	private Long requirementId;
 	private Long personnelId;
 	private Long realValue;
-	private Long assigendStatusTypeId;
+	private Long requirementStatusId;
 
 }

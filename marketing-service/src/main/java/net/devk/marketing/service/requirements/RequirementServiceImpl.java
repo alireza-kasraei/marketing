@@ -30,8 +30,8 @@ class RequirementServiceImpl implements RequirementService {
 	@Autowired
 	private AssignedRequirementRepository assignedRequirementRepository;
 
-//	@Autowired
-//	private AssignedStatusTypeRepository assignedStatusTypeRepository;
+	@Autowired
+	private AssignedRequirementStatusRepository assignedRequirementStatusRepository;
 
 	@Autowired
 	private RequirementRepository requirementRepository;
@@ -88,8 +88,9 @@ class RequirementServiceImpl implements RequirementService {
 		Optional<Requirement> requirementOptional = requirementRepository.findById(requirementId);
 		Requirement requirement = requirementOptional.get();
 		requirement.setRealValue(realValue);
+		Requirement savedRequirement = requirementRepository.save(requirement);
 		AssignedRequirement assignedRequirement = new AssignedRequirement();
-		assignedRequirement.setCustomerRequirment(requirement);
+		assignedRequirement.setCustomerRequirment(savedRequirement);
 		assignedRequirement.setPersonnel(personnelService.getOnePersonnel(personnelId));
 		Date now = new Date();
 		assignedRequirement.setRegisterDate(now);
@@ -97,8 +98,8 @@ class RequirementServiceImpl implements RequirementService {
 		AssignedRequirementStatus assignedRequirementStatus = new AssignedRequirementStatus();
 		assignedRequirementStatus.setAssignedRequirement(savedAssignedRequirement);
 		assignedRequirementStatus.setRegisterDate(now);
-//		assignedRequirementStatus.setAssignedStatusType(assignedStatusTypeRepository.getOne(assignedStatusTypeId));
-//		assignedRequirementSt.save(assignedRequirementStatus);
+		assignedRequirementStatus.setAssignedStatusType(basedataService.getAssignedStatusType(assignedStatusTypeId));
+		assignedRequirementStatusRepository.save(assignedRequirementStatus);
 
 	}
 

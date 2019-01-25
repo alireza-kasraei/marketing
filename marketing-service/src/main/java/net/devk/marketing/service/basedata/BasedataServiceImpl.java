@@ -10,6 +10,7 @@ import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
 import net.devk.marketing.service.basedata.dto.BasedataDTO;
 import net.devk.marketing.service.basedata.dto.ContactTypeDTO;
 import net.devk.marketing.service.basedata.dto.ServiceDTO;
+import net.devk.marketing.service.model.AssignedStatusType;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.BusinessScale;
 import net.devk.marketing.service.model.ContactRole;
@@ -140,6 +141,11 @@ class BasedataServiceImpl implements BasedataService {
 	@Override
 	public RequirementStatusType findRequirementStatusTypeByCode(String code) {
 		return requirementStatusTypeRepository.findByCode(code);
+	}
+
+	@Override
+	public AssignedStatusType getAssignedStatusType(Long id) {
+		return assignedStatusTypeRepository.getOne(id);
 	}
 
 }
