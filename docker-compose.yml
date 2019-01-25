@@ -7,13 +7,6 @@ services:
     networks:
       marketing-cloud:
 
-  postgres:
-    image: postgres:latest
-    volumes:
-      - ./init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
-    networks:
-      marketing-cloud:
-      
   oracle-marketing:
     build:
       context: ./oracle
@@ -62,16 +55,17 @@ services:
     depends_on:
     - service-discovery
     - redis
-    - postgres
+    - oracle-marketing
     environment:
     
       SPRING_PROFILES_ACTIVE: stage
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_USERNAME: docker
-      POSTGRES_PASSWORD: docker
+      ORACLE_HOST: oracle-marketing
+      ORACLE_PORT: 1521
+      ORACLE_SID: XE
+      ORACLE_USER: marketing
+      ORACLE_PASSWORD: marketing
       DISCOVERY_SERVICE_HOST: service-discovery
       DISCOVERY_SERVICE_PORT: 8761
       CONFIG_SERVICE_HOST: config-service
