@@ -12,19 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
+import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.CreateNewContactInfoRequestDTO;
 import net.devk.marketing.service.contacts.dto.CreateNewContactInfoResponseDTO;
-import net.devk.marketing.service.contacts.dto.GetContactInfoResponseDTO;
+import net.devk.marketing.service.customers.CustomerController;
 import net.devk.marketing.service.model.ContactInfo;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/customers")
+@RequestMapping(path = ControllersConfig.API_PREFIX + CustomerController.CUSTOMERS_ENDPOINT)
 public class CustomerContactInfoController {
+
+	private static final String CONTACT_INFO_ENDPOINT = "/contacts-info";
 
 	@Autowired
 	private ContactService contactService;
 
-	@RequestMapping(path = "/{id}/contacts-info", method = RequestMethod.POST)
+	@RequestMapping(path = "/{id}" + CONTACT_INFO_ENDPOINT, method = RequestMethod.POST)
 	public ResponseEntity<CreateNewContactInfoResponseDTO> addNewContactInfo(
 			@RequestBody CreateNewContactInfoRequestDTO createNewContactInfoRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
@@ -34,8 +37,8 @@ public class CustomerContactInfoController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewContactInfoResponseDTO(contactInfo.getId()));
 	}
 
-	@RequestMapping(path = "/{id}/contacts-info", method = RequestMethod.GET)
-	public ResponseEntity<List<GetContactInfoResponseDTO>> getAllContactInfo(
+	@RequestMapping(path = "/{id}" + CONTACT_INFO_ENDPOINT, method = RequestMethod.GET)
+	public ResponseEntity<List<ContactInfoQueryResultDTO>> getAllContactInfo(
 			@PathVariable(name = "id") Long customerId) {
 		return ResponseEntity.ok(contactService.findAllContactsInfo(customerId));
 	}

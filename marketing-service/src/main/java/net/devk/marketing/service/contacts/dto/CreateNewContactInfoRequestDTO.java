@@ -2,17 +2,16 @@ package net.devk.marketing.service.contacts.dto;
 
 import java.util.Collection;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateNewContactInfoRequestDTO {
-	
+
 	private final String name;
 	private final Long contactRoleId;
-	
-	private Collection<ContactTypeRequestDTO> details;
-	
+
+	private final Collection<ContactTypeRequestDTO> details;
 
 }

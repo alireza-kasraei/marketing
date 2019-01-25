@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
+import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
-import net.devk.marketing.service.contacts.dto.GetContactInfoResponseDTO;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.model.ContactDetailInfo;
 import net.devk.marketing.service.model.ContactInfo;
@@ -59,25 +59,34 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	@Transactional
-	public GetContactInfoResponseDTO findContactInfo(Long contactInfoId) {
+	public ContactInfoQueryResultDTO findContactInfo(Long contactInfoId) {
 		Optional<ContactInfo> contactInfoOptional = contactInfoRepository.findById(contactInfoId);
 		// TODO FIXME
-		ContactInfo contactInfo = contactInfoOptional.orElseThrow(() -> new RuntimeException(""));
-		List<ContactDetailInfoQueryResultDTO> details = contactDetailInfoRepository
-				.findContactDetailInfoByContactInfoId(contactInfoId);
-		return new GetContactInfoResponseDTO(contactInfoId, contactInfo.getName(), contactInfo.getRole().getName(),
+		ContactInfo contactInfo = contactInfoOptional.orElseThrow(() -> new RuntimeException("ContactInfo not found"));
+		List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfo(contactInfoId);
+		// TODO FIXME here we have unnecessary additional query for contact role
+		return new ContactInfoQueryResultDTO(contactInfoId, contactInfo.getName(), contactInfo.getRole().getName(),
 				details);
 	}
 
 	@Override
-	public List<GetContactInfoResponseDTO> findAllContactsInfo(Long customerId) {
-		return contactInfoRepository.findByCustomerId(customerId).stream().map(c -> findContactInfo(c.getId()))
-				.collect(Collectors.toList());
+	@Transactional
+	public List<ContactInfoQueryResultDTO> findAllContactsInfo(Long customerId) {
+		return contactInfoRepository.findByCustomerId(customerId).stream().map(c -> {
+			List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfo(c.getId());
+			// TODO FIXME here we have unnecessary additional query for contact role
+			return new ContactInfoQueryResultDTO(c.getId(), c.getName(), c.getRole().getName(), details);
+		}).collect(Collectors.toList());
 	}
 
 	@Override
 	public ContactInfo getOneContactInfo(Long contactInfo) {
 		return contactInfoRepository.getOne(contactInfo);
+	}
+
+	@Override
+	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfoId) {
+		return contactDetailInfoRepository.findContactDetailInfoByContactInfoId(contactInfoId);
 	}
 
 }

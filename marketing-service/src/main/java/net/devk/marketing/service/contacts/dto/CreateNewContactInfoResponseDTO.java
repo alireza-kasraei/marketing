@@ -1,10 +1,10 @@
 package net.devk.marketing.service.contacts.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateNewContactInfoResponseDTO {
 	private final Long contactInfoId;
 }

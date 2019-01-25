@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
-import net.devk.marketing.service.contacts.dto.GetContactInfoResponseDTO;
+import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "/contacts-info")
+@RequestMapping(path = ControllersConfig.API_PREFIX + ContactController.CONTACTS_INFO_ENDPOINT)
 public class ContactController {
 
+	static final String CONTACTS_INFO_ENDPOINT = "/contacts-info";
 	@Autowired
 	private ContactService contactService;
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<GetContactInfoResponseDTO> getContactInfo(@PathVariable(name = "id") Long contactInfoId) {
+	public ResponseEntity<ContactInfoQueryResultDTO> getContactInfo(@PathVariable(name = "id") Long contactInfoId) {
 		return ResponseEntity.ok(contactService.findContactInfo(contactInfoId));
 	}
 
