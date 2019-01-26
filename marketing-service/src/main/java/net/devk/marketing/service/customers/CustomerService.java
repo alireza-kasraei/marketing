@@ -46,4 +46,6 @@ public interface CustomerService {
 
 	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name);
 
+	public void setCustomerAttractionStatus(Long customerId, String attractionTypeCode);
+
 }

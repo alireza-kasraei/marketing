@@ -5,7 +5,7 @@ Insert into ASSIGNED_STATUS_TYPES (ID,TYPE_NAME,TYPE_CODE) values (4,'صدور �
 
 
 Insert into ATTRACTION_TYPES (ID,TYPE_NAME,TYPE_CODE) values (1,'بالقوه','AT1');
-Insert into ATTRACTION_TYPES (ID,TYPE_NAME,TYPE_CODE) values (2,'بالفعل','AT2');
+Insert into ATTRACTION_TYPES (ID,TYPE_NAME,TYPE_CODE) values (2,'راغب','AT2');
 Insert into ATTRACTION_TYPES (ID,TYPE_NAME,TYPE_CODE) values (3,'در حال جذب','AT3');
 
 

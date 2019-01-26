@@ -35,6 +35,8 @@ public class Target {
 	private Long value;
 	@Column(name = "REGISTER_DATE")
 	private Date registerDate;
+	@Column(name = "START_DATE")
+	private Date startDate;
 	@Column(name = "DUE_DATE")
 	private Date dueDate;
 	@Column(name = "DAYS_COUNT")

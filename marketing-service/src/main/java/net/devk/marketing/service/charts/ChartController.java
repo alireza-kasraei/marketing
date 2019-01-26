@@ -28,12 +28,6 @@ public class ChartController {
 		return ResponseEntity.ok(targetService.findPersonnelTargets(principal.getName(), serviceId));
 	}
 
-	@RequestMapping(path = "/target-statistics", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AggregateTargetResponseDTO> getTargetStatistics(
-			@RequestParam(name = "targetId", required = true) Long targetId) {
-		return ResponseEntity.ok(targetService.calculateTargetStatistics(targetId));
-	}
-
 	@RequestMapping(path = "/target-member-statistics", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AggregateTargetResponseDTO> getTargetMemberStatistics(
 			@RequestParam(name = "targetMemberId", required = true) Long targeMembertId) {

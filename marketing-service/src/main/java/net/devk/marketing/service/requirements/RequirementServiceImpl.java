@@ -13,6 +13,7 @@ import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.model.AssignedRequirement;
 import net.devk.marketing.service.model.AssignedRequirementStatus;
+import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.Requirement;
 import net.devk.marketing.service.model.RequirementStatus;
@@ -23,6 +24,7 @@ import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDT
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
 import net.devk.marketing.service.targets.TargetService;
+import net.devk.marketing.service.util.DateUtils;
 
 @Service
 class RequirementServiceImpl implements RequirementService {
@@ -56,9 +58,11 @@ class RequirementServiceImpl implements RequirementService {
 	public CreateNewRequirementResponseDTO createRequirement(Long customerId, Long targetMemberId, Long estimatedValue,
 			String description) {
 
+		Date now = DateUtils.now();
 		Customer customer = customerService.getOneCustomer(customerId);
 		TargetMember targetMember = targetService.getOneTargetMember(targetMemberId);
-		Date now = new Date();
+
+		customerService.setCustomerAttractionStatus(customerId, AttractionType.ATTRACTION_TYPE_TYPE2);
 
 		Requirement requirement = new Requirement();
 		requirement.setCustomer(customer);
@@ -85,14 +89,25 @@ class RequirementServiceImpl implements RequirementService {
 	@Transactional
 	@Override
 	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue) {
+		Date now = DateUtils.now();
 		Optional<Requirement> requirementOptional = requirementRepository.findById(requirementId);
-		Requirement requirement = requirementOptional.get();
+		Requirement requirement = requirementOptional.orElseThrow(() -> new RuntimeException("requirement not found"));
 		requirement.setRealValue(realValue);
 		Requirement savedRequirement = requirementRepository.save(requirement);
+
+		customerService.setCustomerAttractionStatus(savedRequirement.getCustomer().getId(),
+				AttractionType.ATTRACTION_TYPE_TYPE3);
+
+		RequirementStatus requirementStatus = new RequirementStatus();
+		requirementStatus.setRequirment(savedRequirement);
+		requirementStatus.setRegisterDate(now);
+		requirementStatus.setRequirementStatusType(
+				basedataService.findRequirementStatusTypeByCode(RequirementStatusType.REQUIREMENT_STATUS_STATUS3));
+		requirementStatusRepository.save(requirementStatus);
+
 		AssignedRequirement assignedRequirement = new AssignedRequirement();
 		assignedRequirement.setCustomerRequirment(savedRequirement);
 		assignedRequirement.setPersonnel(personnelService.getOnePersonnel(personnelId));
-		Date now = new Date();
 		assignedRequirement.setRegisterDate(now);
 		AssignedRequirement savedAssignedRequirement = assignedRequirementRepository.save(assignedRequirement);
 		AssignedRequirementStatus assignedRequirementStatus = new AssignedRequirementStatus();
@@ -104,6 +119,7 @@ class RequirementServiceImpl implements RequirementService {
 	}
 
 	@Override
+	@Transactional
 	public List<CreateNewRequirementResponseDTO> createRequirement(Long customerId,
 			List<CreateNewRequirementRequestDTO> list) {
 		List<CreateNewRequirementResponseDTO> result = new ArrayList<CreateNewRequirementResponseDTO>();

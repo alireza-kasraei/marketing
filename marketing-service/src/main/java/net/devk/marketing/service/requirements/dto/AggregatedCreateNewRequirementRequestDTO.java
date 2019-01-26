@@ -12,6 +12,6 @@ public class AggregatedCreateNewRequirementRequestDTO {
 	/**
 	 *  based on omid's request
 	 */
-	private final List<CreateNewRequirementRequestDTO> data;
+	private List<CreateNewRequirementRequestDTO> data;
 
 }

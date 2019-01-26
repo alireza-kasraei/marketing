@@ -22,8 +22,8 @@ interface TargetMemberRepository extends JpaRepository<TargetMember, Long> {
 	public Long sumTargetStatistics(Long targetId, Date currentDate, String requirementStatusTypeCode,
 			String assignedStatusTypeCode);
 
-	@Query(value = "SELECT SUM(r.real_value) FROM targets t INNER JOIN targets_members tm ON tm.target_id = t.id INNER JOIN requirements r ON r.target_member_id = tm.id INNER JOIN customers c ON r.customer_id = c.id INNER JOIN requirement_statuses rs ON rs.requirement_id = r.id INNER JOIN requirement_status_types rst ON rs.requirement_status_type_id = rst.id INNER JOIN assigned_requirements  ar ON ar.customer_requirement_id = r.id INNER JOIN assigned_requirements_statuses   ars ON ars.assigned_requirement_id = ar.id INNER JOIN assigned_status_types  ast ON ast.id = ars.assigned_status_type_id INNER JOIN teams_members tmm on tm.team_member_id=tmm.id  inner join personnels p on p.id=tmm.personnel_id WHERE rst.type_code = ?3 and ast.type_code=?4 and t.register_date<=?2 and tm.id= ?1", nativeQuery = true)
-	public Long sumTargetMemberStatistics(Long targetId, Date currentDate, String requirementStatusTypeCode,
-			String assignedStatusTypeCode);
+	@Query(value = "SELECT SUM(r.real_value) FROM targets t INNER JOIN targets_members tm ON tm.target_id = t.id INNER JOIN requirements r ON r.target_member_id = tm.id INNER JOIN customers c ON r.customer_id = c.id INNER JOIN attractions_statuses ats on ats.customer_id=c.id INNER JOIN attraction_types att on ats.attraction_type_id=att.id INNER JOIN requirement_statuses rs ON rs.requirement_id = r.id INNER JOIN requirement_status_types rst ON rs.requirement_status_type_id = rst.id INNER JOIN teams_members tmm ON tm.team_member_id = tmm.id INNER JOIN personnels p ON p.id = tmm.personnel_id WHERE rst.type_code =?3  and att.type_code=?4 and t.register_date<=?2 and tm.id=?1", nativeQuery = true)
+	public Long sumTargetMemberStatistics(Long targetMemberId, Date currentDate, String requirementStatusTypeCode,
+			String attractionStatusTypeCode);
 
 }

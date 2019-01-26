@@ -18,8 +18,6 @@ public interface TargetService {
 
 	public List<TargetMemberListQueryResultDTO> findTargets(String username);
 
-	public AggregateTargetResponseDTO calculateTargetStatistics(Long targetId);
-	
 	public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId);
 
 }

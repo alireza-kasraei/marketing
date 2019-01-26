@@ -69,9 +69,6 @@ public class Customer {
 	@JoinColumn(name = "OWNERSHIP_TYPE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OwnershipType ownershipType;
-	@JoinColumn(name = "ATTRACTION_TYPE_ID")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private AttractionType attractionType;
 	@JoinColumn(name = "ORGANIZATION_TYPE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OrganizationType organizationType;
