@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.model.AssignedStatusType;
 import net.devk.marketing.service.model.RequirementStatusType;
@@ -58,6 +59,31 @@ class TargetServiceImpl implements TargetService {
 		long averageProgressToNow = (totalValue.longValue() / target.getDaysCount().intValue()) * days;
 
 		long totalDays = calculateDayNumber(target.getRegisterDate(), target.getDueDate());
+
+		long progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
+
+		long todayProgress = (summation.longValue() / days) * 100;
+
+		return new AggregateTargetResponseDTO(summation.longValue(), days, totalValue.longValue(), averageProgressToNow,
+				totalDays, progressPercentageToNow, todayProgress);
+	}
+
+	@Override
+	@Transactional
+	public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId) {
+		Date now = new Date();
+		Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, now,
+				RequirementStatusType.REQUIREMENT_STATUS_STATUS1, AssignedStatusType.ASSIGNED_STATUS_TYPE1);
+
+		TargetMember targetMember = targetMemberRepository.findById(targetMemberId).get();
+		long days = calculateDayNumber(targetMember.getRegisterDate(), now);
+
+		Target target = targetMember.getTarget();
+		Long totalValue = target.getValue();
+
+		long averageProgressToNow = (totalValue.longValue() / target.getDaysCount().intValue()) * days;
+
+		long totalDays = calculateDayNumber(targetMember.getRegisterDate(), targetMember.getDueDate());
 
 		long progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
 

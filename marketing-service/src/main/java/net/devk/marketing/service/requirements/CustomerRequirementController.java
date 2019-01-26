@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
-import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
+import net.devk.marketing.service.requirements.dto.AggregatedCreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
 
@@ -26,9 +26,10 @@ public class CustomerRequirementController {
 
 	@RequestMapping(path = "/{id}/requirements", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CreateNewRequirementResponseDTO>> createRequirement(
-			@RequestBody List<CreateNewRequirementRequestDTO> list,
+			@RequestBody AggregatedCreateNewRequirementRequestDTO aggregatedCreateNewRequirementRequestDTO,
 			@PathVariable(name = "id", required = true) Long customerId) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(requirementService.createRequirement(customerId, list));
+		return ResponseEntity.status(HttpStatus.CREATED).body(
+				requirementService.createRequirement(customerId, aggregatedCreateNewRequirementRequestDTO.getData()));
 	}
 
 	@RequestMapping(path = "/{id}/requirements", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
