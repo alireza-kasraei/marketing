@@ -12,6 +12,8 @@ services:
       context: ./oracle
       dockerfile: Dockerfile
     image: marketingservice/oracle-xe:marketing
+    volumes:
+       - db-data:/sql
     networks:
       marketing-cloud:
       
@@ -163,6 +165,7 @@ services:
       REDIS_PORT: 6379
       
       
-  
+volumes:
+  db-data:
 networks:
   marketing-cloud:
