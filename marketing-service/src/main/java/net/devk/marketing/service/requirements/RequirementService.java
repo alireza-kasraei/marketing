@@ -14,7 +14,7 @@ public interface RequirementService {
 	public List<CreateNewRequirementResponseDTO> createRequirement(Long customerId,
 			List<CreateNewRequirementRequestDTO> list);
 
-	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId);
+	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId,String requirementStatusTypeCode);
 
 	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue);
 

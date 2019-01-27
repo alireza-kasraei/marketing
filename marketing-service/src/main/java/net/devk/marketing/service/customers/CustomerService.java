@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
 
 public interface CustomerService {
@@ -44,8 +44,10 @@ public interface CustomerService {
 	 */
 	public Customer getOneCustomer(Long customerId);
 
-	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name);
+	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name);
 
 	public void setCustomerAttractionStatus(Long customerId, String attractionTypeCode);
+	
+	public CustomerQueryResultDTO findCustomerQueryResultById(Long customerId);
 
 }

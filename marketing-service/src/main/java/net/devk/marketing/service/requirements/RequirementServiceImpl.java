@@ -93,6 +93,7 @@ class RequirementServiceImpl implements RequirementService {
 		Optional<Requirement> requirementOptional = requirementRepository.findById(requirementId);
 		Requirement requirement = requirementOptional.orElseThrow(() -> new RuntimeException("requirement not found"));
 		requirement.setRealValue(realValue);
+		requirement.setRealValueEditDate(now);
 		Requirement savedRequirement = requirementRepository.save(requirement);
 
 		customerService.setCustomerAttractionStatus(savedRequirement.getCustomer().getId(),
@@ -134,8 +135,8 @@ class RequirementServiceImpl implements RequirementService {
 	}
 
 	@Override
-	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId) {
-		return requirementRepository.findRequirements(customerId);
+	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId, String requirementStatusTypeCode) {
+		return requirementRepository.findRequirements(customerId, requirementStatusTypeCode);
 	}
 
 }

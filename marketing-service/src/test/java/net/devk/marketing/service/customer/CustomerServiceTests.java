@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.customers.CustomerService;
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.RegistrationStatus;
 
@@ -39,7 +39,7 @@ public class CustomerServiceTests {
 	@Test
 	public void testFindCustomers() {
 		// data.sql , there are three customers with koorosh01 name
-		List<CustomerFindAllQueryResultDTO> customers = customerService.findAllCustomersLikeByName("koorosh");
+		List<CustomerQueryResultDTO> customers = customerService.findAllCustomersLikeByName("koorosh");
 		assertEquals(3, customers.size());
 	}
 

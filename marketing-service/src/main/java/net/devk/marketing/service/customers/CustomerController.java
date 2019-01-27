@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.customers.dto.CreateNewCustomerRequestDTO;
 import net.devk.marketing.service.customers.dto.CreateNewCustomerResponseDTO;
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 import net.devk.marketing.service.customers.dto.UpdateCustomerRequestDTO;
 import net.devk.marketing.service.model.Customer;
 
@@ -55,9 +55,18 @@ public class CustomerController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<CustomerFindAllQueryResultDTO>> findAll(
+	public ResponseEntity<List<CustomerQueryResultDTO>> findAll(
 			@RequestParam(name = "name", required = false) String name) {
 		return ResponseEntity.ok(customerService.findAllCustomersLikeByName(name));
+	}
+
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findCustomerQueryResultById(@PathVariable(name = "id", required = false) Long customerId) {
+		CustomerQueryResultDTO customer = customerService.findCustomerQueryResultById(customerId);
+		if (customer != null) {
+			return ResponseEntity.ok(customer);
+		} else
+			return ResponseEntity.notFound().build();
 	}
 
 }

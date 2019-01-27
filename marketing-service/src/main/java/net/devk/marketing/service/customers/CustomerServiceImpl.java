@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 import net.devk.marketing.service.model.AttractionStatus;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
@@ -18,7 +18,7 @@ import net.devk.marketing.service.model.RegistrationStatus;
 import net.devk.marketing.service.util.DateUtils;
 
 @Service
-class CustomerSeriviceImpl implements CustomerService {
+class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -48,13 +48,6 @@ class CustomerSeriviceImpl implements CustomerService {
 		customer.setUsername(username);
 		customer = customerRepository.save(customer);
 
-//		AttractionStatus attractionStatus = new AttractionStatus();
-//		attractionStatus.setCustomer(customer);
-//		attractionStatus.setRegisterDate(now);
-//		attractionStatus
-//				.setAttractionType(basedataService.findAttractionTypeByCode(AttractionType.ATTRACTION_TYPE_TYPE1));
-//		attractionStatusRepository.save(attractionStatus);
-		
 		setCustomerAttractionStatus(customer.getId(), AttractionType.ATTRACTION_TYPE_TYPE1);
 
 		CustomerAddress customerAddress = new CustomerAddress();
@@ -89,7 +82,7 @@ class CustomerSeriviceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name) {
 		return customerRepository.findAllCustomersLikeByName(name);
 	}
 
@@ -101,6 +94,11 @@ class CustomerSeriviceImpl implements CustomerService {
 		attractionStatus.setRegisterDate(now);
 		attractionStatus.setAttractionType(basedataService.findAttractionTypeByCode(attractionTypeCode));
 		attractionStatusRepository.save(attractionStatus);
+	}
+
+	@Override
+	public CustomerQueryResultDTO findCustomerQueryResultById(Long customerId) {
+		return customerRepository.findCustomerQueryResultById(customerId);
 	}
 
 }

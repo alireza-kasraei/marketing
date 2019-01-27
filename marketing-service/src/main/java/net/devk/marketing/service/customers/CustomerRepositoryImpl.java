@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
 
 public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
@@ -23,10 +23,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 	private EntityManager entityManager;
 
 	@Override
-	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name) {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<CustomerFindAllQueryResultDTO> query = builder.createQuery(CustomerFindAllQueryResultDTO.class);
+		CriteriaQuery<CustomerQueryResultDTO> query = builder.createQuery(CustomerQueryResultDTO.class);
 
 		Root<Customer> root = query.from(Customer.class);
 		List<Predicate> predicateList = new ArrayList<>();
@@ -40,7 +40,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
 		Join<Object, Object> businessScale = root.join("businessScale", JoinType.LEFT);
 		Join<Object, Object> ownershipType = root.join("ownershipType", JoinType.LEFT);
-		Join<Object, Object> attractionType = root.join("attractionType", JoinType.LEFT);
+		Join<Object, Object> organizationType = root.join("organizationType", JoinType.LEFT);
 		query.multiselect(root.get("id").alias("id"), root.get("name").alias("name"),
 				root.get("registerDate").alias("registerDate"), root.get("legal").alias("legal"),
 				root.get("economicCode").alias("economicCode"), root.get("headCount").alias("headCount"),
@@ -48,11 +48,9 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 				root.get("registrationStatus").alias("registrationStatus"), root.get("username").alias("username"),
 				businessScale.get("id").alias("businessScaleId"), businessScale.get("name").alias("businessScaleName"),
 				ownershipType.get("id").alias("ownershipTypeId"), ownershipType.get("type").alias("ownershipType"),
-				attractionType.get("id").alias("attractionTypeId"),
-				attractionType.get("name").alias("attractionTypeName"));
-		TypedQuery<CustomerFindAllQueryResultDTO> typedQuery = entityManager.createQuery(query);
-//		typedQuery.setFirstResult(first);
-//		typedQuery.setMaxResults(pageSize);
+				organizationType.get("id").alias("organizationTypeId"),
+				organizationType.get("type").alias("organizationTypeName"));
+		TypedQuery<CustomerQueryResultDTO> typedQuery = entityManager.createQuery(query);
 		return typedQuery.getResultList();
 
 	}

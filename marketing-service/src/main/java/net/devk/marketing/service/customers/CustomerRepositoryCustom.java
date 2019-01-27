@@ -2,10 +2,10 @@ package net.devk.marketing.service.customers;
 
 import java.util.List;
 
-import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
 
 interface CustomerRepositoryCustom {
 
-	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name);
+	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name);
 
 }

@@ -10,7 +10,7 @@ import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDT
 
 interface RequirementRepository extends JpaRepository<Requirement, Long> {
 
-	@Query("select new net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO(r.id,r.estimatedValue,r.realValue,r.description,r.estimatedValueEditDate,r.estimatedValueRegisterDate,r.realValueEditDate,r.realValueRegisterDate,r.customer.id,tm.id,tm.value,t.id,t.value,s.id,s.name) from Requirement r inner join r.targetMember tm inner join tm.target t inner join t.service s where r.customer.id=?1")
-	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId);
+	@Query("select new net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO(r.id,r.estimatedValue,r.realValue,r.description,r.estimatedValueEditDate,r.estimatedValueRegisterDate,r.realValueEditDate,r.realValueRegisterDate,r.customer.id,tm.id,tm.value,t.id,t.value,s.id,s.name) from RequirementStatus rs inner join rs.requirment r inner join rs.requirementStatusType rst inner join r.targetMember tm inner join tm.target t inner join t.service s where r.customer.id=?1 and rst.code=?2")
+	public List<CustomerRequirementResponseDTO> findRequirements(Long customerId , String requirementStatusTypeId);
 
 }
