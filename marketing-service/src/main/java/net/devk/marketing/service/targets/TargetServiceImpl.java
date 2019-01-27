@@ -52,7 +52,7 @@ class TargetServiceImpl implements TargetService {
 		Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, now,
 				RequirementStatusType.REQUIREMENT_STATUS_STATUS3, AttractionType.ATTRACTION_TYPE_TYPE3);
 
-		TargetMember targetMember = targetMemberRepository.findById(targetMemberId).get();
+		TargetMember targetMember = targetMemberRepository.findById(targetMemberId).orElseThrow(()-> new RuntimeException("targetmember not found"));
 		Target target = targetMember.getTarget();
 		long days = calculateDayNumber(target.getStartDate(), now);
 
