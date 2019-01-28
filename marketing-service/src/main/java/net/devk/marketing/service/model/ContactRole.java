@@ -19,7 +19,7 @@ public class ContactRole {
 	private static final String CONTACT_ROLES_GENERATOR = "contact_roles_generator";
 
 	@GeneratedValue(generator = CONTACT_ROLES_GENERATOR)
-	@SequenceGenerator(name = CONTACT_ROLES_GENERATOR, sequenceName = "contact_roles_sequence", initialValue = 1)
+	@SequenceGenerator(name = CONTACT_ROLES_GENERATOR, sequenceName = "contact_roles_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

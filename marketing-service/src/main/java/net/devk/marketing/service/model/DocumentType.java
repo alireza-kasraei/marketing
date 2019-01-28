@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class DocumentType {
 
 	@GeneratedValue(generator = "document_types_generator")
-	@SequenceGenerator(name = "document_types_generator", sequenceName = "document_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = "document_types_generator", sequenceName = "document_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

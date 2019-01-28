@@ -21,13 +21,13 @@ public class Organ {
 	private static final String GENERATOR_NAME = "organs_generator";
 
 	@GeneratedValue(generator = GENERATOR_NAME)
-	@SequenceGenerator(name = GENERATOR_NAME, sequenceName = "organs_sequence", initialValue = 1)
+	@SequenceGenerator(name = GENERATOR_NAME, sequenceName = "organs_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
 	@Column(name = "ORGAN_NAME")
 	private String name;
-	//0 is higher level
+	// 0 is higher level
 	@Column(name = "ORGAN_LEVEL")
 	private Integer level;
 	@Column(name = "ORGAN_ORDER")

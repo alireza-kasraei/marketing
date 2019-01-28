@@ -24,7 +24,7 @@ public class TargetMember {
 	private static final String TARGETS_MEMBERS_GENERATOR = "targets_members_generator";
 
 	@GeneratedValue(generator = TARGETS_MEMBERS_GENERATOR)
-	@SequenceGenerator(name = TARGETS_MEMBERS_GENERATOR, sequenceName = "targets_members_sequence", initialValue = 1)
+	@SequenceGenerator(name = TARGETS_MEMBERS_GENERATOR, sequenceName = "targets_members_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

@@ -24,7 +24,7 @@ public class Target {
 	private static final String TARGETS_GENERATOR = "targets_generator";
 
 	@GeneratedValue(generator = TARGETS_GENERATOR)
-	@SequenceGenerator(name = TARGETS_GENERATOR, sequenceName = "targets_sequence", initialValue = 1)
+	@SequenceGenerator(name = TARGETS_GENERATOR, sequenceName = "targets_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

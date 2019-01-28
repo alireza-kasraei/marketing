@@ -27,13 +27,13 @@ public class Personnel {
 	private static final String PERSONNELS_GENERATOR = "personnels_generator";
 
 	@GeneratedValue(generator = PERSONNELS_GENERATOR)
-	@SequenceGenerator(name = PERSONNELS_GENERATOR, sequenceName = "personnels_sequence", initialValue = 1)
+	@SequenceGenerator(name = PERSONNELS_GENERATOR, sequenceName = "personnels_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
 	@Column(name = "PERSONNEL_NAME")
 	private String name;
-	
+
 	@Column(name = "USER_NAME")
 	private String username;
 

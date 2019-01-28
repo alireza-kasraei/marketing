@@ -28,7 +28,7 @@ public class Meeting {
 	private static final String MEETINGS_GENERATOR = "meetings_generator";
 
 	@GeneratedValue(generator = MEETINGS_GENERATOR)
-	@SequenceGenerator(name = MEETINGS_GENERATOR, sequenceName = "meeetings_sequence", initialValue = 1)
+	@SequenceGenerator(name = MEETINGS_GENERATOR, sequenceName = "meeetings_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
@@ -41,7 +41,7 @@ public class Meeting {
 	@ManyToMany
 	@JoinTable(name = "MEETINGS_CONTACTS_INFO", joinColumns = @JoinColumn(name = "MEETING_ID"), inverseJoinColumns = @JoinColumn(name = "CONTACT_INFO_ID"))
 	private Set<ContactInfo> contactInfos = new HashSet<>();
-	
+
 	@ManyToMany
 	@JoinTable(name = "MEETINGS_PERSONNELS", joinColumns = @JoinColumn(name = "MEETING_ID"), inverseJoinColumns = @JoinColumn(name = "PERSONNEL_ID"))
 	private Set<Personnel> personnels = new HashSet<>();

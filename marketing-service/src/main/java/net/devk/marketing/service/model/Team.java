@@ -24,7 +24,7 @@ public class Team {
 	private static final String TEAMS_GENERATOR = "teams_generator";
 
 	@GeneratedValue(generator = TEAMS_GENERATOR)
-	@SequenceGenerator(name = TEAMS_GENERATOR, sequenceName = "teams_sequence", initialValue = 1)
+	@SequenceGenerator(name = TEAMS_GENERATOR, sequenceName = "teams_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

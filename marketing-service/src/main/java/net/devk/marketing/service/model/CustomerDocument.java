@@ -8,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,7 +24,7 @@ public class CustomerDocument {
 	private static final String CUSTOMERS_DOCS_GENERATOR = "customers_docs_generator";
 
 	@GeneratedValue(generator = CUSTOMERS_DOCS_GENERATOR)
-	@SequenceGenerator(name = CUSTOMERS_DOCS_GENERATOR, sequenceName = "customers_docs_sequence", initialValue = 1)
+	@SequenceGenerator(name = CUSTOMERS_DOCS_GENERATOR, sequenceName = "customers_docs_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

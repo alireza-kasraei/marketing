@@ -26,7 +26,7 @@ public class AttractionType {
 	private static final String ATTRACTION_TYPE_GENERATOR = "attraction_types_generator";
 
 	@GeneratedValue(generator = ATTRACTION_TYPE_GENERATOR)
-	@SequenceGenerator(name = ATTRACTION_TYPE_GENERATOR, sequenceName = "attraction_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = ATTRACTION_TYPE_GENERATOR, sequenceName = "attraction_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

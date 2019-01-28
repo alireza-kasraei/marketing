@@ -22,7 +22,7 @@ public class CustomerAddress {
 	private static final String CUSTOMER_ADDRESS_GENERATOR = "customers_addresses_generator";
 
 	@GeneratedValue(generator = CUSTOMER_ADDRESS_GENERATOR)
-	@SequenceGenerator(name = CUSTOMER_ADDRESS_GENERATOR, sequenceName = "customers_addresses_sequence", initialValue = 1)
+	@SequenceGenerator(name = CUSTOMER_ADDRESS_GENERATOR, sequenceName = "customers_addresses_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

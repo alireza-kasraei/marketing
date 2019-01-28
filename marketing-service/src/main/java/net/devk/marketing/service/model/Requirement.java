@@ -24,7 +24,7 @@ public class Requirement {
 	private static final String CUSTOMERS_REQUIREMENTS_GENERATOR = "customers_requirements_generator";
 
 	@GeneratedValue(generator = CUSTOMERS_REQUIREMENTS_GENERATOR)
-	@SequenceGenerator(name = CUSTOMERS_REQUIREMENTS_GENERATOR, sequenceName = "cr_sequence", initialValue = 1)
+	@SequenceGenerator(name = CUSTOMERS_REQUIREMENTS_GENERATOR, sequenceName = "cr_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
@@ -47,11 +47,11 @@ public class Requirement {
 	@Column(name = "REAL_VALUE_REGISTER_DATE")
 	private Date realValueRegisterDate;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TARGET_MEMBER_ID")
 	private TargetMember targetMember;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 

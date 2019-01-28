@@ -24,7 +24,7 @@ public class RequirementStatus {
 	private static final String REQUIREMENT_STATUSES_GENERATOR = "requirement_statuses_generator";
 
 	@GeneratedValue(generator = REQUIREMENT_STATUSES_GENERATOR)
-	@SequenceGenerator(name = REQUIREMENT_STATUSES_GENERATOR, sequenceName = "requirement_statuses_sequence", initialValue = 1)
+	@SequenceGenerator(name = REQUIREMENT_STATUSES_GENERATOR, sequenceName = "requirement_statuses_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

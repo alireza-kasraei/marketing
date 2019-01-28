@@ -19,7 +19,7 @@ public class ValueType {
 	private static final String VALUE_TYPE_GENERATOR = "value_types_generator";
 
 	@GeneratedValue(generator = VALUE_TYPE_GENERATOR)
-	@SequenceGenerator(name = VALUE_TYPE_GENERATOR, sequenceName = "value_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = VALUE_TYPE_GENERATOR, sequenceName = "value_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

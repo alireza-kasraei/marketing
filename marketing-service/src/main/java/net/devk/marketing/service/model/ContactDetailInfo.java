@@ -23,11 +23,11 @@ public class ContactDetailInfo {
 	private static final String CONTACTS_INFO_DETAILS_GENERATOR = "contacts_info_details_generator";
 
 	@GeneratedValue(generator = CONTACTS_INFO_DETAILS_GENERATOR)
-	@SequenceGenerator(name = CONTACTS_INFO_DETAILS_GENERATOR, sequenceName = "contacts_info_details_sequence", initialValue = 1)
+	@SequenceGenerator(name = CONTACTS_INFO_DETAILS_GENERATOR, sequenceName = "contacts_info_details_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CONTACT_INFO_ID")
 	private ContactInfo contactInfo;
 	@Column(name = "CONTACT_DATA")

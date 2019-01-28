@@ -24,7 +24,7 @@ public class AttractionStatus {
 	private static final String ATTRACTIONS_STATUSES_GENERATOR = "attractions_statuses_generator";
 
 	@GeneratedValue(generator = ATTRACTIONS_STATUSES_GENERATOR)
-	@SequenceGenerator(name = ATTRACTIONS_STATUSES_GENERATOR, sequenceName = "attractions_statuses_sequence", initialValue = 1)
+	@SequenceGenerator(name = ATTRACTIONS_STATUSES_GENERATOR, sequenceName = "attractions_statuses_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

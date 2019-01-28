@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -29,7 +30,7 @@ public class Customer {
 	private static final String CUSTOMER_GENERATOR = "customers_generator";
 
 	@GeneratedValue(generator = CUSTOMER_GENERATOR)
-	@SequenceGenerator(name = CUSTOMER_GENERATOR, sequenceName = "customers_sequence", initialValue = 1)
+	@SequenceGenerator(name = CUSTOMER_GENERATOR, sequenceName = "customers_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 
@@ -65,6 +66,7 @@ public class Customer {
 	@Column(name = "USER_NAME")
 	private String username;
 
+	@EqualsAndHashCode.Exclude
 	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private CustomerAddress address;
 

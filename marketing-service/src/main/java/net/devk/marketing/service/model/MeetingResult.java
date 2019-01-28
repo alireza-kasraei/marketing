@@ -21,7 +21,7 @@ public class MeetingResult {
 	private static final String MEETINGS_RESULTS_GENERATOR = "meetings_results_generator";
 
 	@GeneratedValue(generator = MEETINGS_RESULTS_GENERATOR)
-	@SequenceGenerator(name = MEETINGS_RESULTS_GENERATOR, sequenceName = "meetings_results_sequence", initialValue = 1)
+	@SequenceGenerator(name = MEETINGS_RESULTS_GENERATOR, sequenceName = "meetings_results_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

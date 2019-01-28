@@ -22,7 +22,7 @@ public class Service {
 	private static final String SERVICE_GENERATOR = "services_generator";
 
 	@GeneratedValue(generator = SERVICE_GENERATOR)
-	@SequenceGenerator(name = SERVICE_GENERATOR, sequenceName = "services_sequence", initialValue = 1)
+	@SequenceGenerator(name = SERVICE_GENERATOR, sequenceName = "services_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

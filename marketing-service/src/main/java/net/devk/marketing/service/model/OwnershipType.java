@@ -18,7 +18,7 @@ public class OwnershipType {
 
 	private static final String OWNERSHIP_TYPE_GENERATOR = "ownership_types_generator";
 	@GeneratedValue(generator = OWNERSHIP_TYPE_GENERATOR)
-	@SequenceGenerator(name = OWNERSHIP_TYPE_GENERATOR, sequenceName = "ownership_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = OWNERSHIP_TYPE_GENERATOR, sequenceName = "ownership_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

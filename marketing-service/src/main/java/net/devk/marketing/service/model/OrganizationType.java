@@ -18,7 +18,7 @@ public class OrganizationType {
 
 	private static final String ORGANIZATION_TYPE_GENERATOR = "organization_types_generator";
 	@GeneratedValue(generator = ORGANIZATION_TYPE_GENERATOR)
-	@SequenceGenerator(name = ORGANIZATION_TYPE_GENERATOR, sequenceName = "organization_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = ORGANIZATION_TYPE_GENERATOR, sequenceName = "organization_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

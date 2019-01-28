@@ -21,7 +21,7 @@ public class ContactType {
 	private static final String CONTACT_TYPES_GENERATOR = "contact_types_generator";
 
 	@GeneratedValue(generator = CONTACT_TYPES_GENERATOR)
-	@SequenceGenerator(name = CONTACT_TYPES_GENERATOR, sequenceName = "contact_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = CONTACT_TYPES_GENERATOR, sequenceName = "contact_types_sequence", initialValue = 1, allocationSize = 1)
 	@Id
 	private Long id;
 

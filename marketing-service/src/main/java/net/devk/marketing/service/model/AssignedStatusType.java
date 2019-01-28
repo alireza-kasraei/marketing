@@ -19,7 +19,7 @@ public class AssignedStatusType {
 	public static final String ASSIGNED_STATUS_TYPE1="AST1";
 
 	@GeneratedValue(generator = "assigned_status_types_generator")
-	@SequenceGenerator(name = "assigned_status_types_generator", sequenceName = "assigned_status_types_sequence", initialValue = 1)
+	@SequenceGenerator(name = "assigned_status_types_generator", sequenceName = "assigned_status_types_sequence", initialValue = 1,allocationSize=1)
 	@Id
 	private Long id;
 
