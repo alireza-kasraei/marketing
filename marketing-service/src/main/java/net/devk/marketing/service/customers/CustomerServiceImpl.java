@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.devk.marketing.service.basedata.BasedataService;
-import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindOneQueryResultDTO;
 import net.devk.marketing.service.model.AttractionStatus;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
@@ -82,7 +83,7 @@ class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
 		return customerRepository.findAllCustomersLikeByName(name);
 	}
 
@@ -97,7 +98,7 @@ class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerQueryResultDTO findCustomerQueryResultById(Long customerId) {
+	public CustomerFindOneQueryResultDTO findCustomerQueryResultById(Long customerId) {
 		return customerRepository.findCustomerQueryResultById(customerId);
 	}
 

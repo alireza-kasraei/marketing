@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.devk.marketing.service.customers.dto.CustomerQueryResultDTO;
+import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
 
 public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
@@ -23,10 +23,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 	private EntityManager entityManager;
 
 	@Override
-	public List<CustomerQueryResultDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<CustomerQueryResultDTO> query = builder.createQuery(CustomerQueryResultDTO.class);
+		CriteriaQuery<CustomerFindAllQueryResultDTO> query = builder.createQuery(CustomerFindAllQueryResultDTO.class);
 
 		Root<Customer> root = query.from(Customer.class);
 		List<Predicate> predicateList = new ArrayList<>();
@@ -50,7 +50,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 				ownershipType.get("id").alias("ownershipTypeId"), ownershipType.get("type").alias("ownershipType"),
 				organizationType.get("id").alias("organizationTypeId"),
 				organizationType.get("type").alias("organizationTypeName"));
-		TypedQuery<CustomerQueryResultDTO> typedQuery = entityManager.createQuery(query);
+		TypedQuery<CustomerFindAllQueryResultDTO> typedQuery = entityManager.createQuery(query);
 		return typedQuery.getResultList();
 
 	}

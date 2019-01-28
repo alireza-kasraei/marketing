@@ -3,6 +3,7 @@ package net.devk.marketing.service.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -62,6 +64,9 @@ public class Customer {
 
 	@Column(name = "USER_NAME")
 	private String username;
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private CustomerAddress address;
 
 	@JoinColumn(name = "BUSINESS_SCALE_ID")
 	@ManyToOne(fetch = FetchType.LAZY)

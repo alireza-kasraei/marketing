@@ -8,7 +8,7 @@ import net.devk.marketing.service.model.RegistrationStatus;
 
 @Data
 @RequiredArgsConstructor
-public class CustomerQueryResultDTO {
+public class CustomerFindOneQueryResultDTO {
 
 	private final Long id;
 	private final String name;
@@ -21,14 +21,16 @@ public class CustomerQueryResultDTO {
 	private final RegistrationStatus registrationStatus;
 	private final String username;
 
+	private final String latitude;
+	private final String longitude;
+
 	private final Long businessScaleId;
 	private final String businessScaleName;
 
 	private final Long ownershipTypeId;
 	private final String ownershipType;
-	
+
 	private final Long organizationTypeId;
 	private final String organizationType;
-
 
 }
