@@ -58,14 +58,14 @@ class TargetServiceImpl implements TargetService {
 
 		Long totalValue = targetMember.getValue();
 
-		long averageProgressToNow = (totalValue.longValue() / target.getDaysCount().intValue()) * days;
+		double averageProgressToNow = (totalValue.doubleValue() / target.getDaysCount().intValue()) * days;
 
 //		long totalDays = calculateDayNumber(targetMember.getRegisterDate(), targetMember.getDueDate());
 		long totalDays = target.getDaysCount();
 
-		long progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
+		double progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
 
-		long todayProgress = (summation.longValue() / days) * 100;
+		double todayProgress = (summation.longValue() / days) * 100;
 
 		return new AggregateTargetResponseDTO(summation.longValue(), days, totalValue.longValue(), averageProgressToNow,
 				totalDays, progressPercentageToNow, todayProgress);

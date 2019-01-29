@@ -13,12 +13,12 @@ public class AggregateTargetResponseDTO {
 
 	private final long totalValue;
 
-	private final long averageProgressToNow;
+	private final double averageProgressToNow;
 
 	private final long totalDay;
 
-	private final long progressPercentageToNow;
+	private final double progressPercentageToNow;
 
-	private final long todayProgress;
+	private final double todayProgress;
 
 }
