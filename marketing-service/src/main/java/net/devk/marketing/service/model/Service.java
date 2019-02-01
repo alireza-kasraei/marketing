@@ -11,19 +11,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "SERVICES")
 @NoArgsConstructor
-public class Service {
+public class Service extends AbstractModel {
 
 	private static final String SERVICE_GENERATOR = "services_generator";
 
 	@GeneratedValue(generator = SERVICE_GENERATOR)
 	@SequenceGenerator(name = SERVICE_GENERATOR, sequenceName = "services_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "SERVICE_NAME")

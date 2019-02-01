@@ -1,8 +1,6 @@
 
 package net.devk.marketing.service.model;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,23 +20,22 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "CUSTOMERS")
 @NoArgsConstructor
-public class Customer {
+public class Customer extends AbstractModel {
 
 	private static final String CUSTOMER_GENERATOR = "customers_generator";
 
 	@GeneratedValue(generator = CUSTOMER_GENERATOR)
 	@SequenceGenerator(name = CUSTOMER_GENERATOR, sequenceName = "customers_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "CUSTOMER_NAME")
 	private String name;
-
-	@Column(name = "REGISTER_DATE")
-	private Date registerDate;
 
 	@Column(name = "LEGAL")
 	private Boolean legal;

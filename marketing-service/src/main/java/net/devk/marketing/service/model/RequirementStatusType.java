@@ -8,13 +8,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "REQUIREMENT_STATUS_TYPES")
 @NoArgsConstructor
-public class RequirementStatusType {
+public class RequirementStatusType extends AbstractModel {
 
 	// TODO FIXME change these codes
 	// TAARIFE NIAZ
@@ -31,6 +33,7 @@ public class RequirementStatusType {
 	@GeneratedValue(generator = REQUIREMENT_STATUS_TYPES_GENERATOR)
 	@SequenceGenerator(name = REQUIREMENT_STATUS_TYPES_GENERATOR, sequenceName = "rst_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "TYPE_NAME")

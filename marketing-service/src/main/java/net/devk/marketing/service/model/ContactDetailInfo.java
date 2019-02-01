@@ -12,19 +12,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "CONTACTS_INFO_DETAILS")
 @NoArgsConstructor
-public class ContactDetailInfo {
+public class ContactDetailInfo extends AbstractModel {
 
 	private static final String CONTACTS_INFO_DETAILS_GENERATOR = "contacts_info_details_generator";
 
 	@GeneratedValue(generator = CONTACTS_INFO_DETAILS_GENERATOR)
 	@SequenceGenerator(name = CONTACTS_INFO_DETAILS_GENERATOR, sequenceName = "contacts_info_details_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

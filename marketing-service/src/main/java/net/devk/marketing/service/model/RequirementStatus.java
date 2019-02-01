@@ -1,8 +1,5 @@
 package net.devk.marketing.service.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,23 +10,23 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "REQUIREMENT_STATUSES")
 @NoArgsConstructor
-public class RequirementStatus {
+public class RequirementStatus extends AbstractModel {
 
 	private static final String REQUIREMENT_STATUSES_GENERATOR = "requirement_statuses_generator";
 
 	@GeneratedValue(generator = REQUIREMENT_STATUSES_GENERATOR)
 	@SequenceGenerator(name = REQUIREMENT_STATUSES_GENERATOR, sequenceName = "requirement_statuses_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
-
-	@Column(name = "REGISTER_DATE")
-	private Date registerDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "REQUIREMENT_STATUS_TYPE_ID")

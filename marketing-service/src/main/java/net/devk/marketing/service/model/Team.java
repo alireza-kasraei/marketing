@@ -13,19 +13,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "TEAMS")
 @NoArgsConstructor
-public class Team {
+public class Team extends AbstractModel {
 
 	private static final String TEAMS_GENERATOR = "teams_generator";
 
 	@GeneratedValue(generator = TEAMS_GENERATOR)
 	@SequenceGenerator(name = TEAMS_GENERATOR, sequenceName = "teams_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "TEAM_NAME")

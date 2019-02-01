@@ -1,7 +1,5 @@
 package net.devk.marketing.service.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,23 +11,23 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "CUSTOMERS_DOCS")
 @NoArgsConstructor
-public class CustomerDocument {
+public class CustomerDocument extends AbstractModel {
 
 	private static final String CUSTOMERS_DOCS_GENERATOR = "customers_docs_generator";
 
 	@GeneratedValue(generator = CUSTOMERS_DOCS_GENERATOR)
 	@SequenceGenerator(name = CUSTOMERS_DOCS_GENERATOR, sequenceName = "customers_docs_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
-
-	@Column(name = "REGISTER_DATE")
-	private Date registerDate;
 
 	@Column(name = "DOCUMENT_NAME")
 	private String documentName;

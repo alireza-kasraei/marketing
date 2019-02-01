@@ -17,19 +17,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "MEETINGS")
 @NoArgsConstructor
-public class Meeting {
+public class Meeting extends AbstractModel {
 
 	private static final String MEETINGS_GENERATOR = "meetings_generator";
 
 	@GeneratedValue(generator = MEETINGS_GENERATOR)
 	@SequenceGenerator(name = MEETINGS_GENERATOR, sequenceName = "meeetings_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "SCHEDULE_DATE")

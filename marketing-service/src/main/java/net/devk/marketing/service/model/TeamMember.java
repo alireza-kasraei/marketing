@@ -12,21 +12,24 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 // TODO FIXME how can we find out this member is head?
 @Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 //TODO FIXME is "TEAMS_PERSONNELS" a better name?
 @Table(name = "TEAMS_MEMBERS")
 @NoArgsConstructor
-public class TeamMember {
+public class TeamMember extends AbstractModel {
 
 	private static final String TEAMS_MEMBERS_GENERATOR = "members_generator";
 
 	@GeneratedValue(generator = TEAMS_MEMBERS_GENERATOR)
 	@SequenceGenerator(name = TEAMS_MEMBERS_GENERATOR, sequenceName = "members_sequence", initialValue = 1, allocationSize = 1)
 	@Id
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "MEMBERSHIP_DATE")
