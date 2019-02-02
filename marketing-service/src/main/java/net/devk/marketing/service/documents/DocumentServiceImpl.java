@@ -1,9 +1,7 @@
 package net.devk.marketing.service.documents;
 
-import java.io.IOException;
-import java.util.Date;
+import java.nio.file.Path;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,21 +20,20 @@ class DocumentServiceImpl implements DocumentService {
 	private CustomerDocumentRepository customerDocumentRepository;
 	@Autowired
 	private BasedataService basedataService;
+	@Autowired
+	private StorageService storageService;
 
 	@Override
 	@Transactional
 	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file) {
 
+		Path store = storageService.store(customerId, file);
+
 		CustomerDocument customerDocument = new CustomerDocument();
-		customerDocument.setRegisterDate(new Date());
 		customerDocument.setCustomer(customerService.getOneCustomer(customerId));
 		customerDocument.setDocumentName(file.getOriginalFilename());
 		customerDocument.setDocumentType(basedataService.getOneDocumentType(documentTypeId));
-//		try {
-//			customerDocument.setFile(IOUtils.toByteArray(file.getInputStream()));
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
+		customerDocument.setFilePath(store.toFile().getAbsolutePath());
 		return customerDocumentRepository.save(customerDocument);
 	}
 
