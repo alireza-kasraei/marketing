@@ -2,8 +2,7 @@ package net.devk.marketing.service.customers;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.customers.dto.CustomerFindOneQueryResultDTO;
 import net.devk.marketing.service.model.Customer;
@@ -41,14 +40,15 @@ public interface CustomerService {
 			Long organizationTypeId, Long annualIncome);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the Customer with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public Customer getOneCustomer(Long customerId);
+	public Customer findOneCustomer(Long customerId);
 
 	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name);
 
 	public void setCustomerAttractionStatus(Long customerId, String attractionTypeCode);
-	
+
 	public CustomerFindOneQueryResultDTO findCustomerQueryResultById(Long customerId);
 
 }

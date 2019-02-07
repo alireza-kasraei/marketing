@@ -59,7 +59,7 @@ class RequirementServiceImpl implements RequirementService {
 			String description) {
 
 		Date now = DateUtils.now();
-		Customer customer = customerService.getOneCustomer(customerId);
+		Customer customer = customerService.findOneCustomer(customerId);
 		TargetMember targetMember = targetService.getOneTargetMember(targetMemberId);
 
 		customerService.setCustomerAttractionStatus(customerId, AttractionType.ATTRACTION_TYPE_TYPE2);
@@ -114,7 +114,7 @@ class RequirementServiceImpl implements RequirementService {
 		AssignedRequirementStatus assignedRequirementStatus = new AssignedRequirementStatus();
 		assignedRequirementStatus.setAssignedRequirement(savedAssignedRequirement);
 		assignedRequirementStatus.setRegisterDate(now);
-		assignedRequirementStatus.setAssignedStatusType(basedataService.getAssignedStatusType(assignedStatusTypeId));
+		assignedRequirementStatus.setAssignedStatusType(basedataService.findAssignedStatusType(assignedStatusTypeId));
 		assignedRequirementStatusRepository.save(assignedRequirementStatus);
 
 	}

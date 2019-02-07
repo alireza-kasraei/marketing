@@ -38,11 +38,11 @@ class ContactsServiceImpl implements ContactService {
 	public ContactInfo createContactInfo(Long customerId, Long contactRoleId, String name,
 			Collection<ContactTypeRequestDTO> contactTypes) {
 
-		Customer customer = customerService.getOneCustomer(customerId);
+		Customer customer = customerService.findOneCustomer(customerId);
 
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.setCustomer(customer);
-		contactInfo.setRole(basedataService.getOneContactRole(contactRoleId));
+		contactInfo.setRole(basedataService.findOneContactRole(contactRoleId));
 		contactInfo.setName(name);
 		final ContactInfo savedContactInfo = contactInfoRepository.save(contactInfo);
 
@@ -50,7 +50,7 @@ class ContactsServiceImpl implements ContactService {
 			ContactDetailInfo contactDetailInfo = new ContactDetailInfo();
 			contactDetailInfo.setContactData(c.getContactData());
 			contactDetailInfo.setContactInfo(savedContactInfo);
-			contactDetailInfo.setContactType(basedataService.getOneContactType(c.getContactTypeId()));
+			contactDetailInfo.setContactType(basedataService.findOneContactType(c.getContactTypeId()));
 			contactDetailInfoRepository.save(contactDetailInfo);
 		});
 

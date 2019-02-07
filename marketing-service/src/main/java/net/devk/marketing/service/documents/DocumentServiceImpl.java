@@ -26,12 +26,12 @@ class DocumentServiceImpl implements DocumentService {
 	@Transactional
 	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file) {
 
-		String path = storageService.store(customerId, file);
 
 		CustomerDocument customerDocument = new CustomerDocument();
-		customerDocument.setCustomer(customerService.getOneCustomer(customerId));
+		customerDocument.setCustomer(customerService.findOneCustomer(customerId));
 		customerDocument.setDocumentName(file.getOriginalFilename());
-		customerDocument.setDocumentType(basedataService.getOneDocumentType(documentTypeId));
+		customerDocument.setDocumentType(basedataService.findOneDocumentType(documentTypeId));
+		String path = storageService.store(customerId, file);
 		customerDocument.setFilePath(path);
 		return customerDocumentRepository.save(customerDocument);
 	}

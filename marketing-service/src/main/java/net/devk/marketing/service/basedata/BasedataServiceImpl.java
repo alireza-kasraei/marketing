@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
 import net.devk.marketing.service.basedata.dto.BasedataDTO;
 import net.devk.marketing.service.basedata.dto.ContactTypeDTO;
@@ -20,6 +21,7 @@ import net.devk.marketing.service.model.DocumentType;
 import net.devk.marketing.service.model.OrganizationType;
 import net.devk.marketing.service.model.OwnershipType;
 import net.devk.marketing.service.model.RequirementStatusType;
+import net.devk.marketing.service.util.MessageUtils;
 
 @Service
 class BasedataServiceImpl implements BasedataService {
@@ -88,38 +90,45 @@ class BasedataServiceImpl implements BasedataService {
 	}
 
 	@Override
-	public BusinessScale getOneBusinessScale(Long id) {
-		return businessScaleRepository.getOne(id);
+	public BusinessScale findOneBusinessScale(Long id) {
+		return businessScaleRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "BusinessScale")));
 	}
 
 	@Override
-	public OwnershipType getOneOwnershipType(Long id) {
-		return ownershipTypeRepository.getOne(id);
+	public OwnershipType findOneOwnershipType(Long id) {
+		return ownershipTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "OwnershipType")));
 	}
 
 	@Override
-	public AttractionType getOneAttractionType(Long id) {
-		return attractionTypeRepository.getOne(id);
+	public AttractionType findOneAttractionType(Long id) {
+		return attractionTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "AttractionType")));
 	}
 
 	@Override
-	public ContactType getOneContactType(Long id) {
-		return contactTypeRepository.getOne(id);
+	public ContactType findOneContactType(Long id) {
+		return contactTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "ContactType")));
 	}
 
 	@Override
-	public ContactRole getOneContactRole(Long id) {
-		return contactRoleRepository.getOne(id);
+	public ContactRole findOneContactRole(Long id) {
+		return contactRoleRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "ContactRole")));
 	}
 
 	@Override
-	public DocumentType getOneDocumentType(Long id) {
-		return documentTypeRepository.getOne(id);
+	public DocumentType findOneDocumentType(Long id) {
+		return documentTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "DocumentType")));
 	}
 
 	@Override
-	public OrganizationType getOrganizationType(Long id) {
-		return organizationTypeRepository.getOne(id);
+	public OrganizationType findOrganizationType(Long id) {
+		return organizationTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "OrganizationType")));
 	}
 
 	@Override
@@ -133,8 +142,9 @@ class BasedataServiceImpl implements BasedataService {
 	}
 
 	@Override
-	public AssignedStatusType getAssignedStatusType(Long id) {
-		return assignedStatusTypeRepository.getOne(id);
+	public AssignedStatusType findAssignedStatusType(Long id) {
+		return assignedStatusTypeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+				MessageUtils.generateEntityNotFoundMessage(id, "AssignedStatusType")));
 	}
 
 }

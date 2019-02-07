@@ -1,7 +1,6 @@
 package net.devk.marketing.service.basedata;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
 import net.devk.marketing.service.model.AssignedStatusType;
 import net.devk.marketing.service.model.AttractionType;
@@ -21,44 +20,52 @@ public interface BasedataService {
 	public AggregatedBasedataDTO getAggregatedBasedata();
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the BusinessScale with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public BusinessScale getOneBusinessScale(Long id);
+	public BusinessScale findOneBusinessScale(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the ContactType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public ContactType getOneContactType(Long id);
+	public ContactType findOneContactType(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the ContactRole with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public ContactRole getOneContactRole(Long id);
+	public ContactRole findOneContactRole(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the OwnershipType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public OwnershipType getOneOwnershipType(Long id);
+	public OwnershipType findOneOwnershipType(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the AttractionType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public AttractionType getOneAttractionType(Long id);
+	public AttractionType findOneAttractionType(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the DocumentType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public DocumentType getOneDocumentType(Long id);
+	public DocumentType findOneDocumentType(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the OrganizationType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public OrganizationType getOrganizationType(Long id);
+	public OrganizationType findOrganizationType(Long id);
 
 	/**
-	 * @see JpaRepository#getOne(Object)
+	 * returns the AssignedStatusType with the given id or else throws
+	 * {@link EntityNotFoundException}
 	 */
-	public AssignedStatusType getAssignedStatusType(Long id);
+	public AssignedStatusType findAssignedStatusType(Long id);
 
 	public AttractionType findAttractionTypeByCode(String code);
 

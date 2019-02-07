@@ -41,7 +41,7 @@ public class BasedataServiceTests {
 	@Test
 	public void testGetExistingBusinessScale() {
 		// data.sql has items
-		BusinessScale businessScale = basedataService.getOneBusinessScale(1L);
+		BusinessScale businessScale = basedataService.findOneBusinessScale(1L);
 		assertNotNull(businessScale);
 	}
 
@@ -49,7 +49,7 @@ public class BasedataServiceTests {
 	@Transactional
 	public void testGetNonExistingBusinessScale() {
 		// data.sql has items
-		BusinessScale businessScale = basedataService.getOneBusinessScale(Long.MAX_VALUE);
+		BusinessScale businessScale = basedataService.findOneBusinessScale(Long.MAX_VALUE);
 		businessScale.getName();
 	}
 
