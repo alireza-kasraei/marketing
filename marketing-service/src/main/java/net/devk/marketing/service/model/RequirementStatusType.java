@@ -22,11 +22,14 @@ public class RequirementStatusType extends AbstractModel {
 	// TAARIFE NIAZ
 	public static final String REQUIREMENT_STATUS_STATUS1 = "RS1";
 
-	// DAR HALE TASVIB
+	// TAKHSISE NIAZ
 	public static final String REQUIREMENT_STATUS_STATUS2 = "RS2";
 
-	// EMZA
+	// DAR HALE EGHDAM
 	public static final String REQUIREMENT_STATUS_STATUS3 = "RS3";
+
+	// TAAMINE NIAZ
+	public static final String REQUIREMENT_STATUS_STATUS4 = "RS4";
 
 	private static final String REQUIREMENT_STATUS_TYPES_GENERATOR = "requirement_status_types_generator";
 

@@ -24,6 +24,8 @@ public class AttractionType extends AbstractModel {
 	public static final String ATTRACTION_TYPE_TYPE2 = "AT2";
 	// dar hale jazb
 	public static final String ATTRACTION_TYPE_TYPE3 = "AT3";
+	// jazb
+	public static final String ATTRACTION_TYPE_TYPE4 = "AT4";
 
 	private static final String ATTRACTION_TYPE_GENERATOR = "attraction_types_generator";
 
