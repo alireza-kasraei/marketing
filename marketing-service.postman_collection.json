@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "8cecc1f8-ac15-4db7-b29c-ad00e3d001dc",
+		"name": "marketing-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get New Token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{client-secret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{client-id}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client-secret}}",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client-id}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{oauth-url}}:{{oauth-port}}/uaa/oauth/token",
+					"protocol": "http",
+					"host": [
+						"{{oauth-url}}"
+					],
+					"port": "{{oauth-port}}",
+					"path": [
+						"uaa",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "gets new token from identity server"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						""
+					]
+				},
+				"description": "gets all customers , you can filter by name , by using name as query parameter"
+			},
+			"response": []
+		},
+		{
+			"name": "Get ContactInfo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b4612379-e117-4588-8ba3-9cb188f644c2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/contacts-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"contacts-info"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": ""
+						}
+					]
+				},
+				"description": "gets contact info for a customer with the given customerId"
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"customer1\",\n\t\"businessScaleId\":1,\n\t\"legal\":true,\n\t\"economicSection\":\"SECTION 1\",\n\t\"latitude\":\"4564664543\",\n\t\"longitude\":\"66541354\",\n\t\"address\":\"sample address\"\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Customer Document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"documents"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Customer-2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"economicCode\":\"CODE-1\",\n\t\"headCount\":12,\n\t\"ownershipTypeId\":1,\n\t\"organizationTypeId\":1,\n\t\"annualIncome\":8000000000\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new/:customerId",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						"new",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Requirement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"data\":[\n\t\t{\n\t\t\t\"targetMemberId\":1,\n\t\t\t\"estimatedValue\":500000,\n\t\t\t\"description\":\"sample requirement\"\n\t\t\t}\t\n\t\t]\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"requirements"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assign requirement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"koorosh01\",\n\t\"businessScaleId\":1,\n\t\"customerTypeId\":1,\n\t\"economicSection\":\"123\",\n\t\"latitude\":\"2342342\",\n\t\"longitude\":\"345345345\",\n\t\"address\":\"skjdhfksflsjflsjlsjfs\"\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/api/v1/requirements/:customerId/assign",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"api",
+						"v1",
+						"requirements",
+						":customerId",
+						"assign"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New ContactInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Mr. Shahbazi\",\n\t\"contactRoleId\":1,\n\t\"details\":[{\"contactTypeId\":1,\"contactData\":\"9287429328\"},{\"contactTypeId\":2,\"contactData\":\"2342342342\"}]\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/contacts-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"contacts-info"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add meeting",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subject\":\"hello\",\n\t\"scheduleDate\":null,\n\t\"contactInfoIds\":[3052],\n\t\"results\":[\"12ca\",\"asdasda\"]\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/meetings",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"meetings"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"documents"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customer Requirements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements?statusCode=RS1",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"requirements"
+					],
+					"query": [
+						{
+							"key": "statusCode",
+							"value": "RS1"
+						}
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chart statistics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/charts/target-member-statistics?targetMemberId=1",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"charts",
+						"target-member-statistics"
+					],
+					"query": [
+						{
+							"key": "targetMemberId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "targets",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/targets",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"targets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents/:fileName",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"documents",
+						":fileName"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						},
+						{
+							"key": "fileName",
+							"value": "3976-rc022-jpa_online.pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
