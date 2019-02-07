@@ -1,5 +1,6 @@
 package net.devk.marketing.service.documents;
 
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.model.CustomerDocument;
@@ -7,5 +8,7 @@ import net.devk.marketing.service.model.CustomerDocument;
 public interface DocumentService {
 
 	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file);
+
+	public Resource retrieveDocument(Long customerId, String fileName);
 
 }

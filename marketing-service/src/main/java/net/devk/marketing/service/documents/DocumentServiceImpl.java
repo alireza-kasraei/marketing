@@ -1,8 +1,7 @@
 package net.devk.marketing.service.documents;
 
-import java.nio.file.Path;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,14 +26,19 @@ class DocumentServiceImpl implements DocumentService {
 	@Transactional
 	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file) {
 
-		Path store = storageService.store(customerId, file);
+		String path = storageService.store(customerId, file);
 
 		CustomerDocument customerDocument = new CustomerDocument();
 		customerDocument.setCustomer(customerService.getOneCustomer(customerId));
 		customerDocument.setDocumentName(file.getOriginalFilename());
 		customerDocument.setDocumentType(basedataService.getOneDocumentType(documentTypeId));
-		customerDocument.setFilePath(store.toFile().getAbsolutePath());
+		customerDocument.setFilePath(path);
 		return customerDocumentRepository.save(customerDocument);
+	}
+
+	@Override
+	public Resource retrieveDocument(Long customerId, String fileName) {
+		return storageService.retreive(customerId, fileName);
 	}
 
 }

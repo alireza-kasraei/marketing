@@ -1,6 +1,7 @@
 package net.devk.marketing.service.documents;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,12 +9,17 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.config.FileStorageProperties;
 
+/**
+ * File based implementation of {@link StorageService}
+ */
 @Service
 public class FileStorageService implements StorageService {
 
@@ -25,7 +31,7 @@ public class FileStorageService implements StorageService {
 	}
 
 	@Override
-	public Path store(Long customerId, MultipartFile file) {
+	public String store(Long customerId, MultipartFile file) {
 
 		Objects.requireNonNull(customerId);
 
@@ -50,10 +56,27 @@ public class FileStorageService implements StorageService {
 			// Copy file to the target location (Replacing existing file with the same name)
 			Path targetLocation = fileStorageLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-
-			return targetLocation;
+			return targetLocation.toFile().getAbsolutePath();
 		} catch (IOException ex) {
 			throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+		}
+	}
+
+	@Override
+	public Resource retreive(Long customerId, String fileName) {
+		Objects.requireNonNull(fileName);
+		Path fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir(), customerId.toString())
+				.toAbsolutePath().normalize();
+		try {
+			Path filePath = fileStorageLocation.resolve(fileName).normalize();
+			Resource resource = new UrlResource(filePath.toUri());
+			if (resource.exists()) {
+				return resource;
+			} else {
+				throw new FileNotFoundException("File not found " + fileName);
+			}
+		} catch (MalformedURLException ex) {
+			throw new FileNotFoundException("File not found " + fileName, ex);
 		}
 	}
 
