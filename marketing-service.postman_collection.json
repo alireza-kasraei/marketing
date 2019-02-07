@@ -373,7 +373,7 @@
 					"raw": "{\n\t\n\t\"data\":[\n\t\t{\n\t\t\t\"targetMemberId\":1,\n\t\t\t\"estimatedValue\":500000,\n\t\t\t\"description\":\"sample requirement\"\n\t\t\t}\t\n\t\t]\n\t\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/12/requirements",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -384,14 +384,8 @@
 						"api",
 						"v1",
 						"customers",
-						":customerId",
+						"12",
 						"requirements"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -423,7 +417,7 @@
 					"raw": "{\n\t\"name\":\"koorosh01\",\n\t\"businessScaleId\":1,\n\t\"customerTypeId\":1,\n\t\"economicSection\":\"123\",\n\t\"latitude\":\"2342342\",\n\t\"longitude\":\"345345345\",\n\t\"address\":\"skjdhfksflsjflsjlsjfs\"\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/api/v1/requirements/:customerId/assign",
+					"raw": "http://{{service-url}}:{{service-port}}/api/v1/customers",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -432,15 +426,7 @@
 					"path": [
 						"api",
 						"v1",
-						"requirements",
-						":customerId",
-						"assign"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						}
+						"customers"
 					]
 				}
 			},
@@ -472,7 +458,7 @@
 					"raw": "{\n\t\"name\":\"Mr. Shahbazi\",\n\t\"contactRoleId\":1,\n\t\"details\":[{\"contactTypeId\":1,\"contactData\":\"9287429328\"},{\"contactTypeId\":2,\"contactData\":\"2342342342\"}]\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/contacts-info",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/4052/contacts-info",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -483,14 +469,8 @@
 						"api",
 						"v1",
 						"customers",
-						":customerId",
+						"4052",
 						"contacts-info"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": ""
-						}
 					]
 				}
 			},
@@ -499,22 +479,17 @@
 		{
 			"name": "add meeting",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 315e859e-acfa-44f1-b62a-6c091988b44b",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -522,7 +497,7 @@
 					"raw": "{\n\t\"subject\":\"hello\",\n\t\"scheduleDate\":null,\n\t\"contactInfoIds\":[3052],\n\t\"results\":[\"12ca\",\"asdasda\"]\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/meetings",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/4052/meetings",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -533,21 +508,15 @@
 						"api",
 						"v1",
 						"customers",
-						":customerId",
+						"4052",
 						"meetings"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "upload document",
+			"name": "add document",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -574,16 +543,60 @@
 							"key": "file",
 							"type": "file",
 							"src": ""
-						},
-						{
-							"key": "documentTypeId",
-							"value": "1",
-							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents",
+					"raw": "http://{{service-url}}:{{service-port}}/api/v1/customers/1/documents?file",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"documents"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Requirement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"data\":[\n\t\t{\n\t\t\t\"targetMemberId\":1,\n\t\t\t\"estimatedValue\":500000,\n\t\t\t\"description\":\"sample requirement\"\n\t\t\t}\t\n\t\t]\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/requireme",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -594,14 +607,7 @@
 						"api",
 						"v1",
 						"customers",
-						":customerId",
-						"documents"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						}
+						"requireme"
 					]
 				}
 			},
@@ -633,7 +639,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements?statusCode=RS1",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/1/requirements?statusCode=RS1",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -644,19 +650,13 @@
 						"api",
 						"v1",
 						"customers",
-						":customerId",
+						"1",
 						"requirements"
 					],
 					"query": [
 						{
 							"key": "statusCode",
 							"value": "RS1"
-						}
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
 						}
 					]
 				}
@@ -737,55 +737,6 @@
 						"api",
 						"v1",
 						"targets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "download document",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents/:fileName",
-					"protocol": "http",
-					"host": [
-						"{{service-url}}"
-					],
-					"port": "{{service-port}}",
-					"path": [
-						"ms",
-						"api",
-						"v1",
-						"customers",
-						":customerId",
-						"documents",
-						":fileName"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						},
-						{
-							"key": "fileName",
-							"value": "3976-rc022-jpa_online.pdf"
-						}
 					]
 				}
 			},
