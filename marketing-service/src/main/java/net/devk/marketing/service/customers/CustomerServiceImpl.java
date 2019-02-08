@@ -36,7 +36,7 @@ class CustomerServiceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer createCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
+	public Customer createNewCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
 			String latitude, String longitude, String address, String username) {
 
 		final Date now = DateUtils.now();
@@ -63,7 +63,7 @@ class CustomerServiceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer updateCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
+	public Customer updateNewCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
 			Long organizationTypeId, Long annualIncome) {
 
 		Customer customer = findOneCustomer(customerId);
@@ -100,6 +100,23 @@ class CustomerServiceImpl implements CustomerService {
 	@Override
 	public CustomerFindOneQueryResultDTO findCustomerQueryResultById(Long customerId) {
 		return customerRepository.findCustomerQueryResultById(customerId);
+	}
+
+	@Override
+	public Customer updateCustomer(Long customerId, String name, Long businessScaleId, boolean legal,
+			String economicSection, String economicCode, Integer headCount, Long ownershipTypeId,
+			Long organizationTypeId, Long annualIncome) {
+		Customer customer = findOneCustomer(customerId);
+		customer.setName(name);
+		customer.setBusinessScale(basedataService.findOneBusinessScale(businessScaleId));
+		customer.setLegal(legal);
+		customer.setEconomicSection(economicSection);
+		customer.setEconomicCode(economicCode);
+		customer.setHeadCount(headCount);
+		customer.setOwnershipType(basedataService.findOneOwnershipType(ownershipTypeId));
+		customer.setOrganizationType(basedataService.findOneOrganizationType(organizationTypeId));
+		customer.setAnnualIncome(annualIncome);
+		return customerRepository.save(customer);
 	}
 
 }

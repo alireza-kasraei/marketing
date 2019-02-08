@@ -22,7 +22,7 @@ public interface CustomerService {
 	 * @param username
 	 * @return
 	 */
-	public Customer createCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
+	public Customer createNewCustomer(String name, Long businessScaleId, boolean legal, String economicSection,
 			String latitude, String longitude, String address, String username);
 
 	/**
@@ -36,7 +36,11 @@ public interface CustomerService {
 	 * @param annualIncome
 	 * @return
 	 */
-	public Customer updateCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
+	public Customer updateNewCustomer(Long customerId, String economicCode, Integer headCount, Long ownershipTypeId,
+			Long organizationTypeId, Long annualIncome);
+
+	public Customer updateCustomer(Long customerId, String name, Long businessScaleId, boolean legal,
+			String economicSection, String economicCode, Integer headCount, Long ownershipTypeId,
 			Long organizationTypeId, Long annualIncome);
 
 	/**

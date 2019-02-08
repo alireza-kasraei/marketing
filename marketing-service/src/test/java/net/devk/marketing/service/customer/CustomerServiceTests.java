@@ -28,11 +28,11 @@ public class CustomerServiceTests {
 	@Transactional
 	public void testSaveCustomer() {
 		// data.sql
-		Customer customer = customerService.createCustomer("DUMMY CUSTOMER", 1L, true, "ye sectione khoob", "123231231",
+		Customer customer = customerService.createNewCustomer("DUMMY CUSTOMER", 1L, true, "ye sectione khoob", "123231231",
 				"43453453453", "dfggdfgd", "admin");
 		Assert.assertNotNull(customer.getId());
 		Assert.assertEquals(RegistrationStatus.EARLY, customer.getRegistrationStatus());
-		customerService.updateCustomer(customer.getId(), "ye code khoob", 12, 1L, 1L, 123454321L);
+		customerService.updateNewCustomer(customer.getId(), "ye code khoob", 12, 1L, 1L, 123454321L);
 		Assert.assertEquals(RegistrationStatus.FINISHED, customer.getRegistrationStatus());
 	}
 

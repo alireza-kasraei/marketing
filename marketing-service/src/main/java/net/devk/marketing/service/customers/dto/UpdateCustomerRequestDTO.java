@@ -7,6 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UpdateCustomerRequestDTO {
 
+	private final String name;
+	private final Long businessScaleId;
+	private final boolean legal;
+	private final String economicSection;
 	private final String economicCode;
 	private final Integer headCount;
 	private final Long ownershipTypeId;

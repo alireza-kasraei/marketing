@@ -147,4 +147,10 @@ class BasedataServiceImpl implements BasedataService {
 				MessageUtils.generateEntityNotFoundMessage(id, "AssignedStatusType")));
 	}
 
+	@Override
+	public OrganizationType findOneOrganizationType(Long id) {
+		return organizationTypeRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "OrganizationType")));
+	}
+
 }

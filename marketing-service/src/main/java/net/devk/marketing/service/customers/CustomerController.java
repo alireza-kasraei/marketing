@@ -20,6 +20,7 @@ import net.devk.marketing.service.customers.dto.CreateNewCustomerResponseDTO;
 import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.customers.dto.CustomerFindOneQueryResultDTO;
 import net.devk.marketing.service.customers.dto.UpdateCustomerRequestDTO;
+import net.devk.marketing.service.customers.dto.UpdateNewCustomerRequestDTO;
 import net.devk.marketing.service.model.Customer;
 
 @RestController
@@ -37,7 +38,7 @@ public class CustomerController {
 	public ResponseEntity<CreateNewCustomerResponseDTO> createNewCustomer(
 			@RequestBody CreateNewCustomerRequestDTO createNewCustomerRequestDTO, Principal principal) {
 
-		Customer customer = customerService.createCustomer(createNewCustomerRequestDTO.getName(),
+		Customer customer = customerService.createNewCustomer(createNewCustomerRequestDTO.getName(),
 				createNewCustomerRequestDTO.getBusinessScaleId(), createNewCustomerRequestDTO.isLegal(),
 				createNewCustomerRequestDTO.getEconomicSection(), createNewCustomerRequestDTO.getLatitude(),
 				createNewCustomerRequestDTO.getLongitude(), createNewCustomerRequestDTO.getAddress(),
@@ -47,9 +48,20 @@ public class CustomerController {
 
 	@RequestMapping(path = NEW_CUSTOMER_ENDPOINT
 			+ "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateNewCustomer(@RequestBody UpdateNewCustomerRequestDTO updateCustomerRequestDTO,
+			@PathVariable(name = "id") Long customerId) {
+		customerService.updateNewCustomer(customerId, updateCustomerRequestDTO.getEconomicCode(),
+				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
+				updateCustomerRequestDTO.getOrganizationTypeId(), updateCustomerRequestDTO.getAnnualIncome());
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(path = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO,
 			@PathVariable(name = "id") Long customerId) {
-		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getEconomicCode(),
+		customerService.updateCustomer(customerId, updateCustomerRequestDTO.getName(),
+				updateCustomerRequestDTO.getBusinessScaleId(), updateCustomerRequestDTO.isLegal(),
+				updateCustomerRequestDTO.getEconomicSection(), updateCustomerRequestDTO.getEconomicCode(),
 				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
 				updateCustomerRequestDTO.getOrganizationTypeId(), updateCustomerRequestDTO.getAnnualIncome());
 		return ResponseEntity.noContent().build();

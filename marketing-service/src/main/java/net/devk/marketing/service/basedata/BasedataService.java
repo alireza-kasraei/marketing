@@ -43,6 +43,8 @@ public interface BasedataService {
 	 */
 	public OwnershipType findOneOwnershipType(Long id);
 
+	public OrganizationType findOneOrganizationType(Long id);
+
 	/**
 	 * returns the AttractionType with the given id or else throws
 	 * {@link EntityNotFoundException}
