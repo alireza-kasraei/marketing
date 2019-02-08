@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
 import net.devk.marketing.service.customers.CustomerService;
+import net.devk.marketing.service.meetings.MeetingService;
 import net.devk.marketing.service.model.ContactDetailInfo;
 import net.devk.marketing.service.model.ContactInfo;
 import net.devk.marketing.service.model.Customer;
+import net.devk.marketing.service.util.MessageUtils;
 
 @Service
 class ContactsServiceImpl implements ContactService {
@@ -32,6 +35,9 @@ class ContactsServiceImpl implements ContactService {
 
 	@Autowired
 	private BasedataService basedataService;
+
+	@Autowired
+	private MeetingService meetingService;
 
 	@Override
 	@Transactional
@@ -87,6 +93,26 @@ class ContactsServiceImpl implements ContactService {
 	@Override
 	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfoId) {
 		return contactDetailInfoRepository.findContactDetailInfoByContactInfoId(contactInfoId);
+	}
+
+	@Override
+	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name) {
+		ContactInfo contactInfo = contactInfoRepository.findById(contactInfoId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						MessageUtils.generateEntityNotFoundMessage(contactInfoId, "ContactInfo")));
+		contactInfo.setName(name);
+		contactInfo.setRole(basedataService.findOneContactRole(contactRoleId));
+		return contactInfoRepository.save(contactInfo);
+	}
+
+	@Override
+	public void deleteContactInfo(Long contactInfoId) {
+		Long meetings = contactInfoRepository.countMeetings(contactInfoId);
+		if (meetings.longValue() == 0) {
+			contactInfoRepository.deleteById(contactInfoId);
+		} else
+			throw new IllegalArgumentException(String
+					.format("could not delete contact info with id %d ,because it has some meetings", contactInfoId));
 	}
 
 }

@@ -7,6 +7,6 @@ import net.devk.marketing.service.model.Meeting;
 
 public interface MeetingService {
 
-	public Meeting createMeeting(Date scheduleDate, String subject, Set<Long> contactInfoIds,Set<String> results);
+	public Meeting createMeeting(Date scheduleDate, String subject, Set<Long> contactInfoIds, Set<String> results);
 
 }

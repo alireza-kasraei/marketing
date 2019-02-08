@@ -15,6 +15,10 @@ public interface ContactService {
 
 	public ContactInfoQueryResultDTO findContactInfo(Long contactInfo);
 
+	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name);
+
+	public void deleteContactInfo(Long contactInfoId);
+
 	public List<ContactInfoQueryResultDTO> findAllContactsInfo(Long customerId);
 
 	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfo);

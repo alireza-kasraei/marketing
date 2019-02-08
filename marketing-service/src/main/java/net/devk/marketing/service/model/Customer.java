@@ -63,6 +63,7 @@ public class Customer extends AbstractModel {
 	@Column(name = "USER_NAME")
 	private String username;
 
+	@EqualsAndHashCode.Exclude
 	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private CustomerAddress address;
 
