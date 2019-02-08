@@ -19,6 +19,7 @@ import net.devk.marketing.service.customers.dto.CreateNewCustomerRequestDTO;
 import net.devk.marketing.service.customers.dto.CreateNewCustomerResponseDTO;
 import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
 import net.devk.marketing.service.customers.dto.CustomerFindOneQueryResultDTO;
+import net.devk.marketing.service.customers.dto.UpdateCustomerAddressRequestDTO;
 import net.devk.marketing.service.customers.dto.UpdateCustomerRequestDTO;
 import net.devk.marketing.service.customers.dto.UpdateNewCustomerRequestDTO;
 import net.devk.marketing.service.model.Customer;
@@ -64,6 +65,15 @@ public class CustomerController {
 				updateCustomerRequestDTO.getEconomicSection(), updateCustomerRequestDTO.getEconomicCode(),
 				updateCustomerRequestDTO.getHeadCount(), updateCustomerRequestDTO.getOwnershipTypeId(),
 				updateCustomerRequestDTO.getOrganizationTypeId(), updateCustomerRequestDTO.getAnnualIncome());
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(path = "/{id}/address", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateCustomerAddress(
+			@RequestBody UpdateCustomerAddressRequestDTO updateCustomerAddressRequestDTO,
+			@PathVariable(name = "id") Long customerId) {
+		customerService.updateCustomerAddress(customerId, updateCustomerAddressRequestDTO.getAddress(),
+				updateCustomerAddressRequestDTO.getLatitude(), updateCustomerAddressRequestDTO.getLongitude());
 		return ResponseEntity.noContent().build();
 	}
 

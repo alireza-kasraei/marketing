@@ -119,4 +119,15 @@ class CustomerServiceImpl implements CustomerService {
 		return customerRepository.save(customer);
 	}
 
+	@Override
+	public CustomerAddress updateCustomerAddress(Long customerId, String address, String latitude, String longitude) {
+		CustomerAddress customerAddress = customerAddressRepository.findByCustomerId(customerId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						MessageUtils.generateEntityNotFoundMessage(customerId, "CustomerAddress")));
+		customerAddress.setAddress(address);
+		customerAddress.setLatitude(latitude);
+		customerAddress.setLongitude(longitude);
+		return customerAddressRepository.save(customerAddress);
+	}
+
 }
