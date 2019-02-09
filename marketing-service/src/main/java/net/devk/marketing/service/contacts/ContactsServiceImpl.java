@@ -86,8 +86,8 @@ class ContactsServiceImpl implements ContactService {
 	}
 
 	@Override
-	public ContactInfo getOneContactInfo(Long contactInfo) {
-		return contactInfoRepository.getOne(contactInfo);
+	public ContactInfo findOneContactInfo(Long contactInfo) {
+		return contactInfoRepository.findById(contactInfo).orElseThrow(()-> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(contactInfo, "ContactInfo")));
 	}
 
 	@Override
@@ -111,7 +111,7 @@ class ContactsServiceImpl implements ContactService {
 		if (meetings.longValue() == 0) {
 			contactInfoRepository.deleteById(contactInfoId);
 		} else
-			throw new IllegalArgumentException(String
+			throw new ContactInfoDeleteException(String
 					.format("could not delete contact info with id %d ,because it has some meetings", contactInfoId));
 	}
 

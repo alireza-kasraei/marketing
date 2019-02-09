@@ -23,6 +23,6 @@ public interface ContactService {
 
 	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfo);
 
-	public ContactInfo getOneContactInfo(Long contactInfo);
+	public ContactInfo findOneContactInfo(Long contactInfo);
 
 }

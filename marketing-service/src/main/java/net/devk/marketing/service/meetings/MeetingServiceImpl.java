@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.contacts.ContactService;
+import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.model.ContactInfo;
 import net.devk.marketing.service.model.Meeting;
 import net.devk.marketing.service.model.MeetingResult;
+import net.devk.marketing.service.util.MessageUtils;
 
 @Service
 class MeetingServiceImpl implements MeetingService {
@@ -25,13 +28,18 @@ class MeetingServiceImpl implements MeetingService {
 	@Autowired
 	private ContactService contactService;
 
+	@Autowired
+	private CustomerService customerService;
+
 	@Override
 	@Transactional
-	public Meeting createMeeting(Date scheduleDate, String subject, Set<Long> contactInfoIds, Set<String> results) {
+	public Meeting createMeeting(Long customerId, Date scheduleDate, String subject, Set<Long> contactInfoIds,
+			Set<String> results) {
 		Meeting meeting = new Meeting();
 		meeting.setSubject(subject);
 		meeting.setScheduleDate(scheduleDate);
-		Set<ContactInfo> contactInfos = contactInfoIds.stream().map(id -> contactService.getOneContactInfo(id))
+		meeting.setCustomer(customerService.findOneCustomer(customerId));
+		Set<ContactInfo> contactInfos = contactInfoIds.stream().map(id -> contactService.findOneContactInfo(id))
 				.collect(Collectors.toSet());
 		meeting.getContactInfos().addAll(contactInfos);
 		final Meeting savedMeeting = meetingRepository.save(meeting);
@@ -44,6 +52,30 @@ class MeetingServiceImpl implements MeetingService {
 		}).forEach(m -> meetingResultRepository.save(m));
 
 		return savedMeeting;
+	}
+
+	@Transactional
+	@Override
+	public void updateMeeting(Long meetingId, Date scheduleDate, String subject) {
+		meetingRepository.updateMeeting(meetingId, scheduleDate, subject);
+	}
+
+	@Override
+	public Meeting findOneById(Long meetingId) {
+		return meetingRepository.findById(meetingId).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(meetingId, "Meeting")));
+	}
+
+	@Transactional
+	@Override
+	public void addMeetingResult(Long meetingId, Set<String> results) {
+		Meeting meeting = findOneById(meetingId);
+		results.stream().map(s -> {
+			MeetingResult meetingResult = new MeetingResult();
+			meetingResult.setMeeting(meeting);
+			meetingResult.setDescription(s);
+			return meetingResult;
+		}).forEach(m -> meetingResultRepository.save(m));
 	}
 
 }

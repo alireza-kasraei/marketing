@@ -28,7 +28,7 @@ public class CustomerMeetingController {
 			@RequestBody CreateNewMeetingRequestDTO createNewMeetingRequestDTO,
 			@PathVariable(name = "id", required = true) Long customerId) {
 
-		Meeting meeting = meetingService.createMeeting(createNewMeetingRequestDTO.getScheduleDate(),
+		Meeting meeting = meetingService.createMeeting(customerId, createNewMeetingRequestDTO.getScheduleDate(),
 				createNewMeetingRequestDTO.getSubject(), createNewMeetingRequestDTO.getContactInfoIds(),
 				createNewMeetingRequestDTO.getResults());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CreateNewMeetingResponseDTO(meeting.getId()));
