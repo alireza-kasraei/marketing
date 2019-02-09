@@ -167,5 +167,6 @@ services:
       
 volumes:
   db-data:
+  uploads:
 networks:
   marketing-cloud:

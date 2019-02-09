@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-EXPOSE 8085
+VOLUME /uploads
+#EXPOSE 8085
 ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF

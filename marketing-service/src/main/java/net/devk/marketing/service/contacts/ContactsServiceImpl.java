@@ -87,7 +87,8 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	public ContactInfo findOneContactInfo(Long contactInfo) {
-		return contactInfoRepository.findById(contactInfo).orElseThrow(()-> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(contactInfo, "ContactInfo")));
+		return contactInfoRepository.findById(contactInfo).orElseThrow(() -> new EntityNotFoundException(
+				MessageUtils.generateEntityNotFoundMessage(contactInfo, "ContactInfo")));
 	}
 
 	@Override
@@ -103,6 +104,17 @@ class ContactsServiceImpl implements ContactService {
 		contactInfo.setName(name);
 		contactInfo.setRole(basedataService.findOneContactRole(contactRoleId));
 		return contactInfoRepository.save(contactInfo);
+	}
+
+	@Override
+	public ContactDetailInfo updateContactInfoDetails(Long contactDetailInfoId, String contactDate,
+			Long contactTypeId) {
+		ContactDetailInfo contactDetailInfo = contactDetailInfoRepository.findById(contactDetailInfoId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						MessageUtils.generateEntityNotFoundMessage(contactDetailInfoId, "ContactDetailInfo")));
+		contactDetailInfo.setContactData(contactDate);
+		contactDetailInfo.setContactType(basedataService.findOneContactType(contactTypeId));
+		return contactDetailInfoRepository.save(contactDetailInfo);
 	}
 
 	@Override

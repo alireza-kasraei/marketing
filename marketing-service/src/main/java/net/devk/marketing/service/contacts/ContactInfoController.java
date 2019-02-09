@@ -13,8 +13,8 @@ import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.UpdateContactInfoRequestDTO;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + ContactController.CONTACTS_INFO_ENDPOINT)
-public class ContactController {
+@RequestMapping(path = ControllersConfig.API_PREFIX + ContactInfoController.CONTACTS_INFO_ENDPOINT)
+public class ContactInfoController {
 
 	static final String CONTACTS_INFO_ENDPOINT = "/contacts-info";
 	@Autowired

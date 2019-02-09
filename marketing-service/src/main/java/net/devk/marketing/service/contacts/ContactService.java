@@ -6,6 +6,7 @@ import java.util.List;
 import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
+import net.devk.marketing.service.model.ContactDetailInfo;
 import net.devk.marketing.service.model.ContactInfo;
 
 public interface ContactService {
@@ -24,5 +25,7 @@ public interface ContactService {
 	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfo);
 
 	public ContactInfo findOneContactInfo(Long contactInfo);
+
+	public ContactDetailInfo updateContactInfoDetails(Long contactDetailInfoId, String contactDate, Long contactTypeId);
 
 }
