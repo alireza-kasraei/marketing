@@ -4,17 +4,17 @@ import java.util.Collection;
 import java.util.List;
 
 import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
+import net.devk.marketing.service.contacts.dto.ContactDetailInfoRequestDTO;
 import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
-import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
 import net.devk.marketing.service.model.ContactDetailInfo;
 import net.devk.marketing.service.model.ContactInfo;
 
 public interface ContactService {
 
 	public ContactInfo createContactInfo(Long customerId, Long contactRoleId, String name,
-			Collection<ContactTypeRequestDTO> contactTypes);
+			Collection<ContactDetailInfoRequestDTO> contactTypes);
 
-	public ContactInfoQueryResultDTO findContactInfo(Long contactInfo);
+	public ContactInfoQueryResultDTO findContactInfoDTO(Long contactInfo);
 
 	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name);
 
@@ -26,6 +26,12 @@ public interface ContactService {
 
 	public ContactInfo findOneContactInfo(Long contactInfo);
 
-	public ContactDetailInfo updateContactInfoDetails(Long contactDetailInfoId, String contactDate, Long contactTypeId);
+	public ContactDetailInfo updateContactDetailInfo(Long contactDetailInfoId, String contactData, Long contactTypeId);
+
+	public void addContactDetailInfo(Long contactInfoId, String contactData, Long contactTypeId);
+
+	public void addContactDetailInfo(Long contactInfoId, Collection<ContactDetailInfoRequestDTO> details);
+
+	public void deleteContactDetailInfo(Long contactDetailInfoId);
 
 }

@@ -10,7 +10,7 @@ import net.devk.marketing.service.model.ContactDetailInfo;
 
 interface ContactDetailInfoRepository extends JpaRepository<ContactDetailInfo, Long> {
 
-	@Query("select new net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO(c.id,cdi.contactData,ct.id,ct.name,ct.category) from ContactDetailInfo cdi join cdi.contactInfo c join cdi.contactType ct where c.id=?1")
+	@Query("select new net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO(c.id,cdi.id,cdi.contactData,ct.id,ct.name,ct.category) from ContactDetailInfo cdi join cdi.contactInfo c join cdi.contactType ct where c.id=?1")
 	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfoByContactInfoId(Long contactInfoId);
 
 }

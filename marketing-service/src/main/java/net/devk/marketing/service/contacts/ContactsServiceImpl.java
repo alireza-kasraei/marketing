@@ -2,7 +2,6 @@ package net.devk.marketing.service.contacts;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.contacts.dto.ContactDetailInfoQueryResultDTO;
+import net.devk.marketing.service.contacts.dto.ContactDetailInfoRequestDTO;
 import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
-import net.devk.marketing.service.contacts.dto.ContactTypeRequestDTO;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.meetings.MeetingService;
 import net.devk.marketing.service.model.ContactDetailInfo;
@@ -42,7 +41,7 @@ class ContactsServiceImpl implements ContactService {
 	@Override
 	@Transactional
 	public ContactInfo createContactInfo(Long customerId, Long contactRoleId, String name,
-			Collection<ContactTypeRequestDTO> contactTypes) {
+			Collection<ContactDetailInfoRequestDTO> contactTypes) {
 
 		Customer customer = customerService.findOneCustomer(customerId);
 
@@ -65,10 +64,8 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	@Transactional
-	public ContactInfoQueryResultDTO findContactInfo(Long contactInfoId) {
-		Optional<ContactInfo> contactInfoOptional = contactInfoRepository.findById(contactInfoId);
-		// TODO FIXME
-		ContactInfo contactInfo = contactInfoOptional.orElseThrow(() -> new RuntimeException("ContactInfo not found"));
+	public ContactInfoQueryResultDTO findContactInfoDTO(Long contactInfoId) {
+		ContactInfo contactInfo = findOneContactInfo(contactInfoId);
 		List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfo(contactInfoId);
 		// TODO FIXME here we have unnecessary additional query for contact role
 		return new ContactInfoQueryResultDTO(contactInfoId, contactInfo.getName(), contactInfo.getRole().getName(),
@@ -98,6 +95,7 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name) {
+		// TODO FIXME replace with one update query
 		ContactInfo contactInfo = contactInfoRepository.findById(contactInfoId)
 				.orElseThrow(() -> new EntityNotFoundException(
 						MessageUtils.generateEntityNotFoundMessage(contactInfoId, "ContactInfo")));
@@ -107,8 +105,8 @@ class ContactsServiceImpl implements ContactService {
 	}
 
 	@Override
-	public ContactDetailInfo updateContactInfoDetails(Long contactDetailInfoId, String contactDate,
-			Long contactTypeId) {
+	public ContactDetailInfo updateContactDetailInfo(Long contactDetailInfoId, String contactDate, Long contactTypeId) {
+		// TODO FIXME replace with one update query
 		ContactDetailInfo contactDetailInfo = contactDetailInfoRepository.findById(contactDetailInfoId)
 				.orElseThrow(() -> new EntityNotFoundException(
 						MessageUtils.generateEntityNotFoundMessage(contactDetailInfoId, "ContactDetailInfo")));
@@ -125,6 +123,29 @@ class ContactsServiceImpl implements ContactService {
 		} else
 			throw new ContactInfoDeleteException(String
 					.format("could not delete contact info with id %d ,because it has some meetings", contactInfoId));
+	}
+
+	@Override
+	public void addContactDetailInfo(Long contactInfoId, String contactData, Long contactTypeId) {
+		ContactInfo contactInfo = findOneContactInfo(contactInfoId);
+		ContactDetailInfo contactDetailInfo = new ContactDetailInfo();
+		contactDetailInfo.setContactInfo(contactInfo);
+		contactDetailInfo.setContactData(contactData);
+		contactDetailInfo.setContactType(basedataService.findOneContactType(contactTypeId));
+		contactDetailInfoRepository.save(contactDetailInfo);
+	}
+
+	@Transactional
+	@Override
+	public void addContactDetailInfo(Long contactInfoId, Collection<ContactDetailInfoRequestDTO> details) {
+		details.forEach((c) -> {
+			addContactDetailInfo(contactInfoId, c.getContactData(), c.getContactTypeId());
+		});
+	}
+
+	@Override
+	public void deleteContactDetailInfo(Long contactDetailInfoId) {
+		contactDetailInfoRepository.deleteById(contactDetailInfoId);
 	}
 
 }

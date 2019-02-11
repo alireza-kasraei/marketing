@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
+import net.devk.marketing.service.contacts.dto.AddContactDetailInfoRequestDTO;
 import net.devk.marketing.service.contacts.dto.ContactInfoQueryResultDTO;
 import net.devk.marketing.service.contacts.dto.UpdateContactInfoRequestDTO;
 
@@ -22,7 +23,7 @@ public class ContactInfoController {
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ContactInfoQueryResultDTO> getContactInfo(@PathVariable(name = "id") Long contactInfoId) {
-		return ResponseEntity.ok(contactService.findContactInfo(contactInfoId));
+		return ResponseEntity.ok(contactService.findContactInfoDTO(contactInfoId));
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)
@@ -30,6 +31,13 @@ public class ContactInfoController {
 			@RequestBody UpdateContactInfoRequestDTO updateContactInfoRequestDTO) {
 		contactService.updateContactInfo(contactInfoId, updateContactInfoRequestDTO.getContactRoleId(),
 				updateContactInfoRequestDTO.getName());
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(path = "/{id}/contact-detail-info", method = RequestMethod.POST)
+	public ResponseEntity<?> addContactDetailInfo(@PathVariable(name = "id") Long contactInfoId,
+			@RequestBody AddContactDetailInfoRequestDTO addContactDetailInfoRequestDTO) {
+		contactService.addContactDetailInfo(contactInfoId, addContactDetailInfoRequestDTO.getDetails());
 		return ResponseEntity.noContent().build();
 	}
 

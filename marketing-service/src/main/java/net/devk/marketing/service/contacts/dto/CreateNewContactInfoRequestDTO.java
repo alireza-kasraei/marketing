@@ -12,6 +12,6 @@ public class CreateNewContactInfoRequestDTO {
 	private final String name;
 	private final Long contactRoleId;
 
-	private final Collection<ContactTypeRequestDTO> details;
+	private final Collection<ContactDetailInfoRequestDTO> details;
 
 }

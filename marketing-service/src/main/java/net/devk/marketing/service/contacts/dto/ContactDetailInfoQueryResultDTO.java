@@ -9,6 +9,7 @@ import net.devk.marketing.service.model.ContactCategory;
 public class ContactDetailInfoQueryResultDTO {
 
 	private final Long contactInfoId;
+	private final Long contactDetailInfoId;
 	private final String contactData;
 	private final Long contactTypeId;
 	private final String contactTypeName;
