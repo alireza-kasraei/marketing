@@ -28,6 +28,11 @@ public class MeetingController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(path = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findMeeting(@PathVariable(name = "id", required = true) Long meetingId) {
+		return ResponseEntity.ok(meetingService.findMeetingById(meetingId));
+	}
+
 	@RequestMapping(path = "{id}/results", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addMeetingResults(@RequestBody AddNewMeetingResults addNewMeetingResults,
 			@PathVariable(name = "id", required = true) Long meetingId) {

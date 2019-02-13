@@ -13,6 +13,9 @@ import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.contacts.ContactService;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.meetings.dto.CustomerMeetingListDTO;
+import net.devk.marketing.service.meetings.dto.MeetingContactInfosDTO;
+import net.devk.marketing.service.meetings.dto.MeetingQueryResultDTO;
+import net.devk.marketing.service.meetings.dto.MeetingResultDTO;
 import net.devk.marketing.service.model.ContactInfo;
 import net.devk.marketing.service.model.Meeting;
 import net.devk.marketing.service.model.MeetingResult;
@@ -82,7 +85,17 @@ class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public List<CustomerMeetingListDTO> findMeetings(Long customerId) {
-		return meetingRepository.findMeetings(customerId);
+		return meetingRepository.findMeetingsByCustomerId(customerId);
+	}
+
+	@Override
+	public MeetingQueryResultDTO findMeetingById(Long meetingId) {
+		MeetingQueryResultDTO meetingQueryResultDTO = meetingRepository.findOneMeeting(meetingId);
+		List<MeetingResultDTO> meetingResults = meetingResultRepository.findMeetingResults(meetingId);
+		List<MeetingContactInfosDTO> contactInfos = meetingRepository.findContactInfosByMeetingId(meetingId);
+		meetingQueryResultDTO.setContactInfos(contactInfos);
+		meetingQueryResultDTO.setMeetingResults(meetingResults);
+		return meetingQueryResultDTO;
 	}
 
 }
