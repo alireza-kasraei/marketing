@@ -1,5 +1,7 @@
 package net.devk.marketing.service.documents;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
+import net.devk.marketing.service.documents.dto.CustomerDocumentListDTO;
 import net.devk.marketing.service.model.CustomerDocument;
 
 @Service
@@ -26,7 +29,6 @@ class DocumentServiceImpl implements DocumentService {
 	@Transactional
 	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file) {
 
-
 		CustomerDocument customerDocument = new CustomerDocument();
 		customerDocument.setCustomer(customerService.findOneCustomer(customerId));
 		customerDocument.setDocumentName(file.getOriginalFilename());
@@ -39,6 +41,11 @@ class DocumentServiceImpl implements DocumentService {
 	@Override
 	public Resource retrieveDocument(Long customerId, String fileName) {
 		return storageService.retreive(customerId, fileName);
+	}
+
+	@Override
+	public List<CustomerDocumentListDTO> getFiles(Long customerId) {
+		return customerDocumentRepository.getFiles(customerId);
 	}
 
 }

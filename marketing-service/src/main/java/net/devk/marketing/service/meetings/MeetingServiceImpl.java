@@ -1,6 +1,7 @@
 package net.devk.marketing.service.meetings;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.contacts.ContactService;
 import net.devk.marketing.service.customers.CustomerService;
+import net.devk.marketing.service.meetings.dto.CustomerMeetingListDTO;
 import net.devk.marketing.service.model.ContactInfo;
 import net.devk.marketing.service.model.Meeting;
 import net.devk.marketing.service.model.MeetingResult;
@@ -76,6 +78,11 @@ class MeetingServiceImpl implements MeetingService {
 			meetingResult.setDescription(s);
 			return meetingResult;
 		}).forEach(m -> meetingResultRepository.save(m));
+	}
+
+	@Override
+	public List<CustomerMeetingListDTO> findMeetings(Long customerId) {
+		return meetingRepository.findMeetings(customerId);
 	}
 
 }

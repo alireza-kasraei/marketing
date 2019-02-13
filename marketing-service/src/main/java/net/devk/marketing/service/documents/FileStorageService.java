@@ -1,5 +1,6 @@
 package net.devk.marketing.service.documents;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -56,7 +57,7 @@ public class FileStorageService implements StorageService {
 			// Copy file to the target location (Replacing existing file with the same name)
 			Path targetLocation = fileStorageLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			return targetLocation.toFile().getAbsolutePath();
+			return fileStorageLocation.getFileName().toString() + "/" + fileName;
 		} catch (IOException ex) {
 			throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
 		}
@@ -77,6 +78,23 @@ public class FileStorageService implements StorageService {
 			}
 		} catch (MalformedURLException ex) {
 			throw new FileNotFoundException("File not found " + fileName, ex);
+		}
+	}
+
+	@Override
+	public Resource retreive(String filePath) {
+		Objects.requireNonNull(filePath);
+		Path fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir(), filePath).toAbsolutePath()
+				.normalize();
+		try {
+			Resource resource = new UrlResource(fileStorageLocation.toUri());
+			if (resource.exists()) {
+				return resource;
+			} else {
+				throw new FileNotFoundException("File not found " + filePath);
+			}
+		} catch (MalformedURLException ex) {
+			throw new FileNotFoundException("File not found " + filePath, ex);
 		}
 	}
 

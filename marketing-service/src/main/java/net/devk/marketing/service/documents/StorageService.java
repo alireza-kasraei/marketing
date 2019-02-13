@@ -13,4 +13,6 @@ public interface StorageService {
 
 	public Resource retreive(Long customerId, String fileName);
 
+	public Resource retreive(String filePath);
+
 }

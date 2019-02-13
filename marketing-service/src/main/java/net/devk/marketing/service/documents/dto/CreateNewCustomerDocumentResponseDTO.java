@@ -2,17 +2,18 @@ package net.devk.marketing.service.documents.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateNewCustomerDocumentResponseDTO {
 
-	private Long customerDocumentId;
-	private Date registerDate;
-	private String documentName;
-	private Long documentTypeId;
-	private Long customerId;
+	private final Long customerDocumentId;
+	private final Date registerDate;
+	private final String documentName;
+	private final String path;
+	private final Long documentTypeId;
+	private final Long customerId;
 
 }

@@ -1,6 +1,7 @@
 package net.devk.marketing.service.documents;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.documents.dto.CreateNewCustomerDocumentResponseDTO;
+import net.devk.marketing.service.documents.dto.CustomerDocumentListDTO;
 import net.devk.marketing.service.model.CustomerDocument;
 
 @RestController
@@ -41,12 +43,19 @@ public class CustomerDocumentController {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(new CreateNewCustomerDocumentResponseDTO(customerDocument.getId(),
 						customerDocument.getRegisterDate(), customerDocument.getDocumentName(),
-						customerDocument.getDocumentType().getId(), customerId));
+						customerDocument.getFilePath(), customerDocument.getDocumentType().getId(), customerId));
+	}
+
+	@GetMapping("{id}/documents")
+	public ResponseEntity<List<CustomerDocumentListDTO>> getFilesList(@PathVariable("id") Long customerId) {
+
+		List<CustomerDocumentListDTO> files = documentService.getFiles(customerId);
+		return ResponseEntity.status(HttpStatus.OK).body(files);
 	}
 
 	@GetMapping("{id}/documents/{fileName}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable("id") Long customerId, @PathVariable("fileName") String fileName,
-			HttpServletRequest request) {
+	public ResponseEntity<Resource> downloadFile(@PathVariable("id") Long customerId,
+			@PathVariable("fileName") String fileName, HttpServletRequest request) {
 		// Load file as Resource
 		Resource resource = documentService.retrieveDocument(customerId, fileName);
 

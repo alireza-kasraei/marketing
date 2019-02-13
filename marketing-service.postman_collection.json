@@ -129,6 +129,243 @@
 			"response": []
 		},
 		{
+			"name": "Get One Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"customer1\",\n\t\"businessScaleId\":1,\n\t\"legal\":true,\n\t\"economicSection\":\"SECTION 1\",\n\t\"latitude\":\"4564664543\",\n\t\"longitude\":\"66541354\",\n\t\"address\":\"sample address\"\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Customer-2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"economicCode\":\"CODE-1\",\n\t\"headCount\":12,\n\t\"ownershipTypeId\":1,\n\t\"organizationTypeId\":1,\n\t\"annualIncome\":8000000000\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new/:customerId",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						"new",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"blah blah\",\n\t\"businessScaleId\":1,\n\t\"legal\":true,\n\t\"economicSection\":\"section 2\",\n\t\"economicCode\":\"code2\",\n\t\"headCount\":12,\n\t\"ownershipTypeId\":1,\n\t\"organizationTypeId\":2,\n\t\"annualIncome\":11231\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer Address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"address\":\"new address\",\n\t\"latitude\":\"2582984792374298\",\n\t\"longitude\":\"20943245893\"\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/address",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"address"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get ContactInfo",
 			"event": [
 				{
@@ -184,7 +421,7 @@
 					"variable": [
 						{
 							"key": "customerId",
-							"value": ""
+							"value": "21"
 						}
 					]
 				},
@@ -193,7 +430,7 @@
 			"response": []
 		},
 		{
-			"name": "Create New Customer",
+			"name": "Create New ContactInfo",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -215,10 +452,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\":\"customer1\",\n\t\"businessScaleId\":1,\n\t\"legal\":true,\n\t\"economicSection\":\"SECTION 1\",\n\t\"latitude\":\"4564664543\",\n\t\"longitude\":\"66541354\",\n\t\"address\":\"sample address\"\n}"
+					"raw": "{\n\t\"name\":\"Mr. Shahbazi\",\n\t\"contactRoleId\":1,\n\t\"details\":[{\"contactTypeId\":1,\"contactData\":\"9287429328\"},{\"contactTypeId\":2,\"contactData\":\"2342342342\"}]\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/contacts-info",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -229,7 +466,453 @@
 						"api",
 						"v1",
 						"customers",
-						"new"
+						":customerId",
+						"contacts-info"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Contact-Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"ali\",\n\t\"contactRoleId\":2\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/contacts-info/:contact-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"contacts-info",
+						":contact-info"
+					],
+					"variable": [
+						{
+							"key": "contact-info",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact-Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/contacts-info/:contact-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"contacts-info",
+						":contact-info"
+					],
+					"variable": [
+						{
+							"key": "contact-info",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ContactDetailInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contactData\":\"helloooo\",\n\t\"contactTypeId\":2\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/contact-detail-info/:contact-detail-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"contact-detail-info",
+						":contact-detail-info"
+					],
+					"variable": [
+						{
+							"key": "contact-detail-info",
+							"value": "21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New ContactDetailInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"details\":[\n\t\t{\n\t\t\t\"contactTypeId\":1,\n\t\t\t\"contactData\":\"1234567\"\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/contacts-info/:contacts-info/contact-detail-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"contacts-info",
+						":contacts-info",
+						"contact-detail-info"
+					],
+					"variable": [
+						{
+							"key": "contacts-info",
+							"value": "21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ContactDetailInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/contact-detail-info/:contact-detail-info",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"contact-detail-info",
+						":contact-detail-info"
+					],
+					"variable": [
+						{
+							"key": "contact-detail-info",
+							"value": "24"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Meeting",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subject\":\"psssssss\",\n\t\"scheduleDate\":null,\n\t\"contactInfoIds\":[21],\n\t\"results\":[\"12ca\",\"asdasda\"]\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/meetings",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"meetings"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Meeting",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subject\":\"hello-update\",\n\t\"scheduleDate\":null\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/meetings/:meetingId",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"meetings",
+						":meetingId"
+					],
+					"variable": [
+						{
+							"key": "meetingId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all Meetings",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/meetings",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"meetings"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Result to Meeting",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"results\":[\"result1\",\"result2\"]\n}"
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/meetings/:meetingId/results",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"meetings",
+						":meetingId",
+						"results"
+					],
+					"variable": [
+						{
+							"key": "meetingId",
+							"value": "5"
+						}
 					]
 				}
 			},
@@ -298,56 +981,6 @@
 			"response": []
 		},
 		{
-			"name": "Create New Customer-2",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"economicCode\":\"CODE-1\",\n\t\"headCount\":12,\n\t\"ownershipTypeId\":1,\n\t\"organizationTypeId\":1,\n\t\"annualIncome\":8000000000\n}"
-				},
-				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/new/:customerId",
-					"protocol": "http",
-					"host": [
-						"{{service-url}}"
-					],
-					"port": "{{service-port}}",
-					"path": [
-						"ms",
-						"api",
-						"v1",
-						"customers",
-						"new",
-						":customerId"
-					],
-					"variable": [
-						{
-							"key": "customerId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create New Requirement",
 			"request": {
 				"auth": {
@@ -373,7 +1006,7 @@
 					"raw": "{\n\t\n\t\"data\":[\n\t\t{\n\t\t\t\"targetMemberId\":1,\n\t\t\t\"estimatedValue\":500000,\n\t\t\t\"description\":\"sample requirement\"\n\t\t\t}\t\n\t\t]\n\t\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/12/requirements",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -384,8 +1017,14 @@
 						"api",
 						"v1",
 						"customers",
-						"12",
+						":customerId",
 						"requirements"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
 					]
 				}
 			},
@@ -417,7 +1056,7 @@
 					"raw": "{\n\t\"name\":\"koorosh01\",\n\t\"businessScaleId\":1,\n\t\"customerTypeId\":1,\n\t\"economicSection\":\"123\",\n\t\"latitude\":\"2342342\",\n\t\"longitude\":\"345345345\",\n\t\"address\":\"skjdhfksflsjflsjlsjfs\"\n}"
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/api/v1/customers",
+					"raw": "http://{{service-url}}:{{service-port}}/api/v1/requirements/:customerId/assign",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -426,97 +1065,22 @@
 					"path": [
 						"api",
 						"v1",
-						"customers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create New ContactInfo",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+						"requirements",
+						":customerId",
+						"assign"
+					],
+					"variable": [
 						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
+							"key": "customerId",
+							"value": "1"
 						}
 					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Mr. Shahbazi\",\n\t\"contactRoleId\":1,\n\t\"details\":[{\"contactTypeId\":1,\"contactData\":\"9287429328\"},{\"contactTypeId\":2,\"contactData\":\"2342342342\"}]\n}"
-				},
-				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/4052/contacts-info",
-					"protocol": "http",
-					"host": [
-						"{{service-url}}"
-					],
-					"port": "{{service-port}}",
-					"path": [
-						"ms",
-						"api",
-						"v1",
-						"customers",
-						"4052",
-						"contacts-info"
-					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "add meeting",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer 315e859e-acfa-44f1-b62a-6c091988b44b",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"subject\":\"hello\",\n\t\"scheduleDate\":null,\n\t\"contactInfoIds\":[3052],\n\t\"results\":[\"12ca\",\"asdasda\"]\n}"
-				},
-				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/4052/meetings",
-					"protocol": "http",
-					"host": [
-						"{{service-url}}"
-					],
-					"port": "{{service-port}}",
-					"path": [
-						"ms",
-						"api",
-						"v1",
-						"customers",
-						"4052",
-						"meetings"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "add document",
+			"name": "upload document",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -543,27 +1107,33 @@
 							"key": "file",
 							"type": "file",
 							"src": ""
+						},
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/api/v1/customers/1/documents?file",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
 					],
 					"port": "{{service-port}}",
 					"path": [
+						"ms",
 						"api",
 						"v1",
 						"customers",
-						"1",
+						":customerId",
 						"documents"
 					],
-					"query": [
+					"variable": [
 						{
-							"key": "file",
-							"value": null
+							"key": "customerId",
+							"value": "21"
 						}
 					]
 				}
@@ -571,7 +1141,7 @@
 			"response": []
 		},
 		{
-			"name": "Assign Requirement",
+			"name": "Get Documents list",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -583,20 +1153,14 @@
 						}
 					]
 				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
+				"method": "GET",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\n\t\"data\":[\n\t\t{\n\t\t\t\"targetMemberId\":1,\n\t\t\t\"estimatedValue\":500000,\n\t\t\t\"description\":\"sample requirement\"\n\t\t\t}\t\n\t\t]\n\t\n}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/requireme",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -607,7 +1171,14 @@
 						"api",
 						"v1",
 						"customers",
-						"requireme"
+						":customerId",
+						"documents"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "21"
+						}
 					]
 				}
 			},
@@ -639,7 +1210,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/1/requirements?statusCode=RS1",
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/requirements?statusCode=RS1",
 					"protocol": "http",
 					"host": [
 						"{{service-url}}"
@@ -650,13 +1221,19 @@
 						"api",
 						"v1",
 						"customers",
-						"1",
+						":customerId",
 						"requirements"
 					],
 					"query": [
 						{
 							"key": "statusCode",
 							"value": "RS1"
+						}
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1"
 						}
 					]
 				}
@@ -737,6 +1314,91 @@
 						"api",
 						"v1",
 						"targets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/customers/:customerId/documents/:fileName",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"customers",
+						":customerId",
+						"documents",
+						":fileName"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "21"
+						},
+						{
+							"key": "fileName",
+							"value": "21/3976-rc022-jpa_online.pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Basedata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{service-url}}:{{service-port}}/ms/api/v1/basedata",
+					"protocol": "http",
+					"host": [
+						"{{service-url}}"
+					],
+					"port": "{{service-port}}",
+					"path": [
+						"ms",
+						"api",
+						"v1",
+						"basedata"
 					]
 				}
 			},
