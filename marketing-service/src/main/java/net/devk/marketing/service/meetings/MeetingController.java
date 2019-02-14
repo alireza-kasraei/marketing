@@ -24,7 +24,7 @@ public class MeetingController {
 	public ResponseEntity<?> updateMeeting(@RequestBody UpdateMeetingRequestDTO updateMeetingRequestDTO,
 			@PathVariable(name = "id", required = true) Long meetingId) {
 		meetingService.updateMeeting(meetingId, updateMeetingRequestDTO.getScheduleDate(),
-				updateMeetingRequestDTO.getSubject());
+				updateMeetingRequestDTO.getSubject(), updateMeetingRequestDTO.getContactInfoIds());
 		return ResponseEntity.noContent().build();
 	}
 
@@ -38,6 +38,11 @@ public class MeetingController {
 			@PathVariable(name = "id", required = true) Long meetingId) {
 		meetingService.addMeetingResult(meetingId, addNewMeetingResults.getResults());
 		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(path = "{id}/results", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findMeetingResults(@PathVariable(name = "id", required = true) Long meetingId) {
+		return ResponseEntity.ok(meetingService.findMeetingResultsByMeetingId(meetingId));
 	}
 
 }

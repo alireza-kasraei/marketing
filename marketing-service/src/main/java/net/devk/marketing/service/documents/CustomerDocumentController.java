@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.documents.dto.CreateNewCustomerDocumentResponseDTO;
-import net.devk.marketing.service.documents.dto.CustomerDocumentListDTO;
+import net.devk.marketing.service.documents.dto.CustomerDocumentQueryResultDTO;
 import net.devk.marketing.service.model.CustomerDocument;
 
 @RestController
@@ -47,10 +47,10 @@ public class CustomerDocumentController {
 	}
 
 	@GetMapping("{id}/documents")
-	public ResponseEntity<List<CustomerDocumentListDTO>> getFilesList(@PathVariable("id") Long customerId) {
+	public ResponseEntity<List<CustomerDocumentQueryResultDTO>> getFilesList(@PathVariable("id") Long customerId) {
 
-		List<CustomerDocumentListDTO> files = documentService.getFiles(customerId);
-		return ResponseEntity.status(HttpStatus.OK).body(files);
+//		List<CustomerDocumentQueryResultDTO> files = documentService.findCustomerDocumentByCustomerId(customerId);
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 
 	@GetMapping("{id}/documents/{fileName}")

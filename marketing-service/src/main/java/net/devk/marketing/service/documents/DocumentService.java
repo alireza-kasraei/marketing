@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.devk.marketing.service.documents.dto.CustomerDocumentListDTO;
+import net.devk.marketing.service.documents.dto.CustomerDocumentResponseDTO;
 import net.devk.marketing.service.model.CustomerDocument;
 
 public interface DocumentService {
@@ -14,6 +14,6 @@ public interface DocumentService {
 
 	public Resource retrieveDocument(Long customerId, String fileName);
 
-	public List<CustomerDocumentListDTO> getFiles(Long customerId);
+	public List<CustomerDocumentResponseDTO> findCustomerDocumentByCustomerId(Long customerId);
 
 }

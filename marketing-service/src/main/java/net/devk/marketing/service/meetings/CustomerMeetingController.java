@@ -40,7 +40,7 @@ public class CustomerMeetingController {
 	@RequestMapping(path = "{id}/meetings", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CustomerMeetingListDTO>> findMeetings(
 			@PathVariable(name = "id", required = true) Long customerId) {
-		List<CustomerMeetingListDTO> meetings = meetingService.findMeetings(customerId);
+		List<CustomerMeetingListDTO> meetings = meetingService.findMeetingsByCustomerId(customerId);
 		return ResponseEntity.status(HttpStatus.OK).body(meetings);
 	}
 

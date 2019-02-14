@@ -22,7 +22,7 @@ public class ContactServiceTests {
 	@Test
 	public void testFindContactInfo() {
 		// data.sql
-		List<ContactInfoQueryResultDTO> contactsInfo = contactService.findAllContactsInfo(1109L);
+		List<ContactInfoQueryResultDTO> contactsInfo = contactService.findContactInfosByCustomerId(1109L);
 		assertNotEquals(0, contactsInfo);
 	}
 

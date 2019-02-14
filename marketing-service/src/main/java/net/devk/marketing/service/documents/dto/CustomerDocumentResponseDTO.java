@@ -5,13 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class CustomerDocumentListDTO {
-
+public class CustomerDocumentResponseDTO {
 	private final Long id;
 	private final String documentName;
-	private final String filePath;
+	private final String url;
 	private final Long documentTypeId;
 	private final String documentTypeName;
 	private final Long customerId;
-
 }

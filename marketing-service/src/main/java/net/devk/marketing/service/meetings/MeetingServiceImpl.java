@@ -61,12 +61,21 @@ class MeetingServiceImpl implements MeetingService {
 
 	@Transactional
 	@Override
-	public void updateMeeting(Long meetingId, Date scheduleDate, String subject) {
-		meetingRepository.updateMeeting(meetingId, scheduleDate, subject);
+	public void updateMeeting(Long meetingId, Date scheduleDate, String subject, Set<Long> contactInfoIds) {
+		Meeting meeting = findMeetingEntityById(meetingId);
+		meeting.setScheduleDate(scheduleDate);
+		meeting.setSubject(subject);
+		if (contactInfoIds != null && contactInfoIds.size() > 0) {
+			meeting.getContactInfos().clear();
+			for (Long contactInfoId : contactInfoIds) {
+				meeting.getContactInfos().add(contactService.findOneContactInfo(contactInfoId));
+			}
+		}
+		meetingRepository.save(meeting);
 	}
 
 	@Override
-	public Meeting findOneById(Long meetingId) {
+	public Meeting findMeetingEntityById(Long meetingId) {
 		return meetingRepository.findById(meetingId).orElseThrow(
 				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(meetingId, "Meeting")));
 	}
@@ -74,7 +83,7 @@ class MeetingServiceImpl implements MeetingService {
 	@Transactional
 	@Override
 	public void addMeetingResult(Long meetingId, Set<String> results) {
-		Meeting meeting = findOneById(meetingId);
+		Meeting meeting = findMeetingEntityById(meetingId);
 		results.stream().map(s -> {
 			MeetingResult meetingResult = new MeetingResult();
 			meetingResult.setMeeting(meeting);
@@ -84,7 +93,7 @@ class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public List<CustomerMeetingListDTO> findMeetings(Long customerId) {
+	public List<CustomerMeetingListDTO> findMeetingsByCustomerId(Long customerId) {
 		return meetingRepository.findMeetingsByCustomerId(customerId);
 	}
 
@@ -96,6 +105,11 @@ class MeetingServiceImpl implements MeetingService {
 		meetingQueryResultDTO.setContactInfos(contactInfos);
 		meetingQueryResultDTO.setMeetingResults(meetingResults);
 		return meetingQueryResultDTO;
+	}
+
+	@Override
+	public List<MeetingResultDTO> findMeetingResultsByMeetingId(Long meetingId) {
+		return meetingResultRepository.findMeetingResults(meetingId);
 	}
 
 }

@@ -23,7 +23,7 @@ public class ContactInfoController {
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ContactInfoQueryResultDTO> getContactInfo(@PathVariable(name = "id") Long contactInfoId) {
-		return ResponseEntity.ok(contactService.findContactInfoDTO(contactInfoId));
+		return ResponseEntity.ok(contactService.findContactInfoById(contactInfoId));
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)

@@ -64,9 +64,9 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	@Transactional
-	public ContactInfoQueryResultDTO findContactInfoDTO(Long contactInfoId) {
+	public ContactInfoQueryResultDTO findContactInfoById(Long contactInfoId) {
 		ContactInfo contactInfo = findOneContactInfo(contactInfoId);
-		List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfo(contactInfoId);
+		List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfoByContactInfoId(contactInfoId);
 		// TODO FIXME here we have unnecessary additional query for contact role
 		return new ContactInfoQueryResultDTO(contactInfoId, contactInfo.getName(), contactInfo.getRole().getName(),
 				details);
@@ -74,9 +74,9 @@ class ContactsServiceImpl implements ContactService {
 
 	@Override
 	@Transactional
-	public List<ContactInfoQueryResultDTO> findAllContactsInfo(Long customerId) {
+	public List<ContactInfoQueryResultDTO> findContactInfosByCustomerId(Long customerId) {
 		return contactInfoRepository.findByCustomerId(customerId).stream().map(c -> {
-			List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfo(c.getId());
+			List<ContactDetailInfoQueryResultDTO> details = findContactDetailInfoByContactInfoId(c.getId());
 			// TODO FIXME here we have unnecessary additional query for contact role
 			return new ContactInfoQueryResultDTO(c.getId(), c.getName(), c.getRole().getName(), details);
 		}).collect(Collectors.toList());
@@ -89,7 +89,7 @@ class ContactsServiceImpl implements ContactService {
 	}
 
 	@Override
-	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfoId) {
+	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfoByContactInfoId(Long contactInfoId) {
 		return contactDetailInfoRepository.findContactDetailInfoByContactInfoId(contactInfoId);
 	}
 

@@ -14,15 +14,15 @@ public interface ContactService {
 	public ContactInfo createContactInfo(Long customerId, Long contactRoleId, String name,
 			Collection<ContactDetailInfoRequestDTO> contactTypes);
 
-	public ContactInfoQueryResultDTO findContactInfoDTO(Long contactInfo);
+	public ContactInfoQueryResultDTO findContactInfoById(Long contactInfo);
 
 	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name);
 
 	public void deleteContactInfo(Long contactInfoId);
 
-	public List<ContactInfoQueryResultDTO> findAllContactsInfo(Long customerId);
+	public List<ContactInfoQueryResultDTO> findContactInfosByCustomerId(Long customerId);
 
-	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfo(Long contactInfo);
+	public List<ContactDetailInfoQueryResultDTO> findContactDetailInfoByContactInfoId(Long contactInfo);
 
 	public ContactInfo findOneContactInfo(Long contactInfo);
 

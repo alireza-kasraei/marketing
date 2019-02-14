@@ -40,7 +40,7 @@ public class CustomerContactInfoController {
 	@RequestMapping(path = "/{id}" + CONTACT_INFO_ENDPOINT, method = RequestMethod.GET)
 	public ResponseEntity<List<ContactInfoQueryResultDTO>> getAllContactInfo(
 			@PathVariable(name = "id") Long customerId) {
-		return ResponseEntity.ok(contactService.findAllContactsInfo(customerId));
+		return ResponseEntity.ok(contactService.findContactInfosByCustomerId(customerId));
 	}
 
 }
