@@ -36,7 +36,6 @@ public class CustomerAddress extends AbstractModel {
 	@Column(name = "LONGITUDE")
 	private String longitude;
 
-	@EqualsAndHashCode.Exclude
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;

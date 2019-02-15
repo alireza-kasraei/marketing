@@ -43,7 +43,6 @@ public class Personnel extends AbstractModel {
 	@ManyToOne
 	private Organ organ;
 
-	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy = "personnels", fetch = FetchType.LAZY)
 	private Set<Meeting> meetings = new HashSet<>();
 

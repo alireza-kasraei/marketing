@@ -41,12 +41,10 @@ public class Meeting extends AbstractModel {
 	@Column(name = "SUBJECT")
 	private String subject;
 
-	@EqualsAndHashCode.Exclude
 	@ManyToMany
 	@JoinTable(name = "MEETINGS_CONTACTS_INFO", joinColumns = @JoinColumn(name = "MEETING_ID"), inverseJoinColumns = @JoinColumn(name = "CONTACT_INFO_ID"))
 	private Set<ContactInfo> contactInfos = new HashSet<>();
 
-	@EqualsAndHashCode.Exclude
 	@ManyToMany
 	@JoinTable(name = "MEETINGS_PERSONNELS", joinColumns = @JoinColumn(name = "MEETING_ID"), inverseJoinColumns = @JoinColumn(name = "PERSONNEL_ID"))
 	private Set<Personnel> personnels = new HashSet<>();

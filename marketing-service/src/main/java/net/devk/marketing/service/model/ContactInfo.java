@@ -50,7 +50,6 @@ public class ContactInfo extends AbstractModel {
 			CascadeType.PERSIST }, mappedBy = "contactInfo", fetch = FetchType.LAZY)
 	private Set<ContactDetailInfo> contactDetails = new HashSet<>();
 
-	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy = "contactInfos", fetch = FetchType.LAZY)
 	private Set<Meeting> meetings = new HashSet<>();
 }
