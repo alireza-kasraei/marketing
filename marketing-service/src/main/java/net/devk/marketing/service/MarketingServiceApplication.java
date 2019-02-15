@@ -7,6 +7,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import net.devk.marketing.service.config.FileStorageProperties;
 
+/**
+ * Application Entry Point
+ */
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableConfigurationProperties({ FileStorageProperties.class })

@@ -14,9 +14,10 @@ import net.devk.marketing.service.meetings.dto.AddNewMeetingResults;
 import net.devk.marketing.service.meetings.dto.UpdateMeetingRequestDTO;
 
 @RestController
-@RequestMapping(path = ControllersConfig.API_PREFIX + "meetings/")
+@RequestMapping(path = ControllersConfig.API_PREFIX + MeetingController.MEETINGS)
 public class MeetingController {
 
+	public static final String MEETINGS = "meetings";
 	@Autowired
 	private MeetingService meetingService;
 

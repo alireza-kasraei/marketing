@@ -46,7 +46,8 @@ public class ContactInfo extends AbstractModel {
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "contactInfo", fetch = FetchType.LAZY)
+	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.MERGE,
+			CascadeType.PERSIST }, mappedBy = "contactInfo", fetch = FetchType.LAZY)
 	private Set<ContactDetailInfo> contactDetails = new HashSet<>();
 
 	@EqualsAndHashCode.Exclude

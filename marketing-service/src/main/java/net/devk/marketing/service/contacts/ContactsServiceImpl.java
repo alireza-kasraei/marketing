@@ -94,13 +94,24 @@ class ContactsServiceImpl implements ContactService {
 	}
 
 	@Override
-	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name) {
-		// TODO FIXME replace with one update query
+	@Transactional
+	public ContactInfo updateContactInfo(Long contactInfoId, Long contactRoleId, String name,
+			Collection<ContactDetailInfoRequestDTO> details) {
 		ContactInfo contactInfo = contactInfoRepository.findById(contactInfoId)
 				.orElseThrow(() -> new EntityNotFoundException(
 						MessageUtils.generateEntityNotFoundMessage(contactInfoId, "ContactInfo")));
 		contactInfo.setName(name);
 		contactInfo.setRole(basedataService.findOneContactRole(contactRoleId));
+
+		if (details != null && details.size() > 0) {
+			details.stream().forEach(c -> {
+				ContactDetailInfo contactDetailInfo = new ContactDetailInfo();
+				contactDetailInfo.setContactData(c.getContactData());
+				contactDetailInfo.setContactInfo(contactInfo);
+				contactDetailInfo.setContactType(basedataService.findOneContactType(c.getContactTypeId()));
+				contactDetailInfoRepository.save(contactDetailInfo);
+			});
+		}
 		return contactInfoRepository.save(contactInfo);
 	}
 

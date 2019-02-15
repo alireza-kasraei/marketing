@@ -30,7 +30,7 @@ public class ContactInfoController {
 	public ResponseEntity<?> updateContactInfo(@PathVariable(name = "id") Long contactInfoId,
 			@RequestBody UpdateContactInfoRequestDTO updateContactInfoRequestDTO) {
 		contactService.updateContactInfo(contactInfoId, updateContactInfoRequestDTO.getContactRoleId(),
-				updateContactInfoRequestDTO.getName());
+				updateContactInfoRequestDTO.getName(), updateContactInfoRequestDTO.getDetails());
 		return ResponseEntity.noContent().build();
 	}
 
