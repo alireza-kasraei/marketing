@@ -31,6 +31,9 @@ public class Service extends AbstractModel {
 
 	@Column(name = "SERVICE_NAME")
 	private String name;
+	
+	@Column(name = "ICON")
+	private String icon;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PARENT_ID")
