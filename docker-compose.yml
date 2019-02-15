@@ -14,7 +14,6 @@ services:
     image: marketingservice/oracle-xe:marketing
     volumes:
        - db-data:/sql
-       - uploads:/uploads
     networks:
       marketing-cloud:
       
@@ -74,26 +73,6 @@ services:
       CONFIG_SERVICE_HOST: config-service
       CONFIG_SERVICE_PORT: 8888
       
-  greetings-service:
-    build:
-      context: ./greetings-service
-      dockerfile: Dockerfile
-    image: marketingservice/greetings-service:latest
-    networks:
-      marketing-cloud:
-    depends_on:
-    - service-discovery
-    - redis
-    - config-service
-    environment:
-    
-      SPRING_PROFILES_ACTIVE: stage
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      DISCOVERY_SERVICE_HOST: service-discovery
-      DISCOVERY_SERVICE_PORT: 8761
-      CONFIG_SERVICE_HOST: config-service
-      CONFIG_SERVICE_PORT: 8888
       
   marketing-gateway:
     build:
@@ -144,6 +123,8 @@ services:
     image: marketingservice/marketing-service:latest
     networks:
       marketing-cloud:
+    volumes:
+       - uploads:/uploads
     depends_on:
     - service-discovery
     - config-service
