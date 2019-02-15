@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.documents.dto.CreateNewCustomerDocumentResponseDTO;
-import net.devk.marketing.service.documents.dto.CustomerDocumentQueryResultDTO;
+import net.devk.marketing.service.documents.dto.CustomerDocumentResponseDTO;
 import net.devk.marketing.service.model.CustomerDocument;
 
 @RestController
@@ -37,20 +37,22 @@ public class CustomerDocumentController {
 
 	@PostMapping("{id}/documents")
 	public ResponseEntity<CreateNewCustomerDocumentResponseDTO> uploadFile(@RequestParam("file") MultipartFile file,
-			@RequestParam("documentTypeId") Long documentTypeId, @PathVariable("id") Long customerId) {
+			@RequestParam("documentTypeId") Long documentTypeId, @PathVariable("id") Long customerId,
+			@RequestParam("documentName") String documentName) {
 
-		CustomerDocument customerDocument = documentService.createCustomerDocument(customerId, documentTypeId, file);
+		CustomerDocument customerDocument = documentService.createCustomerDocument(customerId, documentTypeId,
+				documentName, file);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(new CreateNewCustomerDocumentResponseDTO(customerDocument.getId(),
 						customerDocument.getRegisterDate(), customerDocument.getDocumentName(),
-						customerDocument.getFilePath(), customerDocument.getDocumentType().getId(), customerId));
+						documentService.genereateFileUrl(customerDocument.getFilePath()),
+						customerDocument.getDocumentType().getId(), customerId));
 	}
 
 	@GetMapping("{id}/documents")
-	public ResponseEntity<List<CustomerDocumentQueryResultDTO>> getFilesList(@PathVariable("id") Long customerId) {
-
-//		List<CustomerDocumentQueryResultDTO> files = documentService.findCustomerDocumentByCustomerId(customerId);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+	public ResponseEntity<List<CustomerDocumentResponseDTO>> findCustomerDocuments(@PathVariable("id") Long customerId,
+			HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.OK).body(documentService.createCustomerDocumentList(customerId));
 	}
 
 	@GetMapping("{id}/documents/{fileName}")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.devk.marketing.service.ControllersConfig;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.documents.dto.CustomerDocumentQueryResultDTO;
@@ -29,11 +30,12 @@ class DocumentServiceImpl implements DocumentService {
 
 	@Override
 	@Transactional
-	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file) {
+	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, String documentName,
+			MultipartFile file) {
 
 		CustomerDocument customerDocument = new CustomerDocument();
 		customerDocument.setCustomer(customerService.findOneCustomer(customerId));
-		customerDocument.setDocumentName(file.getOriginalFilename());
+		customerDocument.setDocumentName(documentName);
 		customerDocument.setDocumentType(basedataService.findOneDocumentType(documentTypeId));
 		String path = storageService.store(customerId, file);
 		customerDocument.setFilePath(path);
@@ -46,13 +48,18 @@ class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-	public List<CustomerDocumentResponseDTO> findCustomerDocumentByCustomerId(Long customerId) {
+	public List<CustomerDocumentResponseDTO> createCustomerDocumentList(Long customerId) {
 		List<CustomerDocumentQueryResultDTO> customerDocuments = customerDocumentRepository
 				.findDocumentsByCustomerId(customerId);
 		return customerDocuments.stream().map(cd -> {
-			return new CustomerDocumentResponseDTO(cd.getId(), cd.getDocumentName(), cd.getFilePath(),
+			return new CustomerDocumentResponseDTO(cd.getId(), cd.getDocumentName(), genereateFileUrl(cd.getFilePath()),
 					cd.getDocumentTypeId(), cd.getDocumentName(), cd.getCustomerId());
 		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public String genereateFileUrl(String filePath) {
+		return ControllersConfig.API_PREFIX + "documents/" + filePath;
 	}
 
 }

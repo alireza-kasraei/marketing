@@ -10,10 +10,13 @@ import net.devk.marketing.service.model.CustomerDocument;
 
 public interface DocumentService {
 
-	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, MultipartFile file);
+	public CustomerDocument createCustomerDocument(Long customerId, Long documentTypeId, String documentName,
+			MultipartFile file);
 
 	public Resource retrieveDocument(Long customerId, String fileName);
 
-	public List<CustomerDocumentResponseDTO> findCustomerDocumentByCustomerId(Long customerId);
+	public List<CustomerDocumentResponseDTO> createCustomerDocumentList(Long customerId);
+
+	public String genereateFileUrl(String filePath);
 
 }
