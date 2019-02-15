@@ -104,12 +104,14 @@ class ContactsServiceImpl implements ContactService {
 		contactInfo.setRole(basedataService.findOneContactRole(contactRoleId));
 
 		if (details != null && details.size() > 0) {
+			contactInfo.getContactDetails().clear();
 			details.stream().forEach(c -> {
 				ContactDetailInfo contactDetailInfo = new ContactDetailInfo();
 				contactDetailInfo.setContactData(c.getContactData());
 				contactDetailInfo.setContactInfo(contactInfo);
 				contactDetailInfo.setContactType(basedataService.findOneContactType(c.getContactTypeId()));
 				contactDetailInfoRepository.save(contactDetailInfo);
+				contactInfo.getContactDetails().add(contactDetailInfo);
 			});
 		}
 		return contactInfoRepository.save(contactInfo);
