@@ -72,5 +72,7 @@ public interface BasedataService {
 	public AttractionType findAttractionTypeByCode(String code);
 
 	public RequirementStatusType findRequirementStatusTypeByCode(String code);
+	
+	public String findFullServiceName(Long childServiceId);
 
 }

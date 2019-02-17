@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.service.ControllersConfig;
-import net.devk.marketing.service.meetings.dto.AddNewMeetingResults;
 import net.devk.marketing.service.meetings.dto.UpdateMeetingRequestDTO;
+import net.devk.marketing.service.meetings.dto.UpdateMeetingResults;
 
 @RestController
 @RequestMapping(path = ControllersConfig.API_PREFIX + MeetingController.MEETINGS)
@@ -34,10 +34,10 @@ public class MeetingController {
 		return ResponseEntity.ok(meetingService.findMeetingById(meetingId));
 	}
 
-	@RequestMapping(path = "{id}/results", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addMeetingResults(@RequestBody AddNewMeetingResults addNewMeetingResults,
+	@RequestMapping(path = "{id}/results", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addMeetingResults(@RequestBody UpdateMeetingResults updateMeetingResults,
 			@PathVariable(name = "id", required = true) Long meetingId) {
-		meetingService.addMeetingResult(meetingId, addNewMeetingResults.getResults());
+		meetingService.updateMeetingResult(meetingId, updateMeetingResults.getResults());
 		return ResponseEntity.noContent().build();
 	}
 

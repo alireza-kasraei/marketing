@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.RequirementStatusType;
 import net.devk.marketing.service.model.Target;
@@ -25,6 +26,9 @@ class TargetServiceImpl implements TargetService {
 
 	@Autowired
 	private TargetMemberRepository targetMemberRepository;
+
+	@Autowired
+	private BasedataService basedataService;
 
 	@Override
 	public Target getOneTarget(Long id) {
@@ -50,9 +54,10 @@ class TargetServiceImpl implements TargetService {
 	public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId) {
 		Date now = DateUtils.now();
 		Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, now,
-				RequirementStatusType.REQUIREMENT_STATUS_STATUS3, AttractionType.ATTRACTION_TYPE_TYPE3);
+				RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
 
-		TargetMember targetMember = targetMemberRepository.findById(targetMemberId).orElseThrow(()-> new RuntimeException("targetmember not found"));
+		TargetMember targetMember = targetMemberRepository.findById(targetMemberId)
+				.orElseThrow(() -> new RuntimeException("targetmember not found"));
 		Target target = targetMember.getTarget();
 		long days = calculateDayNumber(target.getStartDate(), now);
 
@@ -65,7 +70,7 @@ class TargetServiceImpl implements TargetService {
 
 		double progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
 
-		double todayProgress = (summation.longValue() / days) * 100;
+		double todayProgress = (summation.doubleValue() / totalValue.doubleValue()) * 100;
 
 		return new AggregateTargetResponseDTO(summation.longValue(), days, totalValue.longValue(), averageProgressToNow,
 				totalDays, progressPercentageToNow, todayProgress);
@@ -73,7 +78,10 @@ class TargetServiceImpl implements TargetService {
 
 	@Override
 	public List<TargetMemberListQueryResultDTO> findTargets(String username) {
-		return targetMemberRepository.findTargetsByUsername(username);
+		List<TargetMemberListQueryResultDTO> targetMembers = targetMemberRepository.findTargetsByUsername(username);
+		// replace with oracle function
+		targetMembers.stream().forEach(tm -> tm.setServiceName(basedataService.findFullServiceName(tm.getServiceId())));
+		return targetMembers;
 	}
 
 }

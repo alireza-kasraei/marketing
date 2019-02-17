@@ -33,7 +33,7 @@ public interface MeetingService {
 
 	public void updateMeeting(Long meetingId, Date scheduleDate, String subject, Set<Long> contactInfoIds);
 
-	public void addMeetingResult(Long meetingId, Set<String> results);
+	public void updateMeetingResult(Long meetingId, Set<String> results);
 
 	public List<CustomerMeetingListDTO> findMeetingsByCustomerId(Long customerId);
 

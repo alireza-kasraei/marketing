@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -52,4 +54,7 @@ public class Meeting extends AbstractModel {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
+	
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "meeting", fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<MeetingResult> meetingResults = new HashSet<>();
 }

@@ -82,14 +82,18 @@ class MeetingServiceImpl implements MeetingService {
 
 	@Transactional
 	@Override
-	public void addMeetingResult(Long meetingId, Set<String> results) {
+	public void updateMeetingResult(Long meetingId, Set<String> results) {
 		Meeting meeting = findMeetingEntityById(meetingId);
-		results.stream().map(s -> {
-			MeetingResult meetingResult = new MeetingResult();
-			meetingResult.setMeeting(meeting);
-			meetingResult.setDescription(s);
-			return meetingResult;
-		}).forEach(m -> meetingResultRepository.save(m));
+		if (results != null && results.size() > 0) {
+			meeting.getMeetingResults().clear();
+			results.stream().map(s -> {
+				MeetingResult meetingResult = new MeetingResult();
+				meetingResult.setMeeting(meeting);
+				meetingResult.setDescription(s);
+				return meetingResult;
+			}).forEach(m -> meetingResultRepository.save(m));
+		}
+
 	}
 
 	@Override
@@ -99,7 +103,8 @@ class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public MeetingQueryResultDTO findMeetingById(Long meetingId) {
-		MeetingQueryResultDTO meetingQueryResultDTO = meetingRepository.findOneMeeting(meetingId);
+		MeetingQueryResultDTO meetingQueryResultDTO = meetingRepository.findOneMeeting(meetingId).orElseThrow(
+				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(meetingId, "Meeting")));
 		List<MeetingResultDTO> meetingResults = meetingResultRepository.findMeetingResults(meetingId);
 		List<MeetingContactInfosDTO> contactInfos = meetingRepository.findContactInfosByMeetingId(meetingId);
 		meetingQueryResultDTO.setContactInfos(contactInfos);

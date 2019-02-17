@@ -103,7 +103,7 @@ class RequirementServiceImpl implements RequirementService {
 		requirementStatus.setRequirment(savedRequirement);
 		requirementStatus.setRegisterDate(now);
 		requirementStatus.setRequirementStatusType(
-				basedataService.findRequirementStatusTypeByCode(RequirementStatusType.REQUIREMENT_STATUS_STATUS2));
+				basedataService.findRequirementStatusTypeByCode(RequirementStatusType.REQUIREMENT_STATUS_STATUS4));
 		requirementStatusRepository.save(requirementStatus);
 
 		AssignedRequirement assignedRequirement = new AssignedRequirement();

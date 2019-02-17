@@ -2,6 +2,7 @@ package net.devk.marketing.service.meetings;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,7 +23,7 @@ interface MeetingRepository extends JpaRepository<Meeting, Long> {
 	public List<CustomerMeetingListDTO> findMeetingsByCustomerId(Long customerId);
 
 	@Query("select new net.devk.marketing.service.meetings.dto.MeetingQueryResultDTO(m.id,m.scheduleDate,m.subject,c.id,c.name) from Meeting m inner join m.customer c where m.id=?1")
-	public MeetingQueryResultDTO findOneMeeting(Long meetingId);
+	public Optional<MeetingQueryResultDTO> findOneMeeting(Long meetingId);
 
 	@Query("select new net.devk.marketing.service.meetings.dto.MeetingContactInfosDTO(m.id,c.id,c.role.id,c.name) from Meeting m inner join m.contactInfos c where m.id=?1")
 	public List<MeetingContactInfosDTO> findContactInfosByMeetingId(Long meetingId);

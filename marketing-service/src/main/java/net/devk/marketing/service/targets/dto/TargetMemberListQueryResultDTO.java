@@ -13,7 +13,7 @@ public class TargetMemberListQueryResultDTO {
 	private final Long targetMemberId;
 	private final Long targetMemberValue;
 	private final String targetMemberName;
-	private final String serviceName;
+	private String serviceName;
 	private final Long serviceId;
 
 }

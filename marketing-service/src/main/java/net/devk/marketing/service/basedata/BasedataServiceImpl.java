@@ -153,4 +153,9 @@ class BasedataServiceImpl implements BasedataService {
 				() -> new EntityNotFoundException(MessageUtils.generateEntityNotFoundMessage(id, "OrganizationType")));
 	}
 
+	@Override
+	public String findFullServiceName(Long childServiceId) {
+		return serviceRepository.findFullServiceName(childServiceId);
+	}
+
 }
