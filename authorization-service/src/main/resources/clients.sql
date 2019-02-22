@@ -1,2 +1,7 @@
-INSERT INTO clients(id, authorities, grant_types, autho_approve_scopes, client_id, scopes, secret) VALUES (1,'ROLE_USER,ROLE_ADMIN' , 'authorization_code,refresh_token,password', '.*', 'html5', 'openid', 'password');
-INSERT INTO clients(id, authorities, grant_types, autho_approve_scopes, client_id, scopes, secret) VALUES (2,'ROLE_USER,ROLE_ADMIN' , 'authorization_code,refresh_token,password', '.*', 'android', 'openid', 'secret');
+INSERT INTO SCOPES(ID,SCOPE_NAME,DESCRIPTION) VALUES(1,'openid','sample scope');
+
+INSERT INTO CLIENTS(ID, AUTHORITIES, GRANT_TYPES, AUTHO_APPROVE_SCOPES, CLIENT_ID, SECRET) VALUES (1,null , 'authorization_code,refresh_token,password', '.*', 'html5', 'password');
+INSERT INTO CLIENTS(ID, AUTHORITIES, GRANT_TYPES, AUTHO_APPROVE_SCOPES, CLIENT_ID, SECRET) VALUES (2,null , 'authorization_code,refresh_token,password', '.*', 'android', 'secret');
+
+INSERT INTO CLIENTS_SCOPES(CLIENT_ID,SCOPE_ID) VALUES(1,1);
+INSERT INTO CLIENTS_SCOPES(CLIENT_ID,SCOPE_ID) VALUES(2,1);

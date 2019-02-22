@@ -1,2 +1,15 @@
-INSERT INTO users(id, active, email, first_name, last_name, mobile_number, pass_word, roles, user_name)	VALUES (1, 1, 'omid@gmail.com', 'امید', 'مرادزاده', '98912384679854', 'omid123', 'ADMIN,USER', 'omid');
-INSERT INTO users(id, active, email, first_name, last_name, mobile_number, pass_word, roles, user_name)	VALUES (2, 1, 'hamid@gmail.com', 'حمید', 'قدیمی', '98912234923429', 'hamid123', 'USER', 'hamid');
+INSERT INTO ROLES(ID,ROLE_NAME,DESCRIPTION) VALUES(1,'ADMIN','ADMIN USER');
+INSERT INTO ROLES(ID,ROLE_NAME,DESCRIPTION) VALUES(2,'USER','NORMAL USER');
+
+INSERT INTO GROUPS(ID,GROUP_NAME,DESCRIPTION) VALUES(1,'admins','admins group');
+INSERT INTO GROUPS(ID,GROUP_NAME,DESCRIPTION) VALUES(2,'users','users group');
+
+INSERT INTO ROLES_GROUPS(GROUP_ID,ROLE_ID) VALUES(1,1);
+INSERT INTO ROLES_GROUPS(GROUP_ID,ROLE_ID) VALUES(2,2);
+
+INSERT INTO USERS(ID,USER_NAME,PASS_WORD,EMAIL,MOBILE_NUMBER,FIRST_NAME,LAST_NAME,ENABLED,LOCKED) VALUES(1,'omid','omid123','omid@gmail.com','00989124874620','امید','مرادزاده',1,0);
+INSERT INTO USERS(ID,USER_NAME,PASS_WORD,EMAIL,MOBILE_NUMBER,FIRST_NAME,LAST_NAME,ENABLED,LOCKED) VALUES(2,'hamid','hamid123','hamid@gmail.com','00989144834990','حمید','قدیمی',1,0);
+
+
+INSERT INTO USERS_GROUPS(USER_ID,GROUP_ID) VALUES(1,1);
+INSERT INTO USERS_GROUPS(USER_ID,GROUP_ID) VALUES(2,2);

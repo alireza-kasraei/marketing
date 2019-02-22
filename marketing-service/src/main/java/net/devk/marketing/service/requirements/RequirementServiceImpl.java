@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.commons.util.date.DateUtils;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.CustomerService;
 import net.devk.marketing.service.model.AssignedRequirement;
@@ -24,7 +25,6 @@ import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDT
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
 import net.devk.marketing.service.targets.TargetService;
-import net.devk.marketing.service.util.DateUtils;
 
 @Service
 class RequirementServiceImpl implements RequirementService {

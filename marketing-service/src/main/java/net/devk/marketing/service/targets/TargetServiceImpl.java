@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.commons.util.date.DateUtils;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.RequirementStatusType;
@@ -16,7 +17,6 @@ import net.devk.marketing.service.model.TargetMember;
 import net.devk.marketing.service.targets.dto.AggregateTargetResponseDTO;
 import net.devk.marketing.service.targets.dto.TargetMemberListQueryResultDTO;
 import net.devk.marketing.service.targets.dto.TargetMemberQueryResultDTO;
-import net.devk.marketing.service.util.DateUtils;
 
 @Service
 class TargetServiceImpl implements TargetService {

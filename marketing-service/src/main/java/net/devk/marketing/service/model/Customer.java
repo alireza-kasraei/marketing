@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import net.devk.commons.jpa.model.AbstractModel;
 
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)

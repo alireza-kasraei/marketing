@@ -1,4 +1,4 @@
-package net.devk.marketing.service.util;
+package net.devk.commons.util.date;
 
 import java.util.Date;
 

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import net.devk.commons.jpa.model.AbstractModel;
 
 // TODO FIXME how can we find out this member is head?
 @Data

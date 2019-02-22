@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.devk.commons.util.date.DateUtils;
 import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.BasedataService;
 import net.devk.marketing.service.customers.dto.CustomerFindAllQueryResultDTO;
@@ -16,7 +17,6 @@ import net.devk.marketing.service.model.AttractionType;
 import net.devk.marketing.service.model.Customer;
 import net.devk.marketing.service.model.CustomerAddress;
 import net.devk.marketing.service.model.RegistrationStatus;
-import net.devk.marketing.service.util.DateUtils;
 import net.devk.marketing.service.util.MessageUtils;
 
 @Service

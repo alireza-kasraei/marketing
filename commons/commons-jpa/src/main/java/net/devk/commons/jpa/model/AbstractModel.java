@@ -1,4 +1,4 @@
-package net.devk.marketing.service.model;
+package net.devk.commons.jpa.model;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
 import lombok.Data;
-import net.devk.marketing.service.util.DateUtils;
+import net.devk.commons.util.date.DateUtils;
 
 @Data
 @MappedSuperclass
