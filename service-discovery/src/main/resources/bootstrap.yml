@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: eureka-service
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
+---
+spring:
+  profiles: stage
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVICE_URI}:${CONFIG_SERVICE_PORT}
