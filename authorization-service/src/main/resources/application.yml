@@ -1,0 +1,54 @@
+server:
+  port: 9191
+  servlet:
+    context-path: /uaa
+---
+spring:
+  profiles: dev
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG     
+---
+spring:
+  profiles: dev-h2
+  datasource:
+    initialization-mode: embedded
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        hbm2ddl:
+          import_files: users.sql,clients.sql
+        jdbc:
+          lob:
+            non_contextual_creation: true
+---
+spring:
+  profiles: dev-oracle
+  datasource:
+    initialization-mode: never
+    url: jdbc:oracle:thin:@//localhost:1521/XE
+    username: marketing
+    password: marketing
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+---
+spring:
+  profiles: stage
+  datasource:
+    initialization-mode: never
+    url: jdbc:oracle:thin:@//${ORACLE_HOST}:${ORACLE_PORT}/${ORACLE_SID}
+    username: ${ORACLE_USER}
+    password: ${ORACLE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update 

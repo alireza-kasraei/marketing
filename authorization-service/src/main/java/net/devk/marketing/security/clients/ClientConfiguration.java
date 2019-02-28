@@ -21,7 +21,7 @@ public class ClientConfiguration {
 
 			BaseClientDetails details = new BaseClientDetails(client.getClientId(), null, scopes,
 					client.getAuthorizedGrantTypes(), client.getAuthorities(), client.getRedirectUrls());
-			details.setClientSecret("{noop}" + client.getSecret());
+			details.setClientSecret(client.getSecret());
 
 			// details.setAutoApproveScopes
 			// (Arrays.asList(client.getAutoApproveScopes().split(",")));

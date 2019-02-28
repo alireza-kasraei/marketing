@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import net.devk.marketing.security.model.User;
 import net.devk.marketing.security.users.UserRepository;
 
+/**
+ * Controller for retrieving user's principle object from oauth token
+ */
 @RestController
 class PrincipalRestController {
 
