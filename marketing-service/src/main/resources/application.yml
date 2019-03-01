@@ -1,0 +1,50 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+---
+spring:
+  profiles: dev
+  redis.host: ${REDIS_HOST}
+  redis.port: 6379
+file:
+  upload-dir: ./uploads
+---
+spring:
+  profiles: dev-h2
+  datasource:
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create
+---
+spring:
+  profiles: dev-oracle
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    initialization-mode: never
+    url: jdbc:oracle:thin:@//localhost:1521/XE
+    username: marketing
+    password: marketing
+---
+spring:
+  profiles: stage
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+  jpa:
+    hibernate.ddl-auto: update
+  datasource:
+    initialization-mode: never
+    url: jdbc:oracle:thin:@//${ORACLE_HOST}:${ORACLE_PORT}/${ORACLE_SID}
+    username: ${ORACLE_USER}
+    password: ${ORACLE_PASSWORD}
+file:
+ upload-dir: /uploads
+server:
+  port: 0

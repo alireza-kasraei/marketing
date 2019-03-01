@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: marketing-service
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://auth-service/uaa/user
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
+---
+spring:
+  profiles: stage
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVICE_HOST}:${CONFIG_SERVICE_PORT}
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${DISCOVERY_SERVICE_HOST}:${DISCOVERY_SERVICE_PORT}/eureka
+    region: default
+    register-with-eureka: true
+    fetch-registry: true
+management:
+  info:
+    git:
+      mode: full
