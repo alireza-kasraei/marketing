@@ -2,6 +2,7 @@ package net.devk.marketing.service.requirements;
 
 import java.util.List;
 
+import net.devk.marketing.service.requirements.dto.AssignedRequirementFindAllDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
@@ -18,4 +19,5 @@ public interface RequirementService {
 
 	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue);
 
+	public List<AssignedRequirementFindAllDTO> findAssignedRequirement(long customerId);
 }

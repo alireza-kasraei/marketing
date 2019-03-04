@@ -32,4 +32,11 @@ public class RequirementController {
 
 	}
 
+	@RequestMapping(path = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findAssignedRequirement(@PathVariable(name = "id",required = true) long customerId){
+		return ResponseEntity.ok(requirementService.findAssignedRequirement(customerId));
+	}
+
+
+
 }

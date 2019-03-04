@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import net.devk.marketing.service.requirements.dto.AssignedRequirementFindAllDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -119,7 +120,12 @@ class RequirementServiceImpl implements RequirementService {
 
 	}
 
-	@Override
+    @Override
+    public List<AssignedRequirementFindAllDTO> findAssignedRequirement(long customerId) {
+		return requirementRepository.findAllAssignedRequirementByCustomerId(customerId);
+    }
+
+    @Override
 	@Transactional
 	public List<CreateNewRequirementResponseDTO> createRequirement(Long customerId,
 			List<CreateNewRequirementRequestDTO> list) {
