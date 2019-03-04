@@ -34,7 +34,7 @@ public class CustomerRequirementController {
 	}
 
 	@RequestMapping(path = "/{id}/requirements", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<CustomerRequirementResponseDTO>> createRequirement(
+	public ResponseEntity<List<CustomerRequirementResponseDTO>> findRequirements(
 			@PathVariable(name = "id", required = true) Long customerId,
 			@RequestParam(name = "statusCode") String statusCode) {
 		return ResponseEntity.status(HttpStatus.CREATED)

@@ -120,10 +120,6 @@ class RequirementServiceImpl implements RequirementService {
 
 	}
 
-    @Override
-    public List<AssignedRequirementFindAllDTO> findAssignedRequirement(long customerId) {
-		return requirementRepository.findAllAssignedRequirementByCustomerId(customerId);
-    }
 
     @Override
 	@Transactional

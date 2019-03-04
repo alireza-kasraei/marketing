@@ -19,5 +19,4 @@ public interface RequirementService {
 
 	public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue);
 
-	public List<AssignedRequirementFindAllDTO> findAssignedRequirement(long customerId);
 }
