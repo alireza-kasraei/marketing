@@ -53,7 +53,7 @@ class DocumentServiceImpl implements DocumentService {
 				.findDocumentsByCustomerId(customerId);
 		return customerDocuments.stream().map(cd -> {
 			return new CustomerDocumentResponseDTO(cd.getId(), cd.getDocumentName(), genereateFileUrl(cd.getFilePath()),
-					cd.getDocumentTypeId(), cd.getDocumentName(), cd.getCustomerId());
+					cd.getDocumentTypeId(), cd.getDocumentTypeName(), cd.getCustomerId());
 		}).collect(Collectors.toList());
 	}
 
