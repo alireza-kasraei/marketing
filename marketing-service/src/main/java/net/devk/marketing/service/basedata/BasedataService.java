@@ -2,15 +2,7 @@ package net.devk.marketing.service.basedata;
 
 import net.devk.marketing.service.EntityNotFoundException;
 import net.devk.marketing.service.basedata.dto.AggregatedBasedataDTO;
-import net.devk.marketing.service.model.AssignedStatusType;
-import net.devk.marketing.service.model.AttractionType;
-import net.devk.marketing.service.model.BusinessScale;
-import net.devk.marketing.service.model.ContactRole;
-import net.devk.marketing.service.model.ContactType;
-import net.devk.marketing.service.model.DocumentType;
-import net.devk.marketing.service.model.OrganizationType;
-import net.devk.marketing.service.model.OwnershipType;
-import net.devk.marketing.service.model.RequirementStatusType;
+import net.devk.marketing.service.model.*;
 
 /**
  * service interface for base data
@@ -75,4 +67,5 @@ public interface BasedataService {
 	
 	public String findFullServiceName(Long childServiceId);
 
+	public SupplyStatusType findSupplyTypeByCode(String supplyStatusCode);
 }
