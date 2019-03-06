@@ -1,5 +1,6 @@
 package net.devk.marketing.service.requirements;
 
+import net.devk.marketing.service.model.Requirement;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementRequestDTO;
 import net.devk.marketing.service.requirements.dto.CreateNewRequirementResponseDTO;
 import net.devk.marketing.service.requirements.dto.CustomerRequirementResponseDTO;
@@ -20,5 +21,7 @@ public interface RequirementService {
     public void assignRequirement(Long requirementId, Long personnelId, Long assignedStatusTypeId, Long realValue);
 
     public void createSupplyRequirement(Long requirementId, String value, String supplyStatusCode);
+    
+    public Requirement findRequirement(long requirementId);
 
 }
