@@ -7,15 +7,15 @@ services:
     networks:
       marketing-cloud:
 
-  oracle-marketing:
-    build:
-      context: ./oracle
-      dockerfile: Dockerfile
-    image: marketingservice/oracle-xe:marketing
-    volumes:
-       - db-data:/sql
-    networks:
-      marketing-cloud:
+#  oracle-marketing:
+#    build:
+#      context: ./oracle
+#      dockerfile: Dockerfile
+#    image: marketingservice/oracle-xe:marketing
+#    volumes:
+#       - db-data:/sql
+#    networks:
+#      marketing-cloud:
       
   config-service:
     build:
@@ -57,13 +57,13 @@ services:
     depends_on:
     - service-discovery
     - redis
-    - oracle-marketing
+#    - oracle-marketing
     environment:
     
       SPRING_PROFILES_ACTIVE: stage
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      ORACLE_HOST: oracle-marketing
+      ORACLE_HOST: 192.168.54.68
       ORACLE_PORT: 1521
       ORACLE_SID: XE
       ORACLE_USER: marketing
@@ -128,7 +128,7 @@ services:
     depends_on:
     - service-discovery
     - config-service
-    - oracle-marketing
+#    - oracle-marketing
     environment:
     
       SPRING_PROFILES_ACTIVE: stage
@@ -138,7 +138,7 @@ services:
       DISCOVERY_SERVICE_PORT: 8761
       CONFIG_SERVICE_HOST: config-service
       CONFIG_SERVICE_PORT: 8888
-      ORACLE_HOST: oracle-marketing
+      ORACLE_HOST: 192.168.54.68
       ORACLE_PORT: 1521
       ORACLE_SID: XE
       ORACLE_USER: marketing

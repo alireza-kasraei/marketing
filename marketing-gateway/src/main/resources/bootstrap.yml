@@ -12,12 +12,15 @@ spring:
   profiles: stage
   cloud:
     config:
-      uri: http://${CONFIG_SERVICE_URI}:${CONFIG_SERVICE_URI}
+      uri: http://${CONFIG_SERVICE_HOST}:${CONFIG_SERVICE_PORT}
 eureka:
   client:
-    service-url:
-      default-zone: http://${DISCOVERY_SERVICE_HOST}:${DISCOVERY_SERVICE_PORT}/eureka
     region: default
     register-with-eureka: true
     fetch-registry: true
-      
+    service-url:
+      defaultZone: http://${DISCOVERY_SERVICE_HOST}:${DISCOVERY_SERVICE_PORT}/eureka
+management:
+  info:
+    git:
+      mode: full      
