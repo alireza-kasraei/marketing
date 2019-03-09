@@ -39,7 +39,7 @@ public class CustomerServiceTests {
 	@Test
 	public void testFindCustomers() {
 		// data.sql , there are three customers with koorosh01 name
-		List<CustomerFindAllQueryResultDTO> customers = customerService.findAllCustomersLikeByName("koorosh");
+		List<CustomerFindAllQueryResultDTO> customers = customerService.findAllWithPagination("av", 200,0);
 		assertEquals(3, customers.size());
 	}
 

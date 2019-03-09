@@ -23,11 +23,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 	private EntityManager entityManager;
 
 	@Override
-	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name) {
+	public List<CustomerFindAllQueryResultDTO> findAllCustomersLikeByName(String name, int pageNumber, int pageSize) {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<CustomerFindAllQueryResultDTO> query = builder.createQuery(CustomerFindAllQueryResultDTO.class);
-
 		Root<Customer> root = query.from(Customer.class);
 		List<Predicate> predicateList = new ArrayList<>();
 		if (name != null && !name.isEmpty()) {
@@ -49,8 +48,11 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 				businessScale.get("id").alias("businessScaleId"), businessScale.get("name").alias("businessScaleName"),
 				ownershipType.get("id").alias("ownershipTypeId"), ownershipType.get("type").alias("ownershipType"),
 				organizationType.get("id").alias("organizationTypeId"),
-				organizationType.get("type").alias("organizationTypeName"));
+				organizationType.get("type").alias("organizationTypeName")).orderBy(builder.asc(root.get("id")));
 		TypedQuery<CustomerFindAllQueryResultDTO> typedQuery = entityManager.createQuery(query);
+		final int firstResult = pageNumber * pageSize;
+		typedQuery.setFirstResult(firstResult); 
+		typedQuery.setMaxResults(pageSize);
 		return typedQuery.getResultList();
 
 	}
