@@ -14,6 +14,9 @@ interface TargetMemberRepository extends JpaRepository<TargetMember, Long> {
     @Query("select new net.devk.marketing.service.targets.dto.TargetMemberQueryResultDTO(t.id,t.name,tm.id,t.value,t.daysCount,tm.value) from TargetMember tm inner join tm.target t inner join tm.teamMember tmm inner join tmm.personnel p inner join t.service s where p.username=?1 and s.id=?2")
     public List<TargetMemberQueryResultDTO> findTargetMemberByUsernameAndServiceId(String username, Long serviceId);
 
+    @Query("select new net.devk.marketing.service.targets.dto.TargetMemberQueryResultDTO(t.id,t.name,tm.id,t.value,t.daysCount,tm.value) from TargetMember tm inner join tm.target t inner join tm.teamMember tmm inner join tmm.personnel p inner join t.service s where p.username=?1")
+    public List<TargetMemberQueryResultDTO> findTargetMemberByUsername(String username);
+
     @Query("select new net.devk.marketing.service.targets.dto.TargetMemberListQueryResultDTO(t.id,t.value,t.name,tm.id,tm.value,tm.name,s.id) from TargetMember tm inner join tm.target t inner join tm.teamMember tmm inner join tmm.personnel p inner join t.service s where p.username=?1")
     public List<TargetMemberListQueryResultDTO> findTargetsByUsername(String username);
 

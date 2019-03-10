@@ -19,6 +19,8 @@ public interface TargetService {
 
     public List<TargetMemberListQueryResultDTO> findTargets(String username);
 
+    public List<TargetMemberQueryResultDTO> findPersonnelTargetsWithoutServiceId(String username);
+
     public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId, Date startDate, Date endDate);
 
 }

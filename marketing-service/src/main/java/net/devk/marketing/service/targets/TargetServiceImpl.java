@@ -44,6 +44,11 @@ class TargetServiceImpl implements TargetService {
         return targetMemberRepository.findTargetMemberByUsernameAndServiceId(username, serviceId);
     }
 
+    @Override
+    public List<TargetMemberQueryResultDTO> findPersonnelTargetsWithoutServiceId(String username) {
+        return targetMemberRepository.findTargetMemberByUsername(username);
+    }
+
     private long calculateDayNumber(Date firstDate, Date secondDate) {
         return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
     }
