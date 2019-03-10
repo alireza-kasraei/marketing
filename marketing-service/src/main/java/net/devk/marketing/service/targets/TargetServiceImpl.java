@@ -52,6 +52,8 @@ class TargetServiceImpl implements TargetService {
     @Transactional
     public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId, Date startDate, Date endDate) {
         Date now = DateUtils.now();
+        startDate = DateUtils.convertToMidday(startDate);
+        endDate = DateUtils.convertToMidnight(endDate);
         Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, startDate, endDate,
                 RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
 
