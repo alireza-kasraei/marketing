@@ -35,11 +35,14 @@ public class ChartController {
 
     @RequestMapping(path = "/target-member-statistics", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AggregateTargetResponseDTO> getTargetMemberStatistics(
-            @RequestParam(name = "targetMemberId", required = true) Long targeMembertId,
-            @RequestParam(name = "startDate", required = true) Date startDate,
-            @RequestParam(name = "endDate", required = true) Date endDate
+            @RequestParam(name = "targetMemberId", required = true) Long targeMembertId
     ) {
-        return ResponseEntity.ok(targetService.calculateTargetMemberStatistics(targeMembertId, startDate, endDate));
+//        return ResponseEntity.ok(targetService.calculateTargetMemberStatistics(targeMembertId, startDate, endDate));
+        return ResponseEntity.ok(targetService.calculateTargetMemberStatistics(targeMembertId));
     }
+
+    /*
+            @RequestParam(name = "startDate", required = true) Date startDate,
+            @RequestParam(name = "endDate", required = true) Date endDate*/
 
 }

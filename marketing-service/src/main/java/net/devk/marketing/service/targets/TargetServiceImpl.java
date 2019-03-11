@@ -55,11 +55,43 @@ class TargetServiceImpl implements TargetService {
 
     @Override
     @Transactional
+    public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId) {
+        Date now = DateUtils.now();
+//        startDate = DateUtils.convertToMidday(startDate);
+//        endDate = DateUtils.convertToMidnight(endDate);
+//        Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, startDate, endDate, RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
+        Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, now, RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
+
+        TargetMember targetMember = targetMemberRepository.findById(targetMemberId)
+                .orElseThrow(() -> new RuntimeException("targetmember not found"));
+        Target target = targetMember.getTarget();
+        long days = calculateDayNumber(target.getStartDate(), now);
+
+        Long totalValue = targetMember.getValue();
+
+        double averageProgressToNow = (totalValue.doubleValue() / target.getDaysCount().intValue()) * days;
+
+//		long totalDays = calculateDayNumber(targetMember.getRegisterDate(), targetMember.getDueDate());
+        long totalDays = target.getDaysCount();
+
+        double progressPercentageToNow = (summation.longValue() / averageProgressToNow) * 100;
+
+        double todayProgress = (summation.doubleValue() / totalValue.doubleValue()) * 100;
+
+        return new AggregateTargetResponseDTO(summation.longValue(), days, totalValue.longValue(), averageProgressToNow,
+                totalDays, progressPercentageToNow, todayProgress);
+    }
+
+    @Override
+    @Transactional
     public AggregateTargetResponseDTO calculateTargetMemberStatistics(Long targetMemberId, Date startDate, Date endDate) {
         Date now = DateUtils.now();
         startDate = DateUtils.convertToMidday(startDate);
         endDate = DateUtils.convertToMidnight(endDate);
-        Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, startDate, endDate,
+/*        Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, startDate, endDate,
+                RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
+        */
+        Long summation = targetMemberRepository.sumTargetMemberStatistics(targetMemberId, now,
                 RequirementStatusType.REQUIREMENT_STATUS_STATUS4, AttractionType.ATTRACTION_TYPE_TYPE3);
 
         TargetMember targetMember = targetMemberRepository.findById(targetMemberId)
