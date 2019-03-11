@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,16 +22,21 @@ public class ChartController {
     @Autowired
     private TargetService targetService;
 
-    @RequestMapping(path = "/personnel-targets", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/personnel-targets", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TargetMemberQueryResultDTO>> findPersonnelTargets(
             @RequestParam(name = "serviceId", required = true) Long serviceId, Principal principal) {
         return ResponseEntity.ok(targetService.findPersonnelTargets(principal.getName(), serviceId));
     }
 
-    @RequestMapping(path = "/personnel-targets", produces = MediaType.APPLICATION_JSON_VALUE)
+/*    @RequestMapping(path = "/personnel-targets", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TargetMemberQueryResultDTO>> findPersonnelTargets(Principal principal) {
         return ResponseEntity.ok(targetService.findPersonnelTargetsWithoutServiceId(principal.getName()));
-    }
+    }*/
+
+/*    @RequestMapping(path = "/{id}/address", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateCustomerAddress(
+            @RequestBody UpdateCustomerAddressRequestDTO updateCustomerAddressRequestDTO,
+            @PathVariable(*/
 
     @RequestMapping(path = "/target-member-statistics", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AggregateTargetResponseDTO> getTargetMemberStatistics(
