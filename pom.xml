@@ -103,13 +103,9 @@
 	<modules>
 		<module>service-discovery</module>
 		<module>config-service</module>
-		<!-- <module>greetings-service</module> -->
-		<!-- <module>edge-api</module> -->
 		<module>authorization-service</module>
-		<!-- <module>security-autoconfiguration</module> -->
 		<module>marketing-ui</module>
 		<module>marketing-gateway</module>
 		<module>marketing-service</module>
-		<module>commons</module>
 	</modules>
 </project>

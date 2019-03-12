@@ -1,7 +1,0 @@
-CREATE USER marketing IDENTIFIED BY marketing;
-GRANT CONNECT, RESOURCE TO marketing;
-GRANT UNLIMITED TABLESPACE TO marketing;
-
-CREATE USER authorization IDENTIFIED BY authorization;
-GRANT CONNECT, RESOURCE TO authorization;
-GRANT UNLIMITED TABLESPACE TO authorization;
