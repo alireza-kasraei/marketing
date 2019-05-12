@@ -44,7 +44,7 @@
 		
 		<dependency>
 			<groupId>net.devk</groupId>
-			<artifactId>commons-util</artifactId>
+			<artifactId>commons-date</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
