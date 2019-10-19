@@ -9,9 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,37 +25,33 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "CLIENTS")
 public class Client extends AbstractModel {
 
+	private static final String CLIENT_SEQUENCE_NAME = "client_sequence";
+
+	private static final String CLIENT_GENERATOR_NAME = "client_generator";
+
 	@Id
 	@EqualsAndHashCode.Include
-	@GeneratedValue(generator = "client_generator")
-	@SequenceGenerator(name = "client_generator", sequenceName = "client_sequence", initialValue = 3, allocationSize = 1)
+	@GeneratedValue(generator = CLIENT_GENERATOR_NAME)
+	@SequenceGenerator(name = CLIENT_GENERATOR_NAME, sequenceName = CLIENT_SEQUENCE_NAME, initialValue = 3, allocationSize = 1)
 	private Long id;
 
-	@Column(name = "CLIENT_ID")
-	private String clientId;
+	@Column(name = "CLIENT_NAME")
+	private String name;
 
 	@Column(name = "SECRET")
 	private String secret;
 
-	// "openid"
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
-	@JoinTable(name = "CLIENTS_SCOPES", joinColumns = {
-			@JoinColumn(name = "CLIENT_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "SCOPE_ID", nullable = false, updatable = false) })
-	private Set<Scope> scopes = new HashSet<Scope>();
+	// "authorization_code", "refresh_token", "password" });
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "client", fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<ScopeClient> scopeClients = new HashSet<>();
 
-	@Column(name = "GRANT_TYPES")
-	private String authorizedGrantTypes;// = StringUtils.arrayToCommaDelimitedString(new String[] {
-										// "authorization_code", "refresh_token", "password" });
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "client", fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<Redirect> redirects = new HashSet<>();
 
-	@Column(name = "AUTHORITIES")
-	private String authorities;// = StringUtils.arrayToCommaDelimitedString(new String[] { "ROLE_USER",
-								// "ROLE_ADMIN" });
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "client", fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<Authority> authorities = new HashSet<>();
 
-	@Column(name = "AUTHO_APPROVE_SCOPES")
-	private String autoApproveScopes;// = StringUtils.arrayToCommaDelimitedString(new String[] { ".*" });
-
-	@Column(name = "REDIRECT_URLS")
-	private String redirectUrls;// = StringUtils.arrayToCommaDelimitedString(new String[] { ".*" });
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "client", fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<ClientGrantType> grantTypes = new HashSet<>();
 
 }

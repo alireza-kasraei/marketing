@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 //@formatter:off
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -37,17 +36,17 @@ class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdap
 
 	private final RedisConnectionFactory redisConnectionFactory;
 
+	private final PasswordEncoder passwordEncoder;
+
 	@Autowired
 	public AuthorizationServerConfiguration(AuthenticationConfiguration authenticationConfiguration,
 			@Qualifier("clientDetails") ClientDetailsService clientDetailsService,
-			RedisConnectionFactory redisConnectionFactory) throws Exception {
+			RedisConnectionFactory redisConnectionFactory, PasswordEncoder passwordEncoder) throws Exception {
 		this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
 		this.clientDetailsService = clientDetailsService;
 		this.redisConnectionFactory = redisConnectionFactory;
+		this.passwordEncoder = passwordEncoder;
 	}
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {

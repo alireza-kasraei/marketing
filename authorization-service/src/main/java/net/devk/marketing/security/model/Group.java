@@ -28,9 +28,13 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "GROUPS", uniqueConstraints = { @UniqueConstraint(columnNames = "GROUP_NAME") })
 public class Group extends AbstractModel {
 
+	private static final String GROUP_SEQUENCE_NAME = "group_sequence";
+
+	private static final String GROUP_GENERATOR_NAME = "group_generator";
+
 	@Id
-	@GeneratedValue(generator = "group_generator")
-	@SequenceGenerator(name = "group_generator", sequenceName = "group_sequence", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(generator = GROUP_GENERATOR_NAME)
+	@SequenceGenerator(name = GROUP_GENERATOR_NAME, sequenceName = GROUP_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	@EqualsAndHashCode.Include
 	private Long id;
 
@@ -53,12 +57,12 @@ public class Group extends AbstractModel {
 	@JoinTable(name = "ROLES_GROUPS", joinColumns = {
 			@JoinColumn(name = "GROUP_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "ROLE_ID", nullable = false, updatable = false) })
-	private Set<Role> roles = new HashSet<Role>(0);
+	private Set<Role> roles = new HashSet<>();
 
 	/**
 	 * bidirectional relation with {@link UserEntity} , indicates users of a group.
 	 */
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "groups")
-	private Set<User> users = new HashSet<User>(0);
+	private Set<User> users = new HashSet<>();
 
 }

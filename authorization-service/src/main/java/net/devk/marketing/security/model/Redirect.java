@@ -4,9 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,23 +18,27 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "SCOPES", uniqueConstraints = { @UniqueConstraint(columnNames = "SCOPE_NAME") })
-public class Scope extends AbstractModel {
+@Table(name = "REDIRECTS")
+public class Redirect extends AbstractModel {
 
-	private static final String SCOPE_SEQUENCE_NAME = "scope_sequence";
+	private static final String REDIRECT_SEQUENCE_NAME = "redirect_sequence";
 
-	private static final String SCOPE_GENERATOR_NAME = "scope_generator";
+	private static final String REDIRECT_GENERATOR_NAME = "redirect_generator";
 
 	@Id
+	@GeneratedValue(generator = REDIRECT_GENERATOR_NAME)
+	@SequenceGenerator(name = REDIRECT_GENERATOR_NAME, sequenceName = REDIRECT_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	@EqualsAndHashCode.Include
-	@GeneratedValue(generator = SCOPE_GENERATOR_NAME)
-	@SequenceGenerator(name = SCOPE_GENERATOR_NAME, sequenceName = SCOPE_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	private Long id;
 
-	@Column(name = "SCOPE_NAME")
-	private String name;
+	@Column(name = "REDIRECT_URL")
+	private String url;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+
+	@ManyToOne
+	@JoinColumn(name = "CLIENT_ID")
+	private Client client;
 
 }

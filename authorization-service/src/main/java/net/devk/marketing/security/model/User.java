@@ -1,5 +1,6 @@
 package net.devk.marketing.security.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +28,13 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "USERS")
 public class User extends AbstractModel {
 
+	private static final String USER_SEQUENCE_NAME = "user_sequence";
+
+	private static final String USER_GENERATOR_NAME = "user_generator";
+
 	@Id
-	@GeneratedValue(generator = "user_generator")
-	@SequenceGenerator(name = "user_generator", sequenceName = "user_sequence", initialValue = 3, allocationSize = 1)
+	@GeneratedValue(generator = USER_GENERATOR_NAME)
+	@SequenceGenerator(name = USER_GENERATOR_NAME, sequenceName = USER_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	@EqualsAndHashCode.Include
 	private Long id;
 
@@ -45,16 +50,19 @@ public class User extends AbstractModel {
 	private String firstName;
 	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "EXP_DATE")
+	private Date expireDate;
+	@Column(name = "CRE_EXP_DATE")
+	private Date credentialExpireDate;
+	@Column(name = "ENABLED")
+	private boolean enabled;
+	@Column(name = "LOCKED")
+	private boolean locked;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(name = "USERS_GROUPS", joinColumns = {
 			@JoinColumn(name = "USER_ID", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "GROUP_ID", nullable = false) })
-	private Set<Group> groups = new HashSet<Group>(0);
-
-	@Column(name = "ENABLED")
-	private boolean enabled;
-	@Column(name = "LOCKED")
-	private boolean locked;
+	private Set<Group> groups = new HashSet<>();
 
 }

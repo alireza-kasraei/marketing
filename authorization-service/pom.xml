@@ -48,11 +48,17 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.devk</groupId>
 			<artifactId>commons-jpa</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
@@ -69,12 +75,11 @@
 			</dependencies>
 		</profile>
 		<profile>
-			<id>oracle</id>
+			<id>postgresql</id>
 			<dependencies>
 				<dependency>
-					<groupId>com.oracle</groupId>
-					<artifactId>ojdbc8</artifactId>
-					<version>12.2.0.1</version>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>

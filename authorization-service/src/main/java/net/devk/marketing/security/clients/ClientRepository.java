@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import net.devk.marketing.security.clients.dto.ScopeDTO;
 import net.devk.marketing.security.model.Client;
 
-public interface ClientRepository extends JpaRepository<Client, Long> {
+interface ClientRepository extends JpaRepository<Client, Long> {
 
-	Optional<Client> findByClientId(String clientId);
+	Optional<Client> findByName(String name);
 
-	@Query("SELECT S.name FROM Client C INNER JOIN C.scopes S WHERE C.clientId=?1")
-	Optional<List<String>> findScopes(String clientId);
+	@Query("SELECT new net.devk.marketing.security.clients.dto.ScopeDTO(s.name,sc.autoApproved) FROM ScopeClient sc INNER JOIN sc.scope s INNER JOIN sc.client c WHERE c.name=?1")
+	List<ScopeDTO> findScopes(String name);
 }

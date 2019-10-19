@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -17,23 +19,27 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "SCOPES", uniqueConstraints = { @UniqueConstraint(columnNames = "SCOPE_NAME") })
-public class Scope extends AbstractModel {
+@Table(name = "AUTHORITIES", uniqueConstraints = { @UniqueConstraint(columnNames = "AUTHORITY_NAME") })
+public class Authority extends AbstractModel {
 
-	private static final String SCOPE_SEQUENCE_NAME = "scope_sequence";
+	private static final String AUTHORITY_SEQUENCE_NAME = "authority_sequence";
 
-	private static final String SCOPE_GENERATOR_NAME = "scope_generator";
+	private static final String AUTHORITY_GENERATOR_NAME = "authority_generator";
 
 	@Id
+	@GeneratedValue(generator = AUTHORITY_GENERATOR_NAME)
+	@SequenceGenerator(name = AUTHORITY_GENERATOR_NAME, sequenceName = AUTHORITY_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	@EqualsAndHashCode.Include
-	@GeneratedValue(generator = SCOPE_GENERATOR_NAME)
-	@SequenceGenerator(name = SCOPE_GENERATOR_NAME, sequenceName = SCOPE_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	private Long id;
 
-	@Column(name = "SCOPE_NAME")
+	@Column(name = "AUTHORITY_NAME")
 	private String name;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+
+	@ManyToOne
+	@JoinColumn(name = "CLIENT_ID")
+	private Client client;
 
 }

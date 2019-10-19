@@ -25,9 +25,13 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "ROLES", uniqueConstraints = { @UniqueConstraint(columnNames = "ROLE_NAME") })
 public class Role extends AbstractModel {
 
+	private static final String ROLE_SEQUENCE_NAME = "role_sequence";
+
+	private static final String ROLE_GENERATOR_NAME = "role_generator";
+
 	@Id
-	@GeneratedValue(generator = "role_generator")
-	@SequenceGenerator(name = "role_generator", sequenceName = "role_sequence", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(generator = ROLE_GENERATOR_NAME)
+	@SequenceGenerator(name = ROLE_GENERATOR_NAME, sequenceName = ROLE_SEQUENCE_NAME, initialValue = 1, allocationSize = 1)
 	@EqualsAndHashCode.Include
 	private Long id;
 
@@ -38,6 +42,6 @@ public class Role extends AbstractModel {
 	private String description;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-	private Set<Group> groups = new HashSet<Group>(0);
+	private Set<Group> groups = new HashSet<>();
 
 }

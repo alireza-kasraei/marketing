@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.marketing.security.model.User;
@@ -24,17 +24,18 @@ class PrincipalRestController {
 		this.userRepository = userRepository;
 	}
 
-	@RequestMapping("/user")
-	Principal principal(Principal p) {
+	@GetMapping("/user")
+	public Principal principal(Principal p) {
 		return p;
 	}
 
-	@RequestMapping("/user-info")
-	ResponseEntity<?> userInfo(Principal p) {
+	@GetMapping("/user-info")
+	public ResponseEntity<?> userInfo(Principal p) {
 		if (p == null)
 			return ResponseEntity.notFound().build();
 		final String name = p.getName();
-		User user = userRepository.findByUsername(name).get();
+		User user = userRepository.findByUsername(name).orElseThrow(RuntimeException::new);
+
 		// keep it simple
 		Map<String, String> userMap = new HashMap<>();
 		userMap.put("username", user.getUsername());
