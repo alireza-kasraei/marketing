@@ -1,6 +1,6 @@
-# Marketing Service
+# Online Shop
 
-this project consists of multiple modules such as authorization-service,config-service,service-discovery and edge-api as main modules and modules such as greetings-service and service-autoconfiguration are helper modules which might be deleted in the futur.
+Online Shop Cloud Native Application with most recent cloud native patterns
 
 # How to Start
 
