@@ -28,9 +28,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "GROUPS", uniqueConstraints = { @UniqueConstraint(columnNames = "GROUP_NAME") })
 public class Group extends AbstractModel {
 
-	private static final String GROUP_SEQUENCE_NAME = "group_sequence";
+	private static final String GROUP_SEQUENCE_NAME = "GROUPS_SEQUENCE";
 
-	private static final String GROUP_GENERATOR_NAME = "group_generator";
+	private static final String GROUP_GENERATOR_NAME = "GROUPS_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = GROUP_GENERATOR_NAME)

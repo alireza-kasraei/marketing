@@ -28,9 +28,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "USERS")
 public class User extends AbstractModel {
 
-	private static final String USER_SEQUENCE_NAME = "user_sequence";
+	private static final String USER_SEQUENCE_NAME = "USERS_SEQUENCE";
 
-	private static final String USER_GENERATOR_NAME = "user_generator";
+	private static final String USER_GENERATOR_NAME = "USERS_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = USER_GENERATOR_NAME)
@@ -55,9 +55,9 @@ public class User extends AbstractModel {
 	@Column(name = "CRE_EXP_DATE")
 	private LocalDate credentialExpireDate;
 	@Column(name = "ENABLED")
-	private boolean enabled;
+	private Boolean enabled;
 	@Column(name = "LOCKED")
-	private boolean locked;
+	private Boolean locked;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(name = "USERS_GROUPS", joinColumns = {

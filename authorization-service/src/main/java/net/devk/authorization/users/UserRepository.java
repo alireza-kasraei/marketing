@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import net.devk.authorization.model.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByUsername(String username);
 

@@ -6,8 +6,11 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 	<changeSet author="Akasraei" id="1" context="ddl">
 		<!-- SQUENCES -->
-		<createSequence sequenceName="AUTHORITY_SEQUENCE" />
-		<createSequence sequenceName="CLIENT_SEQUENCE" />
+		<createSequence sequenceName="AUTHORITIES_SEQUENCE" />
+		<createSequence sequenceName="CLIENTS_SEQUENCE" />
+		<createSequence sequenceName="CGT_SEQUENCE" />
+		<createSequence sequenceName="SCOPES_SEQUENCE" />
+		<createSequence sequenceName="REDIRECTS_SEQUENCE" />
 
 		<!-- TABLES -->
 		<createTable tableName="AUTHORITIES">
@@ -43,7 +46,7 @@
 					primaryKeyName="AUTHORITIES_CLIENTS_PK2" />
 			</column>
 		</createTable>
-		
+
 		<createTable tableName="CLIENT_GRANT_TYPES">
 			<column name="ID" type="BIGINT">
 				<constraints primaryKey="true"
@@ -54,7 +57,7 @@
 			<column name="TYPE_NAME" type="VARCHAR(255)" />
 			<column name="CLIENT_ID" type="BIGINT" />
 		</createTable>
-		
+
 		<createTable tableName="SCOPES">
 			<column name="ID" type="BIGINT">
 				<constraints primaryKey="true"
@@ -63,9 +66,35 @@
 			<column name="REGISTER_DATE" type="timestamp" />
 			<column name="UPDATE_DATE" type="timestamp" />
 			<column name="SCOPE_NAME" type="VARCHAR(255)" />
-			<column name="DESCRIPTION" type="BIGINT" />
+			<column name="DESCRIPTION" type="VARCHAR(255)" />
 		</createTable>
-		
+
+		<createTable tableName="SCOPES_CLIENTS">
+			<column name="SCOPE_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="SCOPES_CLIENTS_PK1" />
+			</column>
+			<column name="CLIENT_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="SCOPES_CLIENTS_PK2" />
+			</column>
+			<column name="REGISTER_DATE" type="timestamp" />
+			<column name="UPDATE_DATE" type="timestamp" />
+			<column name="AUTO_APPROVED" type="TINYINT" />
+		</createTable>
+
+		<createTable tableName="REDIRECTS">
+			<column name="ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="REDIRECTS_PK1" />
+			</column>
+			<column name="REGISTER_DATE" type="timestamp" />
+			<column name="UPDATE_DATE" type="timestamp" />
+			<column name="REDIRECT_URL" type="VARCHAR(255)" />
+			<column name="DESCRIPTION" type="VARCHAR(255)" />
+			<column name="CLIENT_ID" type="BIGINT" />
+		</createTable>
+
 
 		<!-- FKs -->
 
@@ -89,13 +118,34 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="ID"
 			referencedTableName="AUTHORITIES" validate="true" />
-			
+
 		<addForeignKeyConstraint
 			baseColumnNames="CLIENT_ID" baseTableName="CLIENT_GRANT_TYPES"
-			constraintName="FK_CLIENT_GRANT_TYPES_CLIENTS"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="ID"
-			referencedTableName="CLIENTS" validate="true" />
+			constraintName="FK_CLIENT_GRANT_TYPES_CLIENTS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="CLIENTS"
+			validate="true" />
+			
+		<addForeignKeyConstraint
+			baseColumnNames="SCOPE_ID" baseTableName="SCOPES_CLIENTS"
+			constraintName="FK_SCOPES_CLIENTS_SCOPES" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="SCOPES"
+			validate="true" />
+			
+		<addForeignKeyConstraint
+			baseColumnNames="CLIENT_ID" baseTableName="SCOPES_CLIENTS"
+			constraintName="FK_SCOPES_CLIENTS_CLIENTS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="CLIENTS"
+			validate="true" />
+			
+		<addForeignKeyConstraint
+			baseColumnNames="CLIENT_ID" baseTableName="REDIRECTS"
+			constraintName="FK_REDIRECTS_CLIENTS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="CLIENTS"
+			validate="true" />
 
 
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.authorization.model.User;
-import net.devk.authorization.users.UserRepository;
+import net.devk.authorization.users.UserService;
 
 /**
  * Controller for retrieving user's principle object from oauth token
@@ -17,11 +17,11 @@ import net.devk.authorization.users.UserRepository;
 @RestController
 class PrincipalRestController {
 
-	private final UserRepository userRepository;
+	private final UserService userService;
 
-	public PrincipalRestController(UserRepository userRepository) {
+	public PrincipalRestController(UserService userService) {
 		super();
-		this.userRepository = userRepository;
+		this.userService = userService;
 	}
 
 	@GetMapping("/user")
@@ -34,7 +34,7 @@ class PrincipalRestController {
 		if (p == null)
 			return ResponseEntity.notFound().build();
 		final String name = p.getName();
-		User user = userRepository.findByUsername(name).orElseThrow(RuntimeException::new);
+		User user = userService.findByUsername(name).orElseThrow(RuntimeException::new);
 
 		// keep it simple
 		Map<String, String> userMap = new HashMap<>();

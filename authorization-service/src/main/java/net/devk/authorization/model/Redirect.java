@@ -21,9 +21,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "REDIRECTS")
 public class Redirect extends AbstractModel {
 
-	private static final String REDIRECT_SEQUENCE_NAME = "redirect_sequence";
+	private static final String REDIRECT_SEQUENCE_NAME = "REDIRECTS_SEQUENCE";
 
-	private static final String REDIRECT_GENERATOR_NAME = "redirect_generator";
+	private static final String REDIRECT_GENERATOR_NAME = "REDIRECTS_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = REDIRECT_GENERATOR_NAME)

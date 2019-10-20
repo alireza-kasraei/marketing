@@ -20,9 +20,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "SCOPES", uniqueConstraints = { @UniqueConstraint(columnNames = "SCOPE_NAME") })
 public class Scope extends AbstractModel {
 
-	private static final String SCOPE_SEQUENCE_NAME = "SCOPE_SEQUENCE";
+	private static final String SCOPE_SEQUENCE_NAME = "SCOPES_SEQUENCE";
 
-	private static final String SCOPE_GENERATOR_NAME = "SCOPE_GENERATOR";
+	private static final String SCOPE_GENERATOR_NAME = "SCOPES_GENERATOR";
 
 	@Id
 	@EqualsAndHashCode.Include

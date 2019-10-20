@@ -25,9 +25,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "ROLES", uniqueConstraints = { @UniqueConstraint(columnNames = "ROLE_NAME") })
 public class Role extends AbstractModel {
 
-	private static final String ROLE_SEQUENCE_NAME = "role_sequence";
+	private static final String ROLE_SEQUENCE_NAME = "ROLES_SEQUENCE";
 
-	private static final String ROLE_GENERATOR_NAME = "role_generator";
+	private static final String ROLE_GENERATOR_NAME = "ROLES_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = ROLE_GENERATOR_NAME)

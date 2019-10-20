@@ -4,8 +4,8 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-	<changeSet id="test_data" author="Akasraei" context="test">
-		<sqlFile path="../../../data.sql"
+	<changeSet id="test_users_data" author="Akasraei" context="test">
+		<sqlFile path="../../../data-users.sql"
 			relativeToChangelogFile="true" />
 	</changeSet>
 </databaseChangeLog>

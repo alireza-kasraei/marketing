@@ -2,6 +2,8 @@ package net.devk.authorization.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,9 +23,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "CLIENT_GRANT_TYPES")
 public class ClientGrantType extends AbstractModel {
 
-	private static final String CLIENT_GRANT_TYPE_SEQUENCE_NAME = "cgt_sequence";
+	private static final String CLIENT_GRANT_TYPE_SEQUENCE_NAME = "CGT_SEQUENCE";
 
-	private static final String CLIENT_GRANT_TYPE_GENERATOR_NAME = "cgt_generator";
+	private static final String CLIENT_GRANT_TYPE_GENERATOR_NAME = "CGT_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = CLIENT_GRANT_TYPE_GENERATOR_NAME)
@@ -32,6 +34,7 @@ public class ClientGrantType extends AbstractModel {
 	private Long id;
 
 	@Column(name = "TYPE_NAME")
+	@Enumerated(EnumType.STRING)
 	private GrantType grantType;
 
 	@ManyToOne

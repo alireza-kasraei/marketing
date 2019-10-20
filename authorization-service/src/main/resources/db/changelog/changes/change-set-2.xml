@@ -1,0 +1,130 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<changeSet author="Akasraei" id="2" context="ddl">
+		<!-- SQUENCES -->
+		<createSequence sequenceName="ROLES_SEQUENCE" />
+		<createSequence sequenceName="GROUPS_SEQUENCE" />
+		<createSequence sequenceName="USERS_SEQUENCE" />
+
+		<!-- TABLES -->
+		<createTable tableName="ROLES">
+			<column name="ID" type="BIGINT">
+				<constraints primaryKey="true" primaryKeyName="ROLES_PK" />
+			</column>
+			<column name="REGISTER_DATE" type="timestamp" />
+			<column name="UPDATE_DATE" type="timestamp" />
+			<column name="ROLE_NAME" type="VARCHAR(255)" />
+			<column name="DESCRIPTION" type="VARCHAR(255)" />
+		</createTable>
+
+		<createTable tableName="GROUPS">
+			<column name="ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="GROUPS_PK" />
+			</column>
+			<column name="REGISTER_DATE" type="timestamp" />
+			<column name="UPDATE_DATE" type="timestamp" />
+			<column name="GROUP_NAME" type="VARCHAR(255)" />
+			<column name="DESCRIPTION" type="VARCHAR(255)" />
+		</createTable>
+
+		<createTable tableName="ROLES_GROUPS">
+			<column name="GROUP_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="ROLES_GROUPS_PK1" />
+			</column>
+			<column name="ROLE_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="ROLES_GROUPS_PK2" />
+			</column>
+		</createTable>
+
+
+		<createTable tableName="USERS">
+			<column name="ID" type="BIGINT">
+				<constraints primaryKey="true" primaryKeyName="USERS_PK" />
+			</column>
+			<column name="REGISTER_DATE" type="timestamp" />
+			<column name="UPDATE_DATE" type="timestamp" />
+			<column name="USER_NAME" type="VARCHAR(255)" />
+			<column name="PASS_WORD" type="VARCHAR(255)" />
+			<column name="EMAIL" type="VARCHAR(255)" />
+			<column name="MOBILE_NUMBER" type="VARCHAR(255)" />
+			<column name="FIRST_NAME" type="VARCHAR(255)" />
+			<column name="LAST_NAME" type="VARCHAR(255)" />
+			<column name="EXP_DATE" type="timestamp" />
+			<column name="CRE_EXP_DATE" type="timestamp" />
+			<column name="ENABLED" type="TINYINT" />
+			<column name="LOCKED" type="TINYINT" />
+		</createTable>
+
+
+		<createTable tableName="USERS_GROUPS">
+			<column name="USER_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="USERS_GROUPS_PK1" />
+			</column>
+			<column name="GROUP_ID" type="BIGINT">
+				<constraints primaryKey="true"
+					primaryKeyName="USERS_GROUPS_PK2" />
+			</column>
+		</createTable>
+
+
+		<!-- FKs -->
+
+		<addForeignKeyConstraint
+			baseColumnNames="ROLE_ID" baseTableName="ROLES_GROUPS"
+			constraintName="FK_ROLES_GROUPS_ROLES" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="ROLES"
+			validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="GROUP_ID" baseTableName="ROLES_GROUPS"
+			constraintName="FK_ROLES_GROUPS_GROUPS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="GROUPS"
+			validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="USER_ID" baseTableName="USERS_GROUPS"
+			constraintName="FK_USERS_GROUPS_USERS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="USERS"
+			validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="GROUP_ID" baseTableName="USERS_GROUPS"
+			constraintName="FK_USERS_GROUPS_GROUPS" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="ID" referencedTableName="GROUPS"
+			validate="true" />
+
+		<!-- Unique Constraints -->
+		<addUniqueConstraint columnNames="ROLE_NAME"
+			tableName="ROLES" />
+		<addUniqueConstraint columnNames="GROUP_NAME"
+			tableName="GROUPS" />
+		<addUniqueConstraint columnNames="USER_NAME"
+			tableName="USERS" />
+
+		<!-- not null constraints -->
+		<addNotNullConstraint tableName="ROLES"
+			columnName="ROLE_NAME" />
+		<addNotNullConstraint tableName="GROUPS"
+			columnName="GROUP_NAME" />
+		<addNotNullConstraint tableName="USERS"
+			columnName="USER_NAME" />
+
+
+
+
+
+
+	</changeSet>
+</databaseChangeLog>

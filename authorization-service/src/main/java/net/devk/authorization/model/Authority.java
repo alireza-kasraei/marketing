@@ -28,9 +28,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "AUTHORITIES", uniqueConstraints = { @UniqueConstraint(columnNames = "AUTHORITY_NAME") })
 public class Authority extends AbstractModel {
 
-	private static final String AUTHORITY_SEQUENCE_NAME = "AUTHORITY_SEQUENCE";
+	private static final String AUTHORITY_SEQUENCE_NAME = "AUTHORITIES_SEQUENCE";
 
-	private static final String AUTHORITY_GENERATOR_NAME = "AUTHORITY_GENERATOR";
+	private static final String AUTHORITY_GENERATOR_NAME = "AUTHORITIES_GENERATOR";
 
 	@Id
 	@GeneratedValue(generator = AUTHORITY_GENERATOR_NAME)

@@ -26,9 +26,9 @@ import net.devk.commons.jpa.model.AbstractModel;
 @Table(name = "CLIENTS")
 public class Client extends AbstractModel {
 
-	private static final String CLIENT_SEQUENCE_NAME = "CLIENT_SEQUENCE";
+	private static final String CLIENT_SEQUENCE_NAME = "CLIENTS_SEQUENCE";
 
-	private static final String CLIENT_GENERATOR_NAME = "CLIENT_GENERATOR";
+	private static final String CLIENT_GENERATOR_NAME = "CLIENTS_GENERATOR";
 
 	@Id
 	@EqualsAndHashCode.Include
