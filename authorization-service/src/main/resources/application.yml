@@ -4,6 +4,7 @@ server:
     context-path: /uaa
 spring:
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: none
   datasource:
@@ -15,6 +16,11 @@ spring:
   redis:
     host: localhost
     port: 6379
+logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG
 ---
 spring:
   profiles: dev
@@ -24,11 +30,6 @@ spring:
     enabled: true
     contexts: ddl
     change-log: classpath:db/changelog/changelog-master.xml
-logging:
-    level:
-      org:
-        springframework:
-          security: DEBUG
 ---
 spring:
   profiles: dev-postgresql

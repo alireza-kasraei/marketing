@@ -1,9 +1,9 @@
 curl -X POST \
--H"authorization: Basic aHRtbDU6cGFzc3dvcmQ=" \
--F"password=spring" \
--F"username=omid" \
--F"grant_type=omid123" \
--F"scope=openid" \
+-H"authorization: Basic Y2xpZW50MTpwYXNzd29yZA==" \
+-F"password=sample" \
+-F"username=koorosh01" \
+-F"grant_type=password" \
+-F"scope=SCOPE1" \
 http://localhost:9191/uaa/oauth/token
 
 

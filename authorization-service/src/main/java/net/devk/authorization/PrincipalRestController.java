@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.devk.authorization.model.User;
@@ -15,7 +17,8 @@ import net.devk.authorization.users.UserService;
  * Controller for retrieving user's principle object from oauth token
  */
 @RestController
-class PrincipalRestController {
+@RequestMapping("/secured")
+public class PrincipalRestController {
 
 	private final UserService userService;
 
@@ -29,6 +32,7 @@ class PrincipalRestController {
 		return p;
 	}
 
+	@Secured("hasRole('USER')")
 	@GetMapping("/user-info")
 	public ResponseEntity<?> userInfo(Principal p) {
 		if (p == null)
