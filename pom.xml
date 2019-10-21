@@ -156,8 +156,11 @@
 		<module>service-discovery</module>
 		<module>config-service</module>
 		<module>authorization-service</module>
-		<module>marketing-ui</module>
-		<module>marketing-gateway</module>
-		<module>marketing-service</module>
+		
+		
+		
+		<module>gateway</module>
+		<module>services</module>
+		<module>front-end</module>
 	</modules>
 </project>

@@ -79,13 +79,15 @@ public class AuthorizationServerConfiguration {
 
 		@Override
 		public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-			security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()")
-					.passwordEncoder(passwordEncoder);
+			security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 		}
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-			clients.withClientDetails(clientDetailsService);
+//			clients.withClientDetails(clientDetailsService);
+			clients.inMemory().withClient("client2").secret(passwordEncoder.encode("secret"))
+					.authorizedGrantTypes("authorization_code").scopes("user_info").autoApprove(true)
+					.redirectUris("http://localhost:8082/ui/login", "http://localhost:8083/ui2/login");
 		}
 
 		@Bean

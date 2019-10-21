@@ -2,7 +2,7 @@ spring:
   application:
     name: config-service
 ---
-spring:  profiles: dev
+spring:  profiles: dev-cloud
   cloud:
     config:
       server:
