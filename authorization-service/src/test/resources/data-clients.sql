@@ -1,29 +1,26 @@
-INSERT INTO CLIENTS(ID, REGISTER_DATE, UPDATE_DATE, CLIENT_NAME, SECRET) VALUES (50,null,null,'client1','secret1');
-INSERT INTO CLIENTS(ID, REGISTER_DATE, UPDATE_DATE, CLIENT_NAME, SECRET) VALUES (51,null,null,'client2','secret2');
+INSERT INTO clients (id, register_date, update_date, client_name, secret) VALUES (51, NULL, NULL, 'client2', 'secret2');
+INSERT INTO clients (id, register_date, update_date, client_name, secret) VALUES (50, NULL, NULL, 'client1', '$2a$10$ez3F2v6tjlzf1NHfjnTth.m5Zu6YZinOyv8Yri82p0KQzSRW1KFnm');
 
 
-INSERT INTO AUTHORITIES(ID, REGISTER_DATE, UPDATE_DATE, AUTHORITY_NAME, DESCRIPTION) VALUES (50,null,null,'ROLE_ADMIN','Admin Authority');
-INSERT INTO AUTHORITIES(ID, REGISTER_DATE, UPDATE_DATE, AUTHORITY_NAME, DESCRIPTION) VALUES (51,null,null,'ROLE_CLIENT','Client Authority');
+INSERT INTO authorities (id, register_date, update_date, authority_name, description, client_id) VALUES (50, NULL, NULL, 'ROLE_ADMIN', 'Admin Authority', NULL);
+INSERT INTO authorities (id, register_date, update_date, authority_name, description, client_id) VALUES (51, NULL, NULL, 'ROLE_CLIENT', 'Client Authority', NULL);
 
-INSERT INTO AUTHORITIES_CLIENTS(AUTHORITY_ID, CLIENT_ID) VALUES (50,50);
-INSERT INTO AUTHORITIES_CLIENTS(AUTHORITY_ID, CLIENT_ID) VALUES (51,51);
+INSERT INTO authorities_clients (authority_id, client_id) VALUES (50, 50);
+INSERT INTO authorities_clients (authority_id, client_id) VALUES (51, 51);
 
-INSERT INTO CLIENT_GRANT_TYPES(ID,REGISTER_DATE, UPDATE_DATE, TYPE_NAME,CLIENT_ID) VALUES (50,null,null,'AUTHORIZATION_CODE',50);
-INSERT INTO CLIENT_GRANT_TYPES(ID,REGISTER_DATE, UPDATE_DATE, TYPE_NAME,CLIENT_ID) VALUES (51,null,null,'REFRESH_TOKEN',50);
-INSERT INTO CLIENT_GRANT_TYPES(ID,REGISTER_DATE, UPDATE_DATE, TYPE_NAME,CLIENT_ID) VALUES (52,null,null,'PASSWORD',50);
-
-INSERT INTO CLIENT_GRANT_TYPES(ID,REGISTER_DATE, UPDATE_DATE, TYPE_NAME,CLIENT_ID) VALUES (53,null,null,'AUTHORIZATION_CODE',51);
-INSERT INTO CLIENT_GRANT_TYPES(ID,REGISTER_DATE, UPDATE_DATE, TYPE_NAME,CLIENT_ID) VALUES (54,null,null,'REFRESH_TOKEN',51);
-
-
-INSERT INTO SCOPES(ID,REGISTER_DATE, UPDATE_DATE, SCOPE_NAME,DESCRIPTION) VALUES (50,null,null,'SCOPE1','READ PERSON');
-INSERT INTO SCOPES(ID,REGISTER_DATE, UPDATE_DATE, SCOPE_NAME,DESCRIPTION) VALUES (51,null,null,'SCOPE2','WRITE PERSON');
-
-INSERT INTO SCOPES_CLIENTS(SCOPE_ID,CLIENT_ID,REGISTER_DATE, UPDATE_DATE, AUTO_APPROVED) VALUES (50,50,null,null,1);
-INSERT INTO SCOPES_CLIENTS(SCOPE_ID,CLIENT_ID,REGISTER_DATE, UPDATE_DATE, AUTO_APPROVED) VALUES (51,50,null,null,0);
-INSERT INTO SCOPES_CLIENTS(SCOPE_ID,CLIENT_ID,REGISTER_DATE, UPDATE_DATE, AUTO_APPROVED) VALUES (51,51,null,null,1);
+INSERT INTO client_grant_types (id, register_date, update_date, type_name, client_id) VALUES (50, NULL, NULL, 'AUTHORIZATION_CODE', 50);
+INSERT INTO client_grant_types (id, register_date, update_date, type_name, client_id) VALUES (51, NULL, NULL, 'REFRESH_TOKEN', 50);
+INSERT INTO client_grant_types (id, register_date, update_date, type_name, client_id) VALUES (52, NULL, NULL, 'PASSWORD', 50);
+INSERT INTO client_grant_types (id, register_date, update_date, type_name, client_id) VALUES (53, NULL, NULL, 'AUTHORIZATION_CODE', 51);
+INSERT INTO client_grant_types (id, register_date, update_date, type_name, client_id) VALUES (54, NULL, NULL, 'REFRESH_TOKEN', 51);
 
 
-INSERT INTO REDIRECTS(ID,REGISTER_DATE, UPDATE_DATE, REDIRECT_URL,DESCRIPTION,CLIENT_ID) VALUES (50,null,null,'http://redirect',null,50);
+INSERT INTO scopes (id, register_date, update_date, scope_name, description) VALUES (50, NULL, NULL, 'SCOPE1', 'READ PERSON');
+INSERT INTO scopes (id, register_date, update_date, scope_name, description) VALUES (51, NULL, NULL, 'SCOPE2', 'WRITE PERSON');
+
+INSERT INTO scopes_clients (scope_id, client_id, register_date, update_date, auto_approved) VALUES (50, 50, NULL, NULL, 1);
+INSERT INTO scopes_clients (scope_id, client_id, register_date, update_date, auto_approved) VALUES (51, 50, NULL, NULL, 0);
+INSERT INTO scopes_clients (scope_id, client_id, register_date, update_date, auto_approved) VALUES (51, 51, NULL, NULL, 1);
 
 
+INSERT INTO redirects (id, register_date, update_date, redirect_url, description, client_id) VALUES (50, NULL, NULL, 'http://redirect', NULL, 50);

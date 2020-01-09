@@ -27,12 +27,13 @@ public class PrincipalRestController {
 		this.userService = userService;
 	}
 
+	@Secured({ "ROLE_USER" })
 	@GetMapping("/user")
 	public Principal principal(Principal p) {
 		return p;
 	}
 
-	@Secured("hasRole('USER')")
+	@Secured({ "ROLE_ADMIN" })
 	@GetMapping("/user-info")
 	public ResponseEntity<?> userInfo(Principal p) {
 		if (p == null)

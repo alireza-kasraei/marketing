@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+@ActiveProfiles("identity")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class SecuredPrincipleRestControllerTest {
@@ -35,13 +37,13 @@ public class SecuredPrincipleRestControllerTest {
 		mvc.perform(get("/secured/user")).andExpect(status().isUnauthorized());
 	}
 
-	@WithMockUser(roles = "USER")
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	@Test
 	public void withCredentials() throws Exception {
-		mvc.perform(get("/secured/user")).andExpect(status().isOk());
+		mvc.perform(get("/secured/user-info")).andExpect(status().isOk());
 	}
 
-	@WithMockUser(roles = "TEST")
+	@WithMockUser(username = "admin", roles = { "USER" })
 	@Test
 	public void withInvalidCredentials() throws Exception {
 		mvc.perform(get("/secured/user")).andExpect(status().isUnauthorized());

@@ -1,6 +1,6 @@
 curl -X POST \
 -H"authorization: Basic Y2xpZW50MTpwYXNzd29yZA==" \
--F"password=sample" \
+-F"password=password" \
 -F"username=koorosh01" \
 -F"grant_type=password" \
 -F"scope=SCOPE1" \
