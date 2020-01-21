@@ -4,7 +4,6 @@ server:
     context-path: /uaa
 spring:
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: none
   datasource:
@@ -16,6 +15,11 @@ spring:
   redis:
     host: localhost
     port: 6379
+---
+spring:
+  profiles: dev
+  jpa:
+    show-sql: true
 logging:
     level:
       org:
@@ -23,21 +27,33 @@ logging:
           security: DEBUG
 ---
 spring:
-  profiles: dev
+  profiles: dev-postgresql
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    initialization-mode: never
+    url: jdbc:postgresql://localhost:5432/AUTHORIZATION
+    username: postgres
+    password: postgres  
   liquibase:
     enabled: true
     contexts: ddl
     change-log: classpath:db/changelog/changelog-master.xml
 ---
 spring:
-  profiles: dev-postgresql
+  profiles: dev-h2
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
   datasource:
     initialization-mode: never
-    url: jdbc:postgresql://localhost:5432/AUTHORIZATION
-    username: postgres
-    password: postgres
+  liquibase:
+    enabled: true
+    contexts: ddl
+    change-log: classpath:db/changelog/changelog-master.xml
 ---
 spring:
   profiles: stage

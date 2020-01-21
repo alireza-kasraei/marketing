@@ -156,9 +156,6 @@
 		<module>service-discovery</module>
 		<module>config-service</module>
 		<module>authorization-service</module>
-		
-		
-		
 		<module>gateway</module>
 		<module>services</module>
 		<module>front-end</module>
