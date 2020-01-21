@@ -1,4 +1,4 @@
-INSERT INTO clients (id, register_date, update_date, client_name, secret) VALUES (51, NULL, NULL, 'client2', 'secret2');
+INSERT INTO clients (id, register_date, update_date, client_name, secret) VALUES (51, NULL, NULL, 'client2', '$2a$10$4ChqlVM1BlPw02/87IEDlOuZxj/4EF8XYuvB/xM5XikUG7HqoAa2.');
 INSERT INTO clients (id, register_date, update_date, client_name, secret) VALUES (50, NULL, NULL, 'client1', '$2a$10$ez3F2v6tjlzf1NHfjnTth.m5Zu6YZinOyv8Yri82p0KQzSRW1KFnm');
 
 
